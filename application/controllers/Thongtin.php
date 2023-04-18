@@ -24,7 +24,7 @@ class Thongtin extends CI_Controller {
     }
 
     public function index(){
-        $this->data['title']='TEMPO CHUPUH - Thông tin tài khoản';
+        $this->data['title']='TEMPO - Thông tin tài khoản';
         $this->data['view']='index';
         $this->load->view('frontend/layout',$this->data);
     }

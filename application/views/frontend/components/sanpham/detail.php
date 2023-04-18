@@ -85,7 +85,7 @@
 									echo '<h2 style="color:red;">Ngừng kinh doanh</h2>';
 								} else {
 									echo '<div class="actions-qty__button">
-									<button class="button btn-cart add_to_cart_detail detail-button" title="Mua ngay" type="button" aria-label="Mua ngay" class="fa fa-shopping-cart" onclick="onAddCart(' . $row['id'] . ')"> Mua ngay</button>
+									<button class="hvr-pulse-shrink button btn-cart add_to_cart_detail detail-button" title="Mua ngay" type="button" aria-label="Mua ngay" class="fa fa-shopping-cart" onclick="onAddCart(' . $row['id'] . ')"> Mua ngay</button>
 								</div>';
 								}
 								?>
@@ -474,10 +474,28 @@
 				<h4 class="modal-title">Thông báo</h4>
 			</div>
 			<div class="modal-body">
-				<strong><p>Sản phẩm đã được thêm thành công&hellip;</p>
+				<strong><p id="modalContent">Sản phẩm đã được thêm thành công&hellip;</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" onclick="reLoad()">Ok</button>
+				<a type="button" class="btn btn-default" href="gio-hang">Đến giỏ hàng</a>
+				<a type="button" class="btn btn-default" href="san-pham">Tiếp tục mua hàng</a>
+			</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div class="modal fade custom-modal" id="redirectModal">
+		<div class="modal-dialog modal-sm" style="top:100px">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Thông báo</h4>
+			</div>
+			<div class="modal-body">
+				<strong><p id="modalContent">Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng&hellip;</p>
+			</div>
+			<div class="modal-footer">
+				<a type="button" class="btn btn-default" href="dang-nhap">Ok</a>			
 			</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
@@ -491,7 +509,23 @@
 	}
 	function onAddCart(id) {
 		var strurl = "<?php echo base_url(); ?>" + '/sanpham/addcart';
-		jQuery.ajax({
+
+		var session = "<?php 
+		if($this->session->userdata('sessionKhachHang')) 
+		{
+			$info = $this->session->userdata('sessionKhachHang');
+			echo $info['username'] ;
+		}else
+		{
+			$info ="";
+			echo $info;
+		}
+		?>";
+		console.log(session);
+		if(session==""){
+			$('#redirectModal').modal('show');
+		}else{
+			jQuery.ajax({
 			url: strurl,
 			type: 'POST',
 			dataType: 'json',
@@ -502,6 +536,8 @@
 				$('#myModal').modal('show');
 			}
 		});
+		}
+		
 	}
 
 	function submitComment(id) {
@@ -524,8 +560,28 @@
 				data: {
 					id: id,
 					comment: comment,
-					userComment: '<?php $info = $this->session->userdata('sessionKhachHang');echo $info['username'] ?>',
-					sdt: '<?php $info = $this->session->userdata('sessionKhachHang');echo $info['phone'] ?>',
+					userComment: '<?php 
+					if($this->session->userdata('sessionKhachHang')) 
+					{
+						$info = $this->session->userdata('sessionKhachHang');
+						echo $info['username'] ;
+					}else
+					{
+						$info ="";
+						echo $info;
+					}
+					?>',
+					sdt: '<?php 
+					if($this->session->userdata('sessionKhachHang')) 
+					{
+						$info = $this->session->userdata('sessionKhachHang');
+						echo $info['phone'] ;
+					}else
+					{
+						$info ="";
+						echo $info;
+					}
+					?>',
 					star: star
 				},
 				success: function(data) {
@@ -569,10 +625,21 @@
 				id: id,
 				question: comment,
 				type:2,
-				question_by: '<?php $info = $this->session->userdata('sessionKhachHang');echo $info['username'] ?>',
+				question_by: '<?php 
+					if($this->session->userdata('sessionKhachHang')) 
+					{
+						$info = $this->session->userdata('sessionKhachHang');
+						echo $info['username'] ;
+					}else
+					{
+						$info ="";
+						echo $info;
+					}
+					?>',
 			},
 			success: function(data) {
-				window.location.reload(true);
+				console.log(data);
+				// window.location.reload(true);
 			}
 		});
 	}

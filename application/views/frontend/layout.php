@@ -29,6 +29,7 @@
 	<link href="public/css/ketnoi.css" rel="stylesheet">
 	<link href="public/css/ketquatimkiem.css" rel="stylesheet">
 	<link href="public/css/flexslider.css" rel="stylesheet">
+	<link href="public/css/hover.css" rel="stylesheet">
 	<script src="public/js/jquery-2.2.3.min.js"></script>
 </head>
 
