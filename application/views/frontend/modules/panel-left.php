@@ -53,8 +53,8 @@
 		<li class="pull-left nav-item dropdown">
 		<a href="#" class="dropdown-toggle hvr-sweep-to-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-book fa-sm"></i>  Khóa học <span class="caret"></span></a>
 			<ul class="dropdown-menu fade-down">
-				<li class="sub-link"><a class='hvr-pulse-shrink' href="#">Khóa học piano cơ bản</a></li>
-				<li class="sub-link"><a class='hvr-pulse-shrink' href="#">Khóa học piano nâng cao</a></li>
+				<li class="sub-link"><a class='hvr-pulse-shrink' href="coban">Khóa học piano cơ bản</a></li>
+				<li class="sub-link"><a class='hvr-pulse-shrink' href="nangcao">Khóa học piano nâng cao</a></li>
 			</ul>
 		</li>
 		<li class="pull-left"><a class="hvr-sweep-to-right"  href="san-pham"><i class="fas fa-music fa-sm"></i>  Sản phẩm</a></li>

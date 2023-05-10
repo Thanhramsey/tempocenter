@@ -14,16 +14,16 @@
 </div>
 <div class="slider">
     <div class="container">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:10px !important">
-            <a href="tin-tuc/thong-bao-khai-truong-trung-tam">
-                <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/qc1.png">
-            </a>
+        <div class="col-12 col-md-6 col-lg-6 wow fadeInLeft" data-wow-delay="250ms" data-wow-duration="1s" style="visibility: visible; animation-delay: 250ms; animation-name: fadeInLeft; animation-duration: 1s;padding:10px !important">
+                <a href="tin-tuc/thong-bao-khai-truong-trung-tam">
+                    <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/qc1.png">
+                </a>
         </div>
-		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:10px !important">
-            <a href="san-pham">
-                <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/qc2.png">
-            </a>
-    	</div>
+        <div class="col-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-delay="250ms" data-wow-duration="1s" style="visibility: visible; animation-delay: 250ms; animation-name: fadeInRight; animation-duration: 1s;padding:10px !important">
+                <a href="tin-tuc/thong-bao-khai-truong-trung-tam">
+                    <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/qc2.png">
+                </a>
+        </div>
     </div>
 </div>
 <div class="container" style="margin-top: 10px;">
@@ -35,15 +35,15 @@
             <img style="width: 100%; border-radius:20px" src="public/images/about-img.png">
         </div>
         <div class="col-md-6 align-items-center" style="padding: 20px 50px !important;">
-            <div class="row">
+            <div class="row fadeInDown" data-wow-delay="250ms" data-wow-duration="1s" style="visibility: visible; animation-delay: 250ms; animation-name: fadeInDown; animation-duration: 1s">
                 <h3  style="color:#fc2a40"  class="text-beauty text-bold"> <i class="fas fa-sun fa-spin fa-sm"></i> Thành Lập</h3>
                 <p class="text-beauty text-bold">Trung tâm Tempo được thành lập vào năm 2021.</p>
             </div>
-            <div class="row">
+            <div class="row fadeInRight" data-wow-delay="250ms" data-wow-duration="1s" style="visibility: visible; animation-delay: 250ms; animation-name: fadeInRight; animation-duration: 1s">
                 <h3  style="color:#fc2a40"  class="text-beauty text-bold hvr-icon-pulse-grow"> <i class="fas fa-star fa-sm hvr-icon"></i> Sứ mạng</h3>
                 <p class="text-beauty text-bold">Giúp cho học viên trở thành những nghệ sĩ piano tài năng và đầy năng lượng bằng cách cung cấp cho họ chương trình học đa dạng, chuyên nghiệp và cá nhân hóa. Chúng tôi cam kết tạo ra môi trường học tập thân thiện và đầy cảm hứng, giúp học viên phát triển tối đa khả năng của mình và đạt được mục tiêu âm nhạc của mình..</p>
             </div>
-            <div class="row">
+            <div class="row fadeInLeft" data-wow-delay="250ms" data-wow-duration="1s" style="visibility: visible; animation-delay: 250ms; animation-name: fadeInLeft; animation-duration: 1s">
                 <h3 style="color:#fc2a40" class="text-beauty text-bold hvr-icon-buzz-out"> <i class="fas fa-handshake hvr-icon fa-sm"></i> Cam kết</h3>
                 <p class="text-beauty text-bold">Mang đến những kiến thức và trải nghiệm tốt nhất đến cho học viên, bên cạnh đó cam kết cung cấp các sản phẩm chất lượng tới tay người dùng.</p>
             </div>

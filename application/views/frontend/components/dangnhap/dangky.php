@@ -1,6 +1,6 @@
 <?php echo form_open('dang-ky'); ?>
 <section id="product-detail" style="margin-top:20px">
-	<div class="container" style="background-color: #d9e8f1;border-radius: 20px;">
+	<div class="container" style="background-color: #fafdff;border-radius: 20px;">
 		<div class="col-md-3 col-sm-3 hidden-xs"></div>
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="products-wrap">

@@ -1,4 +1,4 @@
-<div class="container" style="margin-top:20px;background-color: #d9e8f1;border-radius: 20px">
+<div class="container" style="margin-top:20px;background-color: #fafdff;border-radius: 20px">
 	<div class="row">
 		<div class="col-md-3 col-sm-3 hidden-xs">
 		</div>

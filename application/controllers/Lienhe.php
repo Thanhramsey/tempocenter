@@ -79,5 +79,17 @@ class Lienhe extends CI_Controller {
 		$this->data['view']='chinhsachbaomat';
 		$this->load->view('frontend/layout',$this->data);
 	}
+	public function coban()
+	{
+		$this->data['title']="TEMPO  - Liên hệ";
+		$this->data['view']='coban';
+		$this->load->view('frontend/layout',$this->data);
+	}
+	public function nangcao()
+	{
+		$this->data['title']="TEMPO  - Liên hệ";
+		$this->data['view']='nangcao';
+		$this->load->view('frontend/layout',$this->data);
+	}
 }
 

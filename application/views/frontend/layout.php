@@ -30,6 +30,8 @@
 	<link href="public/css/ketquatimkiem.css" rel="stylesheet">
 	<link href="public/css/flexslider.css" rel="stylesheet">
 	<link href="public/css/hover.css" rel="stylesheet">
+	<link href="public/css/animate.css" rel="stylesheet">
+	<link href="public/css/animate.min.css" rel="stylesheet">
 	<script src="public/js/jquery-2.2.3.min.js"></script>
 </head>
 
