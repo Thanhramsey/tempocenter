@@ -51,6 +51,14 @@
 	<ul class="menu-right" style="display: inline-block;">
 		<li class="pull-left "><a href="" class="hvr-sweep-to-right"> <i class="fas fa-home fa-sm"></i>  Trang chủ</a></li>
 		<li class="pull-left nav-item dropdown">
+		<a href="#" class="dropdown-toggle hvr-sweep-to-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-book fa-sm"></i>  Khóa học <span class="caret"></span></a>
+			<ul class="dropdown-menu fade-down">
+				<li class="sub-link"><a class='hvr-pulse-shrink' href="#">Khóa học piano cơ bản</a></li>
+				<li class="sub-link"><a class='hvr-pulse-shrink' href="#">Khóa học piano nâng cao</a></li>
+			</ul>
+		</li>
+		<li class="pull-left"><a class="hvr-sweep-to-right"  href="san-pham"><i class="fas fa-music fa-sm"></i>  Sản phẩm</a></li>
+		<li class="pull-left nav-item dropdown">
 			<a href="#" class="hvr-sweep-to-right dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe fa-spin fa-sm"></i>  Thương hiệu <span class="caret"></span></a>
 			<ul class="dropdown-menu fade-down">
 				<?php
@@ -84,11 +92,10 @@
 				?>
 			</ul>
 		</li>
-		<li class="pull-left"><a class="hvr-sweep-to-right" href="lichhoc"><i class="fas fa-calendar fa-sm"></i>  Lịch học</a></li>
 		<!-- <li class="pull-left"><a href="ketnoicungcau">Kết nối cung cầu</a></li> -->
-		<li class="pull-left"><a class="hvr-sweep-to-right"  href="san-pham"><i class="fas fa-music fa-sm"></i>  Sản phẩm</a></li>
+		<li class="pull-left"><a class="hvr-sweep-to-right" href="#"><i class="fas fa-images fa-sm"></i> Thư viện</a></li>
 		<li class="pull-left"><a class="hvr-sweep-to-right" href="tin-tuc/1"><i class="fas fa-newspaper fa-sm"></i>  Tin tức</a></li> 
-		<li class="pull-left"><a class="hvr-sweep-to-right"  href="van-ban"><i class="fas fa-tablet fa-sm"></i>  Chính Sách</a></li>
+		<li class="pull-left"><a class="hvr-sweep-to-right"  href="#"><i class="fas fa-tablet fa-sm"></i>  Tra cứu</a></li>
 		<li class="pull-left nav-item dropdown">
 		<a href="#" class="dropdown-toggle hvr-sweep-to-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle fa-sm"></i>  Liên hệ <span class="caret"></span></a>
 			<ul class="dropdown-menu fade-down">

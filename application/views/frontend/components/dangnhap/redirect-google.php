@@ -70,5 +70,5 @@
          * IF YOU DON'T LOGIN GOOGLE
          * YOU CAN SEEN AGAIN GOOGLE_APP_ID, GOOGLE_APP_SECRET, GOOGLE_APP_CALLBACK_URL
          */
-        echo "<a class='button button-3d button-black nomargin pull-left cursorsHover' style='background-color:#e32f2f !important' href='".$client->createAuthUrl()."' ><i class='fab fa-google-plus'></i>Google Login</a>";
+        echo "<a class='hvr-bounce-in button button-3d button-black nomargin pull-left cursorsHover' style='background-color:#e32f2f !important' href='".$client->createAuthUrl()."' ><i class='fab fa-google-plus'></i>Google Login</a>";
     }

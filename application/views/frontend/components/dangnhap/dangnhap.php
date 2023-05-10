@@ -1,11 +1,11 @@
 <?php echo form_open('dang-nhap'); ?>
-<div class="container">
+<div class="container" style="margin-top:20px" >
 	<div class="products-wrap">
-		<div class="container">
+		<div class="container" style="background-color: #d9e8f1;border-radius: 20px;">
 			<div class="col-md-3 col-sm-3 hidden-xs"></div>
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<div id="login">
-					<div class="acctitle acctitlec">Đăng nhập</div>
+					<h2 class="text-beauty text-bold acc_content" style="color:#fc2a40">Đăng nhập</h2>
 					<div class="acc_content clearfix" style="display: block;">
 						<form accept-charset="UTF-8" action="" id="customer_login" method="post">
 							<div class="col_full">
@@ -24,7 +24,7 @@
 								</div>
 							<?php  endif;?>
 							<div class="col_full nobottommargin">
-								<button class="button button-3d button-black nomargin pull-left" id="login-form-submit" name="login-form-submit" type="submit" value="login">Đăng nhập</button>
+								<button class="hvr-bounce-in button button-3d button-black nomargin pull-left" id="login-form-submit" name="login-form-submit" type="submit" value="login">Đăng nhập</button>
 								<?php
 									$this->load->view('frontend/components/dangnhap/fbbtn');
 								?>

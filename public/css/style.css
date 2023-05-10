@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,500,600,700');
 @media (max-width: 767px){
 	.img-sp{
 		display: block;
@@ -2992,4 +2993,21 @@ a.fright {
 th.text-center {
 	background: #262144;
     color: #fff;
+}
+
+.text-beauty{
+	font-family: 'Playfair Display', sans-serif;
+}
+
+.text-bold{
+	font-weight: bold;
+}
+
+.text-gradient {
+    background: -moz-linear-gradient(left, #fc2a40, #ff5606);
+    background: -webkit-linear-gradient(left, #fc2a40, #ff5606);
+    background: linear-gradient(to right, #fc2a40, #ff5606);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc2a40', endColorstr='#ff5606',GradientType=1 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

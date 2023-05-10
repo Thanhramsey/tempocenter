@@ -13,23 +13,46 @@
     </div>
 </div>
 <div class="slider">
-        <div class="container">
-           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:10px !important">
-		   <a href="tin-tuc/thong-bao-khai-truong-trung-tam">
-             <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/khaitruong.jpg">
-        	</div>
-			</a>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:10px !important">
-
-			<a href="san-pham">
-				<img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/khaitruong2.jpg">
-			</a>
-        	</div>
+    <div class="container">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:10px !important">
+            <a href="tin-tuc/thong-bao-khai-truong-trung-tam">
+                <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/qc1.png">
+            </a>
+        </div>
+		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:10px !important">
+            <a href="san-pham">
+                <img style="width: 100%; height: 160px; box-shadow: -10px 10px 5px #bbb; border-radius:20px" src="public/images/quangcao/qc2.png">
+            </a>
+    	</div>
+    </div>
+</div>
+<div class="container" style="margin-top: 10px;">
+    <div class= "row">
+        <h1 class="text-bold text-center text-beauty">Giới thiệu <span class="text-bold text-beauty text-gradient" >TEMPO</span></h1> 
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="padding: 0px 50px !important;">
+            <img style="width: 100%; border-radius:20px" src="public/images/about-img.png">
+        </div>
+        <div class="col-md-6 align-items-center" style="padding: 20px 50px !important;">
+            <div class="row">
+                <h3  style="color:#fc2a40"  class="text-beauty text-bold"> <i class="fas fa-sun fa-spin fa-sm"></i> Thành Lập</h3>
+                <p class="text-beauty text-bold">Trung tâm Tempo được thành lập vào năm 2021.</p>
+            </div>
+            <div class="row">
+                <h3  style="color:#fc2a40"  class="text-beauty text-bold hvr-icon-pulse-grow"> <i class="fas fa-star fa-sm hvr-icon"></i> Sứ mạng</h3>
+                <p class="text-beauty text-bold">Giúp cho học viên trở thành những nghệ sĩ piano tài năng và đầy năng lượng bằng cách cung cấp cho họ chương trình học đa dạng, chuyên nghiệp và cá nhân hóa. Chúng tôi cam kết tạo ra môi trường học tập thân thiện và đầy cảm hứng, giúp học viên phát triển tối đa khả năng của mình và đạt được mục tiêu âm nhạc của mình..</p>
+            </div>
+            <div class="row">
+                <h3 style="color:#fc2a40" class="text-beauty text-bold hvr-icon-buzz-out"> <i class="fas fa-handshake hvr-icon fa-sm"></i> Cam kết</h3>
+                <p class="text-beauty text-bold">Mang đến những kiến thức và trải nghiệm tốt nhất đến cho học viên, bên cạnh đó cam kết cung cấp các sản phẩm chất lượng tới tay người dùng.</p>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container" style="margin-top: 20px;">
     <div class="sale-title">
-        <span>SẢN PHẨM KHUYẾN MÃI HOT </span>
+        <span class= "text-beauty">SẢN PHẨM KHUYẾN MÃI HOT </span>
     </div>
 </div>
 <div class="container" style="margin-bottom: 20px;">
@@ -111,7 +134,7 @@
  if(count($product_tiemnang) > 0) :?>
 <div class="container" style="margin-top: 20px;">
     <div class="sale-title">
-        <span>SẢN PHẨM TIỀM NĂNG </span>
+        <span class="text-beauty">SẢN PHẨM TIỀM NĂNG </span>
     </div>
 </div>
 <div class="container" style="margin-bottom: 20px;">
@@ -192,7 +215,7 @@
 
 <div class="container" style="margin-top: 20px;">
     <div class="sale-title">
-        <span>SẢN PHẨM BÁN CHẠY</span>
+        <span class="text-beauty">SẢN PHẨM BÁN CHẠY</span>
     </div>
 </div>
 <div class="container" style="margin-bottom: 20px;">
@@ -286,7 +309,7 @@
             if((count($listProducts) >= 2)):?>
                     <div class="sale-title">
                         <!-- <span><a href="<?php echo  $rowCategory['link']?>"><?php echo  $rowCategory['name']?> nổi bật</a></span> -->
-						<span><?php echo  $rowCategory['name']?> nổi bật</span>
+						<span class="text-beauty"><?php echo  $rowCategory['name']?> nổi bật</span>
 						<!-- <?php if((count($subCategory) >= 0)):?>
                         <ul class="sub-category">
                             <?php foreach ($subCategory as $rowSubCategory) :?>
@@ -390,7 +413,7 @@
 
         </div> -->
 		<div class="text-center">
-                <h2 class="sectin-title title title-blue">Tin tức</h2>
+                <h2 class="sectin-title title title-blue text-beauty">Tin tức</h2>
             </div>
             <?php
             $listBaiViet=$this->Mcontent->content_list_home(6, 'all');
