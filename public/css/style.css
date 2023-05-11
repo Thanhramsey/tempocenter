@@ -32,8 +32,8 @@
 	.col-xs-8, .col-xs-9 {
 		position: relative;
 		min-height: 1px;
-		padding-right: 0px !important;
-		padding-left: 0px !important;
+		padding-right: 15px !important;
+		padding-left: 15px !important;
 	}
 	.left-panel-info-cart{
 		width: 100% !important;
@@ -137,8 +137,8 @@
 	.col-xs-8, .col-xs-9 {
 		position: relative;
 		min-height: 1px;
-		padding-right: 0px !important;
-		padding-left: 0px !important;
+		padding-right: 15px !important;
+		padding-left: 15px !important;
 	}
 	.p-box-5{
 		width: 25% !important;
@@ -2996,11 +2996,15 @@ th.text-center {
 }
 
 .text-beauty{
-	font-family: 'Playfair Display', sans-serif;
+	font-family: serif;
 }
 
 .text-bold{
 	font-weight: bold;
+}
+
+.white-text{
+	color:#fff;
 }
 
 .text-gradient {
@@ -3010,4 +3014,42 @@ th.text-center {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc2a40', endColorstr='#ff5606',GradientType=1 );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.col-pad{
+	padding: 0 15px !important;
+}
+
+.coban-text li{
+	font-family: serif;
+	font-weight: bold;
+	font-size:20px
+}
+
+.coban .btn-dk {
+    background-color: #ffdc00;
+    display: inline-block;
+    padding: 5px 10px;
+    color: #262144;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 4px;
+	font-family: serif;
+}
+.coban .btn-dk:hover {
+    text-decoration: none;
+    background-color: #ffe757;
+}
+
+.contact-form{
+	margin-top:40px;
+	width:700px;
+	height:450px;
+	background: rgb(2,0,36);
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,28,1) 37%, rgba(198,110,128,1) 100%);
+	border-radius:20px
+}
+
+.contact-form label,.contact-form h3,.contact-form h5{
+	color: #ffb22e;
 }

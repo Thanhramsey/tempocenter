@@ -23,32 +23,17 @@ class Lienhe extends CI_Controller {
 		$today=$d['year']."/".$d['mon']."/".$d['mday'];
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('fullname', 'Họ và tên','required' );
-		// $this->form_validation->set_rules('email', 'email','required|valid_email' );
 		$this->form_validation->set_rules('phone', 'Số điện thoại','required' );
-		// $this->form_validation->set_rules('title', 'tiêu đề','required' );
 		$this->form_validation->set_rules('content', 'nội dụng','required' );
-		$mon = "" ;
-		$ca = "" ;
 		if($this->form_validation->run()==TRUE){
-
-			if(!empty($_POST['monId'])){
-				$monhoc = $this->Mmonhoc->monhoc_detail($_POST['monId']);
-				$mon = $monhoc['name'];
-			}
-			if(!empty($_POST['caId'])){
-				$cahoc = $this->Mcahoc->cahoc_detail($_POST['caId']);
-				$ca = $cahoc['name'];
-			}
 			if(empty($_POST['title'])){
 				$_POST['title'] = "Đăng kí học thử";
 			}
-			echo "<pre>---In ra---\n".print_r($_POST)."</pre>";
 			$mydata=array(
 				'fullname'=>$_POST['fullname'],
 				'email'=>$_POST['email'],
 				'phone'=>$_POST['phone'],
 				'title'=>$_POST['title'],
-				'cahoc' =>"Môn: ".$mon." Ca: ".$ca,
 				'content'=>$_POST['content'],
 				'created_at'=> $today
 			);
@@ -91,5 +76,22 @@ class Lienhe extends CI_Controller {
 		$this->data['view']='nangcao';
 		$this->load->view('frontend/layout',$this->data);
 	}
-}
 
+	public function insertLienHe(){
+		$today=$d['year']."/".$d['mon']."/".$d['mday']." ".$d['hours'].":".$d['minutes'].":".$d['seconds'];
+		if(empty($_POST['title'])){
+			$_POST['title'] = "Đăng kí học thử";
+		}
+		$mydata= array(
+				'fullname'=>$_POST['fullname'],
+				'email'=>$_POST['email'],
+				'phone'=>$_POST['phone'],
+				'cahoc'=>$_POST['cahoc'],
+				'title'=>$_POST['title'],
+				'content'=>$_POST['content'],
+				'created_at'=> $today
+				);
+		$this->Mcontact->contact_insert($mydata);
+		echo json_encode( $mydata );
+	}
+}
