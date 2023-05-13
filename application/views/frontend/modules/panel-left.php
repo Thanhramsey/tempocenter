@@ -55,6 +55,8 @@
 			<ul class="dropdown-menu fade-down">
 				<li class="sub-link"><a class='hvr-pulse-shrink' href="coban">Khóa học piano cơ bản</a></li>
 				<li class="sub-link"><a class='hvr-pulse-shrink' href="nangcao">Khóa học piano nâng cao</a></li>
+				<li class="sub-link"><a class='hvr-pulse-shrink' href="demhat">Khóa học piano đệm hát</a></li>
+				<li class="sub-link"><a class='hvr-pulse-shrink' href="doctau">Khóa học piano độc tấu</a></li>
 			</ul>
 		</li>
 		<li class="pull-left"><a class="hvr-sweep-to-right"  href="san-pham"><i class="fas fa-music fa-sm"></i>  Sản phẩm</a></li>

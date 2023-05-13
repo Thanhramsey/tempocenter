@@ -38,6 +38,8 @@ $route['dieukhoanbaohanh'] = 'lienhe/dieukhoanthamgia';
 $route['chinhsachbaomat'] = 'lienhe/chinhsachbaomat';
 $route['coban'] = 'lienhe/coban';
 $route['nangcao'] = 'lienhe/nangcao';
+$route['demhat'] = 'lienhe/demhat';
+$route['doctau'] = 'lienhe/doctau';
 $route['ketnoicungcau'] = 'ketnoicungcau/index';
 $route['ketnoicungcau/timkiem'] = 'ketnoicungcau/timkiem';
 

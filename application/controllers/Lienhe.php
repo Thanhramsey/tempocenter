@@ -76,8 +76,21 @@ class Lienhe extends CI_Controller {
 		$this->data['view']='nangcao';
 		$this->load->view('frontend/layout',$this->data);
 	}
+	public function demhat()
+	{
+		$this->data['title']="TEMPO  - Liên hệ";
+		$this->data['view']='demhat';
+		$this->load->view('frontend/layout',$this->data);
+	}
+	public function doctau()
+	{
+		$this->data['title']="TEMPO  - Liên hệ";
+		$this->data['view']='doctau';
+		$this->load->view('frontend/layout',$this->data);
+	}
 
 	public function insertLienHe(){
+		$d=getdate();
 		$today=$d['year']."/".$d['mon']."/".$d['mday']." ".$d['hours'].":".$d['minutes'].":".$d['seconds'];
 		if(empty($_POST['title'])){
 			$_POST['title'] = "Đăng kí học thử";

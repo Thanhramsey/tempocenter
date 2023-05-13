@@ -155,7 +155,7 @@
                             <img style="width: 145; height:145" src="public/images/banners/music-why-1.png">
                         </p>
                         <h4 style="color:#ffcb05" class="text-beauty text-bold text-center"> SỐ BUỔI</h4>
-                        <p class="text-beauty text-bold text-center white-text">24 BUỔI</p>
+                        <p class="text-beauty text-bold text-center white-text">24 BUỔI - KÉO DÀI 3 THÁNG</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -180,7 +180,7 @@
                 </div>
             </div>
             <div class="coban text-center">
-                <a href="lien-he" class="btn-dk">Đăng ký học thử </a>
+                <button type="button" class="btn-dk" onclick="clickDk()">Đăng ký học thử</button>
             </div>
         </div>
     </div>
@@ -229,38 +229,46 @@
             <div class="col-md-12 col-lg-12 col-xs-12 col-12">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="fullname"><span class="required">*</span>Tên:</label>
+                        <label for="fullname"><span class="required">*</span> Tên:</label>
                         <input type="text" class="form-control" id="fullname">
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="phone"><span class="required">*</span> Số điện thoại:</label>
+                        <input type="number" class="form-control" id="phone">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-xs-12 col-12">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="text" class="form-control" id="email">
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-12 col-xs-12 col-12">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="phone">Số điện thoại:</label>
-                        <input type="text" class="form-control" id="phone">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="usr">Ca học:</label>
-                        <input type="text" class="form-control" id="usr">
+                        <label for="cahoc">Khóa học:</label>
+                        <select class="form-control" id="cahoc">
+                            <option>Piano cơ bản</option>
+                            <option>Piano nâng cao</option>
+                            <option>Piano đệm hát</option>
+                            <option>Piano độc tấu</option>
+                        </select>
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-12 col-xs-12 col-12">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="content"><em> Lời nhắn</em><span class="required">*</span></label>
-                        <textarea id="content" name="content" class="form-control custom-control" rows="5"></textarea>
+                        <label for="content"><em> Lời nhắn</em></label>
+                        <textarea id="content" name="content" class="form-control custom-control" rows="5"
+                            placeholder="Thời gian muốn học, thông tin thêm học viên,...."></textarea>
                     </div>
-                    <button type="submit" class="btn-update-order" style="background-color:#ffb22e">Gửi</button>
+                    <button type="button" class="btn-update-order" onclick="insertLienHe()"
+                        style="background-color:#ffb22e">Gửi</button>
                 </div>
             </div>
         </div>
@@ -276,4 +284,91 @@
             </div>
         </div>
     </div>
+    <div class="modal fade custom-modal" id="myModal">
+        <div class="modal-dialog" style="top:100px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <strong>
+                        <p id="modalContent">Thông tin đã dược gửi thành công, Chúng tôi sẽ liên hệ lại với bạn trong
+                            thời gian sớm nhất!&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-default" onClick="reLoad()">Close</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade custom-modal" id="alertModal">
+        <div class="modal-dialog" style="top:100px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thông báo</h4>
+                </div>
+                <div class="modal-body">
+                    <strong>
+                        <p id="modalContent">Vui lòng điền Họ tên và Số điện thoại&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-default" onClick="reLoad2()">Close</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </section>
+
+<script>
+function reLoad() {
+    $('#myModal').modal('hide');
+    window.location.reload();
+}
+
+function reLoad2() {
+    $('#alertModal').modal('hide');
+}
+
+function clickDk() {
+    $('html, body').animate({
+        scrollTop: $("#lienhe").offset().top
+    }, 300);
+}
+
+function insertLienHe() {
+    var strurl = "<?php echo base_url(); ?>" + 'lienhe/insertLienHe';
+    var fullname = $("#fullname").val();
+    var phone = $("#phone").val();
+    var validate = false;
+    if (fullname === "" || phone === "") {
+        $('#alertModal').modal('show');
+    } else {
+        validate = true;
+    }
+    if (validate) {
+        jQuery.ajax({
+            url: strurl,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                fullname: $("#fullname").val(),
+                email: $("#email").val(),
+                phone: $("#phone").val(),
+                cahoc: $("#cahoc").val(),
+                // title:$("#title").val(),
+                content: $("#content").val(),
+            },
+            success: function(data) {
+                console.log(data);
+                $('#myModal').modal('show');
+            }
+        });
+    }
+};
+</script>

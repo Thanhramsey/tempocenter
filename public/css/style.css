@@ -2912,19 +2912,23 @@ a.fright {
 }
 
 .custom-modal .modal-header{
- background: #262144;
- color: #fff;
+ background: #d4eeda;
+ color: #000;
 }
+.custom-modal .modal-header h4{
+	color: #c52458;
+}
+
 .custom-modal .modal-body{
 	padding: 15px;
 }
 .custom-modal .modal-footer{
-	border-top: 1px solid #ff9700;
+	/* border-top: 1px solid #ff9700; */
 	padding: 7px;
 }
 .custom-modal .btn-default{
-	background: #262144;
- 	color: #fff;
+	background: #f8d8da;
+ 	color: #000;
 }
 
   .tintuc a {
@@ -3025,6 +3029,11 @@ th.text-center {
 	font-weight: bold;
 	font-size:20px
 }
+.nangcao-text li{
+	font-family: serif;
+	font-weight: bold;
+	font-size:18px
+}
 
 .coban .btn-dk {
     background-color: #ffdc00;
@@ -3053,3 +3062,8 @@ th.text-center {
 .contact-form label,.contact-form h3,.contact-form h5{
 	color: #ffb22e;
 }
+
+html {
+	scroll-behavior: smooth;
+  }
+  

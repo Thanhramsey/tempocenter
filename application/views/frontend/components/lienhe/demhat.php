@@ -13,15 +13,8 @@
                     <div class="fadeInDown" data-wow-delay="250ms" data-wow-duration="1s"
                         style="visibility: visible; animation-delay: 250ms; animation-name: fadeInDown; animation-duration: 1s">
                         <h1 class="text-beauty text-bold text-center" style="color:#fc2a40">Chương trình đào tạo</h1>
-                        <h1 class="text-beauty text-bold text-center" style="color:#fc2a40">PIANO NÂNG CAO</h1>
-                        <p class="text-bold text-beauty" style="font-size:22px">Khóa học đàn piano nâng cao bao gồm các
-                            nội dung, kiến thức trang bị để giúp người học đàn không chỉ nâng cao kỹ thuật của mình. Mà
-                            bên cạnh đó, cũng giúp rèn luyện khả năng độc tấu một mình với những bản nhạc hay bất hủ mọi
-                            thời. Bạn đã nắm chắc những kiến thức cơ bản nhưng để chơi một bản nhạc khó, hay thật sự cảm
-                            xúc thì cần dành thời gian luyện tập là chưa đủ. Mà cần bổ sung kiến thức nâng cao bởi đàn
-                            piano độc đáo hơn các loại nhạc cụ khác ở chỗ có thể chơi nhiều điệu như slow, jazz, March,
-                            Fox, Valse. Mỗi giai điệu sẽ có cách chơi, thể hiện khác nhau vì thế mà đòi hỏi ở người chơi
-                            sự kiên nhẫn, chăm chỉ.</p>
+                        <h1 class="text-beauty text-bold text-center" style="color:#fc2a40">PIANO ĐỆM HÁT</h1>
+                        <p class="text-bold text-beauty" style="font-size:22px">SẼ ĐƯỢC CẬP NHẬT SỚM NHẤT.</p>
                     </div>
                 </div>
             </div>
@@ -86,7 +79,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <!-- <div class="container">
         <div class="row" style="margin-top:40px">
             <div class="col-md-12 col-lg-12 col-xs-12 col-12">
                 <div class="col-md-6" style="padding: 5px 20px">
@@ -147,16 +140,16 @@
                                 giai, thể loại nhạc ( mở bài )</li>
                             <li>Đàn và hát các tác phẩm mẫu mang giá trị âm nhạc cao của các tác giả nổi tiếng trong và
                                 ngoài nước</li>
-                            <li>Kỹ năng đệm cho mọi người hát với bất kỳ ca khúc nào</li>
-                            <li> Xác đinh điệu cho bài hát</li>
-                            <li>Đệm đàn dựa theo giọng hát</li>
+                            <li>Kỹ năng đệm cho mọi người hát với bất kỳ ca khúc nào</li>                        
+                            <li> Xác đinh điệu cho bài hát</li>                            
+                            <li>Đệm đàn dựa theo giọng hát</li>                            
                             <li>Tự soạn đệm, cover, chuyển màu sắc, tính chất cho bài hát bất kỳ</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     <div class="container-fluid">
         <div class="row" style="background-color:#333333; margin-top:40px; padding:30px 20px">
             <div class=" col-md-12 col-lg-12 col-xs-12 col-12">
@@ -194,11 +187,11 @@
                     </div>
                 </div>
             </div>
-            <div class="coban text-center">
-                <button type="button" class="btn-dk" onclick="clickDk()">Đăng ký học thử</button>
+            <div class="coban text-center">            
+                <button type="button" class="btn-dk" onclick="clickDk()" >Đăng ký học thử</button>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <div class="container">
         <div class="row" style="margin-top:40px">
@@ -216,8 +209,8 @@
                 <div class="col-md-4">
                     <div class="fadeInDown text-center" data-wow-delay="1s" data-wow-duration="3s"
                         style="visibility: visible; animation-delay: 1s; animation-name: fadeInDown; animation-duration: 3s">
-                        <a style="color:#0e0d08;margin-bottom:10px" class="text-beauty text-bold" href="demhat"> KHÓA
-                            PIANO ĐỆM HÁT</a>
+                        <a style="color:#0e0d08;margin-bottom:10px" class="text-beauty text-bold" href="nangcao"> KHÓA
+                            PIANO NÂNG CAO</a>
                         <img style="width: 350px;height:400px; border-radius:20px;margin-top:10px"
                             src="public/images/banners/coban.png">
                     </div>
@@ -236,7 +229,7 @@
     </div>
 
 
-    <div id="lienhe" class="container" style="display:flex;justify-content: center">
+    <div class="container" style="display:flex;justify-content: center">
         <div class="row contact-form">
             <h3 class="text-beauty text-bold text-center"> ĐĂNG KÝ ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ!</h3>
             <h5 class="text-beauty text-bold text-center">Vui lòng điền thông tin để được tư vấn trực tiếp nhanh nhất!
@@ -349,9 +342,8 @@ function reLoad() {
 function reLoad2() {
     $('#alertModal').modal('hide');
 }
-
-function clickDk() {
-    $('html, body').animate({
+function clickDk(){
+	$('html, body').animate({
         scrollTop: $("#lienhe").offset().top
     }, 300);
 }
