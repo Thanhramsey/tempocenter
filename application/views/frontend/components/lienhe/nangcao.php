@@ -83,6 +83,9 @@
                             trường/tại nhà hoặc học trực tuyến kết hợp trực tiếp.</p>
                     </div>
                 </div>
+                <div class="coban text-center">
+                    <button type="button" class="btn-dk" onclick="clickDk()">Đăng ký học thử</button>
+                </div>
             </div>
         </div>
     </div>

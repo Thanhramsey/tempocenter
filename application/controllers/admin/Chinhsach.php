@@ -8,6 +8,7 @@ class Chinhsach extends CI_Controller {
         $this->load->model('backend/Muser');
         $this->load->model('backend/Morders');
 		$this->load->model('backend/Mchinhsach');
+		$this->load->model('backend/Mcustomer');
 		if(!$this->session->userdata('sessionadmin')){
 			redirect('admin/user/login','refresh');
 		}
@@ -38,17 +39,20 @@ class Chinhsach extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->library('alias');
-		$this->form_validation->set_rules('name', 'Tên văn bản', 'required|is_unique[db_chinhsach.name]');
-		// $this->form_validation->set_rules('sohieu', 'Số hiệu', 'required|is_unique[db_chinhsach.sohieu]');
-		// $this->form_validation->set_rules('loaivanban', 'Loại văn bản', 'required');
-		// $this->form_validation->set_rules('linhvuc', 'Lĩnh vực', 'required');
-		// $this->form_validation->set_rules('trichyeu', 'Trích yếu', 'required');
-		// $this->form_validation->set_rules('ngaybanhanh', 'Ngày ban hành', 'required');
+		$this->form_validation->set_rules('name', 'Tên hóa đơn', 'required|is_unique[db_chinhsach.name]');
+		$this->form_validation->set_rules('typeHd', 'Loại hóa đơn', 'required');
+		$this->form_validation->set_rules('sohieu', 'Số hóa đơn', 'required');
+		$this->form_validation->set_rules('customer_id', 'Khách hàng', 'required');
+		$this->form_validation->set_rules('ngay', 'Ngày', 'required');
+		$this->form_validation->set_rules('thang', 'Tháng', 'required');
+		$this->form_validation->set_rules('nam', 'Năm', 'required');
 		if ($this->form_validation->run() == TRUE){
 			$mydata= array(
 				'name' =>$_POST['name'],
-				'loaivanban'=>$_POST['loaivanban'],
-				'loaivanban_name'=>$_POST['loaivanban_name'],
+				'type' =>$_POST['typeHd'],
+				'sohieu' =>$_POST['sohieu'],
+				'customer_id'=>$_POST['customer_id'],
+				'ngaybanhanh'=>$_POST['ngay']."/".$_POST['thang']."/".$_POST['nam'],
 				'created_at'=>$today,
 				'created_by'=>$this->session->userdata('id'),
 				'updated_at'=>$today,
@@ -56,18 +60,6 @@ class Chinhsach extends CI_Controller {
 				'trash'=>1,
 				'status'=>1,
 			);
-			if (!empty($_POST['linhvuc'])) {
-				$mydata['linhvuc']=$_POST['linhvuc'];
-			}
-			if (!empty($_POST['sohieu'])) {
-				$mydata['sohieu']=$_POST['sohieu'];
-			}
-			if (!empty($_POST['trichyeu'])) {
-				$mydata['trichyeu']=$_POST['trichyeu'];
-			}
-			if (!empty($_POST['ngaybanhanh'])) {
-				$mydata['ngaybanhanh']=$_POST['ngaybanhanh'];
-			}
 			$config['upload_path']          = './public/images/chinhsach/';
 			$config['encrypt_name'] = TRUE;
             $config['allowed_types']        = 'pdf|doc|docx';

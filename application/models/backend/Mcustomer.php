@@ -15,6 +15,13 @@ class Mcustomer extends CI_Model {
         $query = $this->db->get($this->table, $limit, $first);
         return $query->result_array();
     }
+    public function customer_list()
+    {
+        $this->db->where('trash', 1);
+        $this->db->order_by('created', 'desc');
+        $query = $this->db->get($this->table);
+        return $query->result_array();
+    }
 
     public function customer_count()
     {

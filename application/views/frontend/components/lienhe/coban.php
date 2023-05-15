@@ -82,6 +82,9 @@
                             trường/tại nhà hoặc học trực tuyến kết hợp trực tiếp.</p>
                     </div>
                 </div>
+                <div class="coban text-center">
+                    <button type="button" class="btn-dk" onclick="clickDk()">Đăng ký học thử</button>
+                </div>
             </div>
         </div>
     </div>
@@ -221,7 +224,7 @@
     </div>
 
 
-    <div class="container" style="display:flex;justify-content: center">
+    <div id="lienhe" class="container" style="display:flex;justify-content: center">
         <div class="row contact-form">
             <h3 class="text-beauty text-bold text-center"> ĐĂNG KÝ ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ!</h3>
             <h5 class="text-beauty text-bold text-center">Vui lòng điền thông tin để được tư vấn trực tiếp nhanh nhất!

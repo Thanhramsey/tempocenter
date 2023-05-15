@@ -1,5 +1,5 @@
 <section id="content">
-	<div class="container account">
+    <div class="container account" style="margin=top:40px">
         <aside class="col-right sidebar col-md-3 col-xs-12">
             <div class="block block-account">
                 <div class="general__title">
@@ -11,7 +11,10 @@
                     <p>Email: <strong><?php echo $info['email'] ?></strong></p>
                     <p>Số điện thoại: <strong><?php echo $info['phone'] ?></strong></p>
                 </div>
-                <button class="btn"><a href="reset_password">Đổi mật khẩu</a></button>
+                <!-- <button class="btn"><a href="reset_password">Đổi mật khẩu</a></button> -->
+                <div class="coban">
+                    <button type="button" class="btn-dk"><a href="reset_password"></a>Đổi mật khẩu</button>
+                </div>
             </div>
         </aside>
         <div class="col-main col-md-9 col-sm-12">
@@ -19,56 +22,9 @@
 
                 <?php if($this->Minfocustomer->order_listorder_customerid_not($info['id']) != null)
                 { ?>
-                    <div class="general__title">
-                        <h2><span>Danh sách đơn hàng chưa duyệt</span></h2>
-                    </div>
-                    <table style="padding-right: 10px; width: 100%;">
-                        <thead style="border: 1px solid silver;">
-                            <tr>
-                                <th class="text-left" style="width: 85px; padding:5px 10px">Đơn hàng</th>
-                                <th style="width: 110px; padding:5px 10px">Ngày</th>
-                                <th style="width: 150px;text-align: center; padding:5px 10px">
-                                    Giá trị đơn hàng
-                                </th>
-                                <th style="width: 150px; text-align: center;">Trạng thái đơn hàng</th>
-                                <th style="text-align: center;" colspan="2">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody style="border: 1px solid silver;">
-                            <?php $order = $this->Minfocustomer->order_listorder_customerid_not($info['id']);
-                            foreach ($order as $value):?>
-                                <tr style="border-bottom: 1px solid silver;">
-                                    <td style="padding:5px 10px;">#<?php echo $value['orderCode'] ?></td>
-                                    <td style="padding:5px 10px;"><?php echo $value['orderdate'] ?></td>
-                                    <td style="text-align: center; padding:5px 10px;"><span class="price-2"><?php echo number_format($value['money']) ?> VNĐ</span></td>
-                                    <td style="padding:5px 10px; text-align: center;">
-                                       <?php
-                                       switch ($value['status']) {
-                                        case '0':
-                                        echo 'Đang đợi duyệt';
-                                        break;
-                                    }
-                                    $id = $value['id'];
-                                    ?>
-                                </td>
-                                <td width="70">
-                                    <span> <a style="color: #262144;" href="account/orders/<?php echo $value['id'] ?>">Xem chi tiết</a></span>
-                                </td>
-                                <td width="70">
-                                    <a style="color: red;" href="thongtin/update/<?php echo $value['id'];?>" onclick="return confirm('Xác nhận hủy đơn hàng này ?')">Hủy đơn hàng</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <?php
-            }
-            ?>
-
-            <div class="general__title">
-                <h2><span>Danh sách đơn hàng</span></h2>
-            </div>
-            <div class="table-order">
+                <div class="general__title">
+                    <h2><span>Danh sách đơn hàng chưa duyệt</span></h2>
+                </div>
                 <table style="padding-right: 10px; width: 100%;">
                     <thead style="border: 1px solid silver;">
                         <tr>
@@ -78,18 +34,69 @@
                                 Giá trị đơn hàng
                             </th>
                             <th style="width: 150px; text-align: center;">Trạng thái đơn hàng</th>
-                            <th>Thao tác</th>
+                            <th style="text-align: center;" colspan="2">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody style="border: 1px solid silver;">
-                        <?php $order = $this->Minfocustomer->order_listorder_customerid($info['id']);
+                        <?php $order = $this->Minfocustomer->order_listorder_customerid_not($info['id']);
+                            foreach ($order as $value):?>
+                        <tr style="border-bottom: 1px solid silver;">
+                            <td style="padding:5px 10px;">#<?php echo $value['orderCode'] ?></td>
+                            <td style="padding:5px 10px;"><?php echo $value['orderdate'] ?></td>
+                            <td style="text-align: center; padding:5px 10px;"><span
+                                    class="price-2"><?php echo number_format($value['money']) ?> VNĐ</span></td>
+                            <td style="padding:5px 10px; text-align: center;">
+                                <?php
+                                       switch ($value['status']) {
+                                        case '0':
+                                        echo 'Đang đợi duyệt';
+                                        break;
+                                    }
+                                    $id = $value['id'];
+                                    ?>
+                            </td>
+                            <td width="70">
+                                <span> <a style="color: #262144;" href="account/orders/<?php echo $value['id'] ?>">Xem
+                                        chi tiết</a></span>
+                            </td>
+                            <td width="70">
+                                <a style="color: red;" href="thongtin/update/<?php echo $value['id'];?>"
+                                    onclick="return confirm('Xác nhận hủy đơn hàng này ?')">Hủy đơn hàng</a>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php
+            }
+            ?>
+
+                <div class="general__title">
+                    <h2><span>Danh sách đơn hàng</span></h2>
+                </div>
+                <div class="table-order">
+                    <table style="padding-right: 10px; width: 100%;">
+                        <thead style="border: 1px solid silver;">
+                            <tr>
+                                <th class="text-left" style="width: 85px; padding:5px 10px">Đơn hàng</th>
+                                <th style="width: 110px; padding:5px 10px">Ngày</th>
+                                <th style="width: 150px;text-align: center; padding:5px 10px">
+                                    Giá trị đơn hàng
+                                </th>
+                                <th style="width: 150px; text-align: center;">Trạng thái đơn hàng</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody style="border: 1px solid silver;">
+                            <?php $order = $this->Minfocustomer->order_listorder_customerid($info['id']);
                         foreach ($order as $value):?>
                             <tr style="border-bottom: 1px solid silver;">
                                 <td style="padding:5px 10px;">#<?php echo $value['orderCode'] ?></td>
                                 <td style="padding:5px 10px;"><?php echo $value['orderdate'] ?></td>
-                                <td style="text-align: center; padding:5px 10px;"><span class="price-2"><?php echo number_format($value['money']) ?> VNĐ</span></td>
+                                <td style="text-align: center; padding:5px 10px;"><span
+                                        class="price-2"><?php echo number_format($value['money']) ?> VNĐ</span></td>
                                 <td style="padding:5px 10px; text-align: center;">
-                                   <?php
+                                    <?php
                                    switch ($value['status']) {
                                     case '0':
                                     echo 'Đang đợi duyệt';
@@ -109,17 +116,18 @@
                                 }
                                 $id = $value['id'];
                                 ?>
-                            </td>
-                            <td width="70">
-                                <span> <a style="color: #262144;" href="account/orders/<?php echo $value['id'] ?>">Xem chi tiết</a></span>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                                </td>
+                                <td width="70">
+                                    <span> <a style="color: #262144;"
+                                            href="account/orders/<?php echo $value['id'] ?>">Xem chi tiết</a></span>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
 
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 </section>

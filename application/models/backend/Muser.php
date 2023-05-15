@@ -29,6 +29,13 @@ class Muser extends CI_Model {
         $query = $this->db->get($this->table, $limit, $first);
         return $query->result_array();
     }
+    public function users_list(){
+        $this->db->where('trash', 1);
+        $this->db->where('id !=', 1);
+        $this->db->order_by('created', 'desc');
+        $query = $this->db->get($this->table);
+        return $query->result_array();
+    }
 	public function users_banhang(){
         $this->db->where('trash', 1);
         $this->db->where('id !=', 1);
