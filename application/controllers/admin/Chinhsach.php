@@ -52,7 +52,7 @@ class Chinhsach extends CI_Controller {
 				'type' =>$_POST['typeHd'],
 				'sohieu' =>$_POST['sohieu'],
 				'customer_id'=>$_POST['customer_id'],
-				'ngaybanhanh'=>$_POST['ngay']."/".$_POST['thang']."/".$_POST['nam'],
+				'ngaybanhanh'=>$_POST['nam']."/".$_POST['thang']."/".$_POST['ngay'],
 				'created_at'=>$today,
 				'created_by'=>$this->session->userdata('id'),
 				'updated_at'=>$today,
@@ -72,7 +72,7 @@ class Chinhsach extends CI_Controller {
                 $mydata['file']='';
             }
 			$this->Mchinhsach->chinhsach_insert($mydata);
-			$this->session->set_flashdata('success', 'Thêm văn bản thành công');
+			$this->session->set_flashdata('success', 'Thêm hóa đơn thành công');
 			redirect('admin/chinhsach','refresh');
 		}else{
 			$this->data['view']='insert';
@@ -92,49 +92,40 @@ class Chinhsach extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->library('alias');
-		$this->form_validation->set_rules('name', 'Tên văn bản', 'required');
-		// $this->form_validation->set_rules('sohieu', 'Số hiệu', 'required');
-		$this->form_validation->set_rules('loaivanban', 'Loại văn bản', 'required');
-		// $this->form_validation->set_rules('linhvuc', 'Lĩnh vực', 'required');
-		// $this->form_validation->set_rules('trichyeu', 'Trích yếu', 'required');
-		// $this->form_validation->set_rules('ngaybanhanh', 'Ngày ban hành', 'required');
+		$this->form_validation->set_rules('name', 'Tên hóa đơn', 'required');
 		if ($this->form_validation->run() == TRUE) {
 			$mydata= array(
 				'name' =>$_POST['name'],
-				'loaivanban'=>$_POST['loaivanban'],
-				'loaivanban_name'=>$_POST['loaivanban_name'],
+				'type' =>$_POST['typeHd'],
+				'sohieu' =>$_POST['sohieu'],
+				'customer_id'=>$_POST['customer_id'],
 				'updated_at'=>$today,
 				'updated_by'=>$this->session->userdata('id'),
 				'trash'=>1,
-				'status'=>$_POST['status']
+				'status'=>1,
 			);
-			if (!empty($_POST['linhvuc'])) {
-				$mydata['linhvuc']=$_POST['linhvuc'];
-			}
-			if (!empty($_POST['sohieu'])) {
-				$mydata['sohieu']=$_POST['sohieu'];
-			}
-			if (!empty($_POST['trichyeu'])) {
-				$mydata['trichyeu']=$_POST['trichyeu'];
-			}
-			if (!empty($_POST['ngaybanhanh'])) {
-				$mydata['ngaybanhanh']=$_POST['ngaybanhanh'];
+			if (empty($_POST['ngay']) || empty($_POST['thang']) || empty($_POST['nam'])) {
+				$mydata['ngaybanhanh']= $today;
+			}else{
+				$mydata['ngaybanhanh'] = $_POST['nam']."/".$_POST['thang']."/".$_POST['ngay'];
 			}
 			$config['upload_path']          = './public/images/chinhsach/';
 			$config['encrypt_name'] = TRUE;
-            $config['allowed_types']        = 'pdf|doc|docx';
+            $config['allowed_types']        = 'pdf|doc|docx|jpg|png|jpeg';
             $config['max_size']             = 10000;
             $this->load->library('upload', $config);
             if ( $this->upload->do_upload('file_pdf')){
                 $data = $this->upload->data();
-                $mydata['file']=$data['file_name'];
+				if ($data['file_name']!= ""){
+					$mydata['file']=$data['file_name'];
+				}
             }
 			$this->Mchinhsach->chinhsach_update($mydata, $id);
-			$this->session->set_flashdata('success', 'Cập nhật văn bản thành công');
+			$this->session->set_flashdata('success', 'Cập nhật hóa đơn thành công');
 			redirect('admin/chinhsach/','refresh');
 		}
 		$this->data['view']='update';
-		$this->data['title']='Cập nhật văn bản';
+		$this->data['title']='Cập nhật hóa đơn';
 		$this->load->view('backend/layout', $this->data);
 	}
 
@@ -143,7 +134,7 @@ class Chinhsach extends CI_Controller {
 		$status=($row['status']==1)?0:1;
 		$mydata= array('status' => $status);
 		$this->Mchinhsach->chinhsach_update($mydata, $id);
-		$this->session->set_flashdata('success', 'Cập nhật văn bản thành công');
+		$this->session->set_flashdata('success', 'Cập nhật hóa đơn thành công');
 		redirect('admin/chinhsach/','refresh');
 	}
 
@@ -156,28 +147,28 @@ class Chinhsach extends CI_Controller {
 		$this->data['strphantrang']=$this->phantrang->PagePer($total, $current, $limit, $url='admin/chinhsach/recyclebin');
 		$this->data['list']=$this->Mchinhsach->chinhsach_trash($limit, $first);
 		$this->data['view']='recyclebin';
-		$this->data['title']='Thùng rác chính sách';
+		$this->data['title']='Thùng rác hóa đơn';
 		$this->load->view('backend/layout', $this->data);
 	}
 
 	public function trash($id){
 		$mydata= array('trash' => 0);
 		$this->Mchinhsach->chinhsach_update($mydata, $id);
-		$this->session->set_flashdata('success', 'Xóa văn bản vào thùng rác thành công');
+		$this->session->set_flashdata('success', 'Xóa hóa đơn vào thùng rác thành công');
 		redirect('admin/chinhsach','refresh');
 	}
 
 	public function restore($id)
 	{
 		$this->Mchinhsach->chinhsach_restore($id);
-		$this->session->set_flashdata('success', 'Khôi phục văn bản thành công');
+		$this->session->set_flashdata('success', 'Khôi phục hóa đơn thành công');
 		redirect('admin/chinhsach/recyclebin','refresh');
 	}
 	public function delete($id)
 	{
 		$row=$this->Mchinhsach->chinhsach_delete_detail($id);
 		$this->Mchinhsach->chinhsach_delete($row['id'],$row['file']);
-		$this->session->set_flashdata('success', 'Xóa văn bản thành công');
+		$this->session->set_flashdata('success', 'Xóa hóa đơn thành công');
 		redirect('admin/chinhsach/recyclebin','refresh');
 	}
 

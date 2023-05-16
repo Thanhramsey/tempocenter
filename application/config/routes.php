@@ -40,6 +40,8 @@ $route['coban'] = 'lienhe/coban';
 $route['nangcao'] = 'lienhe/nangcao';
 $route['demhat'] = 'lienhe/demhat';
 $route['doctau'] = 'lienhe/doctau';
+$route['thuvien'] = 'lienhe/thuvien';
+$route['thuvien/(:num)'] = 'lienhe/thuvien/$1';
 $route['ketnoicungcau'] = 'ketnoicungcau/index';
 $route['ketnoicungcau/timkiem'] = 'ketnoicungcau/timkiem';
 
@@ -221,4 +223,3 @@ $route['diaphuong/detail/(:any)'] = 'diaphuong/detail/$1';
 $route['fbcallback'] = 'dangnhap/fbcallback';
 $route['ggcallback'] = 'dangnhap/ggcallback';
 $route['fb-index'] = 'dangnhap/fbindex';
-

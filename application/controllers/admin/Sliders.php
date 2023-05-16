@@ -42,6 +42,10 @@ class Sliders extends CI_Controller {
 		$this->load->library('session');
 		$this->load->library('alias');
 		$this->form_validation->set_rules('name', 'Tên hình ảnh', 'required');
+		$type = 1 ;
+		if(!empty($_POST['type'])){
+			$type = $_POST['type'];
+		}
 		if ($this->form_validation->run() == TRUE) 
 		{
 			$mydata= array(
@@ -52,7 +56,8 @@ class Sliders extends CI_Controller {
 				'modified'=>$today,
 				'modified_by'=>$this->session->userdata('id'),
 				'trash'=>1,
-				'status'=>$_POST['status']
+				'status'=>$_POST['status'],
+				'type'=> $type
 			);
 			$config['upload_path']          = './public/images/banners/';
 			$config['allowed_types']        = 'gif|jpg|png';
@@ -95,6 +100,7 @@ class Sliders extends CI_Controller {
 			$mydata= array(
 				'link'=>$_POST['link'],
 				'name' =>$_POST['name'],
+				'type' => $_POST['type'],
 				'modified'=>$today,
 				'modified_by'=>$this->session->userdata('fullname'),
 				'trash'=>1,

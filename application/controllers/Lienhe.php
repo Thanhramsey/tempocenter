@@ -14,7 +14,7 @@ class Lienhe extends CI_Controller {
 		$this->load->model('backend/Muser');
 		$this->load->model('backend/Mmonhoc');
 		$this->load->model('backend/Mcahoc');
-
+		$this->load->model('frontend/Mslider');
 	}
 
 	public function index()
@@ -86,6 +86,21 @@ class Lienhe extends CI_Controller {
 	{
 		$this->data['title']="TEMPO  - Liên hệ";
 		$this->data['view']='doctau';
+		$this->load->view('frontend/layout',$this->data);
+	}
+
+	public function thuvien()
+	{
+		$this->load->library('phantrang');
+        $limit=12;
+        $current=$this->phantrang->PageCurrent();
+        $first=$this->phantrang->PageFirst($limit, $current);
+        $total=$this->Mslider->list_img_class_count("","");
+        $this->data['strphantrang']=$this->phantrang->PagePer($total, $current, $limit, $url='thuvien');
+        $this->data['list']=$this->Mslider->list_img_class_1($limit,$first);
+
+		$this->data['title']="TEMPO  - Liên hệ";
+		$this->data['view']='thuvien';
 		$this->load->view('frontend/layout',$this->data);
 	}
 

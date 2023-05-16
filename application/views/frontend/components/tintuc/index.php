@@ -14,22 +14,24 @@
                 </div>
                 <?php $this->load->view('frontend/modules/news'); ?>
             </div>
-            <div class = "col-xs-12 col-sm-12 col-md-9 col-lg-9 product-content" id="list-content">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 product-content" id="list-content">
                 <div class="product-wrap" style="padding:0px 15px">
-				  <span class="tintuc-sp">Tin tức</span>
-                  <div class="fs-newsboxs">
-                    <?php foreach ($list as $item) :?>
+                    <span class="tintuc-sp">Tin tức</span>
+                    <div class="fs-newsboxs">
+                        <?php foreach ($list as $item) :?>
                         <div class="fs-ne2-it clearfix">
                             <div class="fs-ne2-if">
                                 <a class="fs-ne2-img" href="tin-tuc/<?php echo $item['alias']; ?>">
-                                    <img style="margin-right:15px"  src="public/images/posts/<?php echo $item['img']; ?>">
+                                    <img style="margin-right:15px"
+                                        src="public/images/posts/<?php echo $item['img']; ?>">
                                 </a>
                                 <div class="fs-n2-info">
-                                    <h3><a class="fs-ne2-tit" href="tin-tuc/<?php echo $item['alias']; ?>" title=""><?php echo $item['title']; ?></a></h3>
+                                    <h3><a class="fs-ne2-tit" href="tin-tuc/<?php echo $item['alias']; ?>"
+                                            title=""><?php echo $item['title']; ?></a></h3>
                                     <div class="fs-ne2-txt"><?php echo $item['introtext']; ?></div>
                                     <p class="fs-ne2-bot">
                                         <span class="fs-ne2-user">
-                                            <img class="lazy"src="">
+                                            <img class="lazy" src="">
                                         </span>
                                         <span><?php echo $item['created']; ?></span>
                                     </p>
@@ -37,17 +39,17 @@
                             </div>
 
                         </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
 
+                    </div>
+                    <div class="row text-center">
+                        <ul class="pagination">
+                            <?php echo $strphantrang; ?>
+                        </ul>
+                    </div>
                 </div>
-                <div class = "row text-center">
-                   <ul class ="pagination">
-                      <?php echo $strphantrang; ?>
-                  </ul>
-              </div>
-          </div>
 
-      </div>
-  </div>
-</div>
+            </div>
+        </div>
+    </div>
 </section>

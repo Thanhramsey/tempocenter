@@ -32,6 +32,7 @@
     <link href="public/css/hover.css" rel="stylesheet">
     <link href="public/css/animate.css" rel="stylesheet">
     <link href="public/css/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <script src="public/js/jquery-2.2.3.min.js"></script>
 </head>
 
@@ -165,6 +166,12 @@
         js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+    Fancybox.bind('[data-fancybox]', {
+        //
+    });
     </script>
 </body>
 

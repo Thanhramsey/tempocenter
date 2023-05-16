@@ -252,6 +252,19 @@ html[xmlns] .flexslider .slides {
   transition: all 1s ease;
     border: 1px solid #D1CFCF;
 }
+.sp-detail .flex-control-thumbs img {
+  width: 140px;
+  height: 126px;
+  display: block;
+  opacity: .7;
+  cursor: pointer;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+    border: 1px solid #D1CFCF;
+}
 .flex-control-thumbs img:hover {
   opacity: 1;
 }
