@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="public/css/AdminLTE.css">
     <link rel="stylesheet" href="public/css/ionicons.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <meta property="fb:app_id" content="659513967881060">
 
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -68,6 +69,8 @@
     </div><!-- ./wrapper -->
     <!-- jQuery 2.2.3 -->
     <script src="public/js/jquery-2.2.3.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="public/js/bootstrap.js"></script>
     <!-- AdminLTE App -->
@@ -79,6 +82,7 @@
         let getTime = (m) => {
             return m.minutes() + m.hours() * 60;
         }
+        $('#cahocId').select2();
 
         function tmTotalHrsOnSite() {
             if ($("#startTime") && $("#endTime")) {

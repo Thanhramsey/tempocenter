@@ -10,6 +10,7 @@ class Hocvien extends CI_Controller {
         $this->load->model('backend/Morders');
 		$this->load->model('backend/Mmonhoc');
 		$this->load->model('backend/Mcahoc');
+		$this->load->model('backend/Mhocviencahoc');
 		if(!$this->session->userdata('sessionadmin'))
 		{
 			redirect('admin/user/login','refresh');
@@ -22,7 +23,8 @@ class Hocvien extends CI_Controller {
 	{
 		$this->load->library('phantrang');
 		$this->load->library('alias');
-		$limit=10;
+		$this->load->library('table');
+		$limit=15;
 		$current=$this->phantrang->PageCurrent();
 		$first=$this->phantrang->PageFirst($limit, $current);
 		$loaisp = "";
@@ -35,7 +37,27 @@ class Hocvien extends CI_Controller {
 		}
 		$total=$this->Mhocvien->hocvien_count($loaisp,$caId);
 		$this->data['strphantrang']=$this->phantrang->PagePer($total, $current, $limit, $url='admin/hocvien');
-		$this->data['list']=$this->Mhocvien->hocvien_all($limit,$first,$loaisp,$caId);
+		// $this->data['list']=$this->Mhocvien->hocvien_all($limit,$first,$loaisp,$caId);
+
+		$query = $this->db->select('hv.*, GROUP_CONCAT(ch.name) AS ca_hoc')
+                  ->from('hocvien AS hv')
+                  ->join('hocvien_cahoc AS hvc', 'hv.id = hvc.hocvien_id')
+                  ->join('cahoc AS ch', 'hvc.cahoc_id = ch.id')
+                  ->group_by('hv.id')
+                  ->limit($limit, $first) // Giới hạn số bản ghi trả về và xác định vị trí bắt đầu
+                  ->get();
+
+		if ($query->num_rows() > 0) {
+			$result = $query->result_array();
+			$this->data['list'] = $result;
+			// print_r($result);
+		} else {
+			echo "Không có kết quả.";
+		}
+		
+		// $this->data['table'] = $this->table->generate();
+
+
 		$this->data['view']='index';
 		$this->data['title']='Học viên';
 		$this->load->view('backend/layout', $this->data);
@@ -52,10 +74,6 @@ class Hocvien extends CI_Controller {
 		$this->load->library('form_validation');
 		$today=$d['year']."/".$d['mon']."/".$d['mday']." ".$d['hours'].":".$d['minutes'].":".$d['seconds'];
 		$this->form_validation->set_rules('name', 'Học viên', 'required|is_unique[db_hocvien.name]|max_length[25]');
-		$this->form_validation->set_rules('ngaysinh', 'Ngày sinh', 'required');
-		$this->form_validation->set_rules('gioitinh', 'Gioi tinh', 'required');
-		$this->form_validation->set_rules('monId', 'Môn học', 'required');
-		$this->form_validation->set_rules('caId', 'Ca học', 'required');
 		if ($this->form_validation->run() == TRUE)
 		{
 			$mydata= array(
@@ -65,15 +83,10 @@ class Hocvien extends CI_Controller {
 				'phone' =>$_POST['phone'],
 				'diachi' =>$_POST['diachi'],
 				'monId' =>$_POST['monId'],
-				'caId' =>$_POST['caId'],
 				'status' =>$_POST['status'],
 				'created_at' =>$today,
 				'trash'=>1
 			);
-			$mydata['cahocId']= 0 ;
-			if (!empty($_POST['cahocId'])) {
-				$mydata['cahocId']=$_POST['cahocId'];
-			}
 			$config['upload_path']          = './public/images/hocvien/';
 			$config['encrypt_name'] = TRUE;
             $config['allowed_types']        = 'gif|jpg|png';
@@ -91,6 +104,10 @@ class Hocvien extends CI_Controller {
 				}
             }
 			$this->Mhocvien->hocvien_insert($mydata);
+
+			$hocvienid = $this->db->insert_id();
+			$cahocIds = $_POST['cahocId'];
+			$this->Mhocviencahoc->hocvien_cahoc_insert($hocvienid, $cahocIds);
 			$this->session->set_flashdata('success', 'Thêm danh mục thành công');
 			redirect('admin/hocvien','refresh');
 		}
@@ -121,16 +138,28 @@ class Hocvien extends CI_Controller {
 			$mydata= array(
 				'name' =>$_POST['name'],
 				'monId' =>$_POST['monId'],
-				'startTime' =>$_POST['startTime'],
-				'endTime' =>$_POST['endTime'],
 				'status' =>$_POST['status'],
 				'updated_at' =>$today,
 				'trash'=>1
 			);
 			$this->Mhocvien->hocvien_update($mydata, $id);
+			$cahocIds = $_POST['cahocId'];
+			$this->Mhocviencahoc->hocvien_update($id, $cahocIds);
+			
 			$this->session->set_flashdata('success', 'Cập nhật danh mục thành công');
 			redirect('admin/hocvien','refresh');
 		}
+		$query = $this->db->select('cahoc_id')
+							->from('hocvien_cahoc')
+							->where('hocvien_id', $id)
+							->get();
+	
+			if ($query->num_rows() > 0) {
+				$result = $query->result_array();
+			} else {
+				$result = [100];
+			}
+		$this->data['cahochv']= $result ;
 		$this->data['view']='update';
 		$this->data['title']='Cập nhật danh mục';
 		$this->load->view('backend/layout', $this->data);
@@ -200,6 +229,7 @@ class Hocvien extends CI_Controller {
 	public function delete($id)
 	{
 		$this->Mhocvien->hocvien_delete($id);
+		$this->Mhocviencahoc->hocvien_cahoc_delete($id);
 		$this->session->set_flashdata('success', 'Xóa Học viên thành công');
 		redirect('admin/hocvien/recyclebin','refresh');
 	}
