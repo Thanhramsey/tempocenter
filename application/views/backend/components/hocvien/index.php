@@ -91,7 +91,8 @@
                                                 <th class="text-center">SĐT</th>
                                                 <th class="text-center">Môn học</th>
                                                 <th class="text-center">Trạng thái</th>
-                                                <th class="text-center" colspan="2">Thao tác</th>
+                                                <th class="text-center">Thao tác</th>
+                                                <th class="text-center">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>

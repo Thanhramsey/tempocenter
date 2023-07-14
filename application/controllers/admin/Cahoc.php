@@ -10,6 +10,8 @@ class Cahoc extends CI_Controller {
         $this->load->model('backend/Mproduct');
         $this->load->model('backend/Morders');
 		$this->load->model('backend/Mmonhoc');
+		$this->load->model('backend/Mhocvien');
+		$this->load->model('backend/Mhocviencahoc');
 		if(!$this->session->userdata('sessionadmin'))
 		{
 			redirect('admin/user/login','refresh');
@@ -61,14 +63,21 @@ class Cahoc extends CI_Controller {
 		$this->load->library('alias');
 		$this->load->library('form_validation');
 		$today=$d['year']."/".$d['mon']."/".$d['mday']." ".$d['hours'].":".$d['minutes'].":".$d['seconds'];
-		$this->form_validation->set_rules('name', 'Ca học', 'required|is_unique[db_cahoc.name]|max_length[25]');
-		// $this->form_validation->set_rules('thoigian', 'Thời gian', 'required');
-		$this->form_validation->set_rules('monId', 'Môn', 'required');
+		// $this->form_validation->set_rules('name', 'Ca học', 'required|is_unique[db_cahoc.name]|max_length[25]');
+		$this->form_validation->set_rules('startTime', 'Thời gian', 'required');
+		$this->form_validation->set_rules('thu', 'Thứ', 'required');
+		$name = "";
 		if ($this->form_validation->run() == TRUE)
 		{
+			if(!empty($_POST['name'])){
+				$name =$_POST['name'];
+			}else{
+				$name = $_POST['thu'] . " - Ca " .$_POST['startTime']. "->".$_POST['endTime'];
+			}
 			$mydata= array(
-				'name' =>$_POST['name'],
+				'name' =>$name,
 				'monId' =>$_POST['monId'],
+				'thu' =>$_POST['thu'],
 				'startTime' =>$_POST['startTime'],
 				'endTime' =>$_POST['endTime'],
 				'status' =>$_POST['status'],
@@ -76,6 +85,11 @@ class Cahoc extends CI_Controller {
 				'trash'=>1
 			);
 			$this->Mcahoc->cahoc_insert($mydata);
+			if(!empty($_POST['hocvienId'])){
+				$cahocId = $this->db->insert_id();
+				$hocvienIds = $_POST['hocvienId'];
+				$this->Mhocviencahoc->cahoc_hocvien_insert($cahocId, $hocvienIds);
+			}
 			$this->session->set_flashdata('success', 'Thêm danh mục thành công');
 			redirect('admin/cahoc','refresh');
 		}
@@ -98,14 +112,19 @@ class Cahoc extends CI_Controller {
 		$today=$d['year']."/".$d['mon']."/".$d['mday']." ".$d['hours'].":".$d['minutes'].":".$d['seconds'];
 		$this->load->library('alias');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Ca học', 'required');
-		// $this->form_validation->set_rules('thoigian', 'Thời gian', 'required');
-		$this->form_validation->set_rules('monId', 'Môn', 'required');
+		$this->form_validation->set_rules('startTime', 'Thời gian', 'required');
+		$this->form_validation->set_rules('thu', 'Thứ', 'required');
 		if ($this->form_validation->run() == TRUE)
 		{
+			if(!empty($_POST['name'])){
+				$name =$_POST['name'];
+			}else{
+				$name = $_POST['thu'] . " - Ca " .$_POST['startTime']. "->".$_POST['endTime'];
+			}
 			$mydata= array(
 				'name' =>$_POST['name'],
 				'monId' =>$_POST['monId'],
+				'thu' =>$_POST['thu'],
 				'startTime' =>$_POST['startTime'],
 				'endTime' =>$_POST['endTime'],
 				'status' =>$_POST['status'],
@@ -113,9 +132,23 @@ class Cahoc extends CI_Controller {
 				'trash'=>1
 			);
 			$this->Mcahoc->cahoc_update($mydata, $id);
+			$hocvienIds = $_POST['hocvienId'];
+			$this->Mhocviencahoc->hocvien_update_byhv($id, $hocvienIds);
+
 			$this->session->set_flashdata('success', 'Cập nhật danh mục thành công');
 			redirect('admin/cahoc','refresh');
 		}
+		$query = $this->db->select('hocvien_id')
+							->from('hocvien_cahoc')
+							->where('cahoc_id', $id)
+							->get();
+	
+			if ($query->num_rows() > 0) {
+				$result = $query->result_array();
+			} else {
+				$result = [100];
+			}
+		$this->data['hocviench']= $result ;
 		$this->data['view']='update';
 		$this->data['title']='Cập nhật danh mục';
 		$this->load->view('backend/layout', $this->data);
@@ -185,6 +218,7 @@ class Cahoc extends CI_Controller {
 	public function delete($id)
 	{
 		$this->Mcahoc->cahoc_delete($id);
+		$this->Mhocviencahoc->cahoc_hocvien_delete($id);
 		$this->session->set_flashdata('success', 'Xóa Ca học thành công');
 		redirect('admin/cahoc/recyclebin','refresh');
 	}

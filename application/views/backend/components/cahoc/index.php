@@ -73,15 +73,16 @@
                             <div class="row" style='padding:0px; margin:0px;'>
                                 <!--ND-->
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-bordered">
+                                    <table id="myTable"  class="table table-hover table-bordered">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">ID</th>
                                                 <th class="text-center">Tên ca học</th>
-                                                <th class="text-center">Môn học</th>
                                                 <th class="text-center">Học viên trong ca</th>
+                                                <th class="text-center">Môn học</th>                                        
                                                 <th class="text-center">Trạng thái</th>
-                                                <th class="text-center" colspan="2">Thao tác</th>
+                                                <th class="text-center" >Thao tác</th>
+                                                <th class="text-center" >Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
