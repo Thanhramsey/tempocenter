@@ -89,12 +89,11 @@
                                             <tr>
                                                 <td class="text-center"><?php echo $row['id'] ?></td>
                                                 <td class="text-center"><?php echo $row['name'] ?></td>
+                                                <td class="text-center"><?php echo $row['hoc_vien'] ?></td>
                                                 <td class="text-center"><?php
 													$monhoc = $this->Mmonhoc->monhoc_detail($row['monId']);
 													echo $monhoc['name'];
 												?></td>
-                                                <td class="text-center"><?php echo $row['startTime'] ?></td>
-                                                <td class="text-center"><?php echo $row['endTime'] ?></td>
                                                 <td class="text-center">
                                                     <a
                                                         href="<?php echo base_url() ?>admin/cahoc/status/<?php echo $row['id'] ?>">

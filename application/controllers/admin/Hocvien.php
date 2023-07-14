@@ -41,8 +41,8 @@ class Hocvien extends CI_Controller {
 
 		$query = $this->db->select('hv.*, GROUP_CONCAT(ch.name) AS ca_hoc')
                   ->from('hocvien AS hv')
-                  ->join('hocvien_cahoc AS hvc', 'hv.id = hvc.hocvien_id')
-                  ->join('cahoc AS ch', 'hvc.cahoc_id = ch.id')
+                  ->join('hocvien_cahoc AS hvc', 'hv.id = hvc.hocvien_id', 'left')
+                  ->join('cahoc AS ch', 'hvc.cahoc_id = ch.id', 'left')
                   ->group_by('hv.id')
                   ->limit($limit, $first) // Giới hạn số bản ghi trả về và xác định vị trí bắt đầu
                   ->get();

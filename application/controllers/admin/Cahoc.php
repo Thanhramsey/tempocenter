@@ -22,7 +22,7 @@ class Cahoc extends CI_Controller {
 	{
 		$this->load->library('phantrang');
 		$this->load->library('alias');
-		$limit=10;
+		$limit=15;
 		$current=$this->phantrang->PageCurrent();
 		$first=$this->phantrang->PageFirst($limit, $current);
 		$loaisp = "";
@@ -31,16 +31,15 @@ class Cahoc extends CI_Controller {
 		}
 		$total=$this->Mcahoc->cahoc_count($loaisp);
 		$this->data['strphantrang']=$this->phantrang->PagePer($total, $current, $limit, $url='admin/cahoc');
-		$this->data['list']=$this->Mcahoc->cahoc_all($limit,$first,$loaisp);
-
+		// $this->data['list']=$this->Mcahoc->cahoc_all($limit,$first,$loaisp);
 		
 		$query = $this->db->select('ch.*, GROUP_CONCAT(hv.name) AS hoc_vien')
                   ->from('cahoc AS ch')
-                  ->join('hocvien_cahoc AS hvc', 'ch.id = hvc.cahoc_id')
-                  ->join('hocvien AS hv', 'hvc.hocvien_id = hv.id')
+                  ->join('hocvien_cahoc AS hvc', 'ch.id = hvc.cahoc_id', 'left')
+                  ->join('hocvien AS hv', 'hvc.hocvien_id = hv.id', 'left')
                   ->group_by('ch.id')
+				  ->limit($limit, $first) 
                   ->get();
-
 		if ($query->num_rows() > 0) {
 			$result = $query->result_array();
 			$this->data['list'] = $result;
