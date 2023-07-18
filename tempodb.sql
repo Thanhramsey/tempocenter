@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2023 at 06:19 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Jul 18, 2023 at 12:31 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `active_sessions` (
   `id` int(11) NOT NULL,
-  `ip` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `session` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `session` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -39,7 +39,7 @@ CREATE TABLE `active_sessions` (
 --
 
 INSERT INTO `active_sessions` (`id`, `ip`, `session`, `date`) VALUES
-(0, '::1', '7sejqkp2an6sio65c1p0r1j1pc2q9l34', '2023-07-14 20:44:37');
+(0, '::1', 'uq790h6kgsuq8f4453kvbskhsaco0cm2', '2023-07-18 08:36:14');
 
 -- --------------------------------------------------------
 
@@ -51,25 +51,48 @@ CREATE TABLE `db_cahoc` (
   `id` int(11) NOT NULL,
   `monId` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `thu` varchar(25) NOT NULL,
+  `thu` varchar(20) NOT NULL,
   `startTime` time NOT NULL,
   `endTime` time NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `trash` tinyint(1) NOT NULL DEFAULT 1,
   `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `db_cahoc`
 --
 
 INSERT INTO `db_cahoc` (`id`, `monId`, `name`, `thu`, `startTime`, `endTime`, `created_at`, `updated_at`, `trash`, `status`) VALUES
-(1, 1, 'Ca 3 - 5', '', '19:00:00', '20:30:00', '2022-12-15 10:48:19', '2022-12-15 14:43:30', 1, 1),
-(2, 1, 'Ca 3 - 5 (2)', 'Thứ 4', '17:30:00', '19:00:00', '2022-12-15 11:04:14', '2023-07-14 22:32:32', 1, 1),
-(6, 1, 'Thứ 2 - Ca 17:30->18:30 PM', 'Thứ 2', '17:30:00', '18:30:00', '2023-07-14 21:38:47', '2023-07-14 22:31:29', 1, 1),
-(7, 1, 'Thứ 2 - Ca 15:00->17:30', 'Thứ 2', '15:00:00', '17:30:00', '2023-07-14 21:39:21', '2023-07-14 22:31:44', 1, 1),
-(8, 1, 'Chủ Nhật - Ca 09:00->10:30', 'Chủ Nhật', '09:00:00', '10:30:00', '2023-07-14 22:44:24', '0000-00-00 00:00:00', 1, 1);
+(1, 1, 'Thứ 2 - Ca 1 (9h -> 10h30)', 'Thứ 2', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '2023-07-17 10:07:01', 1, 1),
+(2, 1, 'Thứ 2 - Ca 2(15h -> 16h30)', 'Thứ 2', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(3, 1, 'Thứ 2 - Ca 3(17h -> 18h30)', 'Thứ 2', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(4, 1, 'Thứ 2 - Ca 4(18h -> 20h00)', 'Thứ 2', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(5, 1, 'Thứ 3 - Ca 1(9h -> 10h30)', 'Thứ 3', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(6, 1, 'Thứ 3 - Ca 2(15h -> 16h30)', 'Thứ 3', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(7, 1, 'Thứ 3 - Ca 3(17h -> 18h30)', 'Thứ 3', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(8, 1, 'Thứ 3 - Ca 4(18h -> 20h00)', 'Thứ 3', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(9, 1, 'Thứ 4 - Ca 1(9h -> 10h30)', 'Thứ 4', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(10, 1, 'Thứ 4 - Ca 2(15h -> 16h30)', 'Thứ 4', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(11, 1, 'Thứ 4 - Ca 3(17h -> 18h30)', 'Thứ 4', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(12, 1, 'Thứ 4 - Ca 4(18h -> 20h00)', 'Thứ 4', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(13, 1, 'Thứ 5 - Ca 1(9h -> 10h30)', 'Thứ 5', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(14, 1, 'Thứ 5 - Ca 2(15h -> 16h30)', 'Thứ 5', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(15, 1, 'Thứ 5 - Ca 3(17h -> 18h30)', 'Thứ 5', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(16, 1, 'Thứ 5 - Ca 4(18h -> 20h00)', 'Thứ 5', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(17, 1, 'Thứ 6 - Ca 1(9h -> 10h30)', 'Thứ 6', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(18, 1, 'Thứ 6 - Ca 2(15h -> 16h30)', 'Thứ 6', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(19, 1, 'Thứ 6 - Ca 3(17h -> 18h30)', 'Thứ 6', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(20, 1, 'Thứ 6 - Ca 4(18h -> 20h00)', 'Thứ 6', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(21, 1, 'Thứ 7 - Ca 1(9h -> 10h30)', 'Thứ 7', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(22, 1, 'Thứ 7 - Ca 2(15h -> 16h30)', 'Thứ 7', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(23, 1, 'Thứ 7 - Ca 3(17h -> 18h30)', 'Thứ 7', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(24, 1, 'Thứ 7 - Ca 4(18h -> 20h00)', 'Thứ 7', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(25, 1, 'Chủ Nhật - Ca 1(8h -> 9h30)', 'Chủ Nhật', '08:00:00', '09:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(26, 1, 'Chủ Nhật - Ca 2(15h -> 16h30)', 'Chủ Nhật', '15:00:00', '16:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(27, 1, 'Chủ Nhật - Ca 3(17h -> 18h30)', 'Chủ Nhật', '17:00:00', '18:30:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1),
+(28, 1, 'Chủ Nhật - Ca 4(18h -> 20h00)', 'Chủ Nhật', '18:30:00', '20:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -79,15 +102,15 @@ INSERT INTO `db_cahoc` (`id`, `monId`, `name`, `thu`, `startTime`, `endTime`, `c
 
 CREATE TABLE `db_category` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `link` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `level` int(2) NOT NULL,
   `parentid` int(11) NOT NULL,
-  `orders` varchar(5) CHARACTER SET utf8 DEFAULT NULL,
+  `orders` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `created_by` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `created_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `updated_at` datetime NOT NULL,
-  `updated_by` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `updated_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `trash` tinyint(1) NOT NULL DEFAULT 1,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -98,7 +121,9 @@ CREATE TABLE `db_category` (
 
 INSERT INTO `db_category` (`id`, `name`, `link`, `level`, `parentid`, `orders`, `created_at`, `created_by`, `updated_at`, `updated_by`, `trash`, `status`) VALUES
 (1, 'Piano', 'piano', 1, 0, '0', '2022-04-22 16:15:39', '4', '2022-04-22 22:37:23', '1', 1, 1),
-(2, 'Guitar', 'guitar', 1, 0, '0', '2022-06-03 14:18:11', '1', '2022-06-03 14:18:11', '1', 1, 1);
+(2, 'Guitar', 'guitar', 1, 0, '0', '2022-06-03 14:18:11', '1', '2022-06-03 14:18:11', '1', 1, 1),
+(15, 'Piano Điện', 'piano-dien', 2, 1, '0', '2023-04-17 10:08:18', '4', '2023-04-17 10:08:18', '', 1, 1),
+(16, 'Piano Cơ', 'piano-co', 2, 1, '1', '2023-04-17 11:37:36', '4', '2023-04-17 11:37:36', '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -108,29 +133,29 @@ INSERT INTO `db_category` (`id`, `name`, `link`, `level`, `parentid`, `orders`, 
 
 CREATE TABLE `db_chinhsach` (
   `id` int(11) NOT NULL,
-  `sohieu` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `loaivanban` int(11) NOT NULL,
-  `coquanbanhanh` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `linhvuc` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `trichyeu` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `file` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `ngaybanhanh` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `sohieu` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `file` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `created_by` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `ngaybanhanh` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `updated_at` datetime NOT NULL,
-  `updated_by` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `updated_by` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `trash` tinyint(1) NOT NULL DEFAULT 1,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `loaivanban_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `db_chinhsach`
 --
 
-INSERT INTO `db_chinhsach` (`id`, `sohieu`, `loaivanban`, `coquanbanhanh`, `linhvuc`, `trichyeu`, `file`, `ngaybanhanh`, `created_at`, `created_by`, `updated_at`, `updated_by`, `trash`, `status`, `name`, `loaivanban_name`) VALUES
-(1, NULL, 1, 'BCĐ Trung ương	', 'OCOP', 'Chính sách bảo hành', '_FilesUpload_01-QD-BCDTW432159552316.pdf', '2022-05-17 11:42:04', '2022-05-17 11:42:04', 'mtp', '2022-12-19 16:14:26', '1', 0, 1, 'Chính sách bảo hành', '');
+INSERT INTO `db_chinhsach` (`id`, `name`, `sohieu`, `type`, `customer_id`, `customer_name`, `file`, `created_at`, `ngaybanhanh`, `created_by`, `updated_at`, `updated_by`, `trash`, `status`) VALUES
+(5, 'aaaaaa', 'ádad', 1, 77, '', '709bdd57177e9438192962bf537acb2b.pdf', '2023-05-15 17:04:19', '0000-00-00 00:00:00', '79', '2023-05-15 17:04:19', '79', 1, 1),
+(6, 'test HĐ002', '0002', 1, 78, '', 'e0547e3f0b58655bf8984852739e68f8.jpg', '2023-05-16 08:40:46', '2023-05-16 09:19:37', '1', '2023-05-16 09:19:37', '1', 1, 1),
+(7, 'Hóa đơn 03', '003', 1, 76, '', '55d51bb77091143bec60ecd4921658d0.jpg', '2023-05-16 08:51:07', '2023-05-16 09:14:18', '1', '2023-05-16 09:14:18', '1', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -140,12 +165,12 @@ INSERT INTO `db_chinhsach` (`id`, `sohieu`, `loaivanban`, `coquanbanhanh`, `linh
 
 CREATE TABLE `db_config` (
   `id` int(11) NOT NULL,
-  `mail_smtp` varchar(68) CHARACTER SET utf8 NOT NULL,
-  `mail_smtp_password` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Password mail shop',
-  `mail_noreply` varchar(68) CHARACTER SET utf8 NOT NULL,
-  `priceShip` mediumtext CHARACTER SET utf8 NOT NULL,
-  `title` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `description` text CHARACTER SET utf8 NOT NULL
+  `mail_smtp` varchar(68) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `mail_smtp_password` varchar(100) NOT NULL COMMENT 'Password mail shop',
+  `mail_noreply` varchar(68) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `priceShip` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -163,15 +188,15 @@ INSERT INTO `db_config` (`id`, `mail_smtp`, `mail_smtp_password`, `mail_noreply`
 
 CREATE TABLE `db_contact` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `cahoc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `cahoc` varchar(255) NOT NULL,
+  `created_at` text NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `trash` int(11) NOT NULL DEFAULT 1,
-  `fullname` varchar(80) COLLATE utf8_unicode_ci NOT NULL
+  `fullname` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -180,13 +205,7 @@ CREATE TABLE `db_contact` (
 
 INSERT INTO `db_contact` (`id`, `title`, `phone`, `email`, `content`, `cahoc`, `created_at`, `status`, `trash`, `fullname`) VALUES
 (33, 'hehe', '123123123', '', 'hehe', 'Môn: Piano Ca: Ca 3 - 5 (2)', '2022/12/19', 0, 1, 'tèo'),
-(34, 'Đăng kí học thử', '094123123', 'thanh@gmail.com', 'ádhjkashduiashduiahsdukonasjkdbnakjsc\nádasdasd\nádasd\nádasd\nád\nád\nád\nád\nád\nád\n', '', '// ::', 0, 1, 'thành'),
-(35, 'Đăng kí học thử', 'bankai', 'chíp chíp', 'ádasdas', 'chém', '// ::', 0, 1, 'dăng dăng'),
-(36, 'Đăng kí học thử', 'ád', 'adasdasd', 'ádasd', 'ádasd', '2023/5/13 13:50:5', 0, 1, 'ádasdasd'),
-(37, 'Đăng kí học thử', 'ấ', 'ấdad', 'sdasdas', 'áda', '2023/5/13 14:43:3', 0, 1, 'test'),
-(38, 'Đăng kí học thử', '', '', '', '', '2023/5/13 16:1:7', 0, 1, 'cccc'),
-(39, 'Đăng kí học thử', '123', 'ấdas', 'đâsd', 'Piano', '2023/5/13 16:13:6', 0, 1, 'â'),
-(40, 'Đăng kí học thử', '13123123', 'ádasd', 'ádasd', 'Piano nâng cao', '2023/5/13 16:37:40', 0, 1, 'ádasdasd');
+(34, 'Đăng kí học thử', '0969124469', 'teo@gmail.com', 'aaa', 'Piano cơ bản', '2023/7/14 8:29:5', 0, 1, 'tèo');
 
 -- --------------------------------------------------------
 
@@ -196,15 +215,15 @@ INSERT INTO `db_contact` (`id`, `title`, `phone`, `email`, `content`, `cahoc`, `
 
 CREATE TABLE `db_content` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `alias` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `introtext` mediumtext CHARACTER SET utf8 NOT NULL,
-  `fulltext` mediumtext CHARACTER SET utf8 NOT NULL,
-  `img` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `introtext` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `fulltext` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created` datetime NOT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `modified` datetime NOT NULL,
-  `modified_by` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `trash` int(1) NOT NULL DEFAULT 1,
   `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -214,7 +233,7 @@ CREATE TABLE `db_content` (
 --
 
 INSERT INTO `db_content` (`id`, `title`, `alias`, `introtext`, `fulltext`, `img`, `created`, `created_by`, `modified`, `modified_by`, `trash`, `status`) VALUES
-(8, 'THÔNG BÁO KHAI TRƯƠNG TRUNG TÂM', 'thong-bao-khai-truong-trung-tam', '', '<p><strong>Tempo </strong>xin ch&agrave;o c&aacute;c bạn:</p>\r\n\r\n<p>Lời đầu ti&ecirc;n, <strong>Tempo music </strong>xin được gửi lời cảm ơn ch&acirc;n th&agrave;nh đến qu&yacute; phụ huynh v&agrave; c&aacute;c bạn học vi&ecirc;n, đ&atilde; tin tưởng lựa chọn <strong>Tempo </strong>l&agrave;m người bạn đồng h&agrave;nh c&ugrave;ng c&aacute;c bạn trong thời gian qua.</p>\r\n\r\n<p>Đ&aacute;p lại t&igrave;nh cảm của qu&yacute; phụ huynh, học sinh <strong>Tempo music </strong>lu&ocirc;n kh&ocirc;ng ngừng đổi mới, s&aacute;ng tạo để mang đến cho qu&yacute; phụ huynh, học sinh những trải nghiệm tuyệt vời nhất khi đồng h&agrave;nh c&ugrave;ng ch&uacute;ng t&ocirc;i. Với mong muốn gi&uacute;p c&aacute;c bạn nhỏ được trải nghiệm nhiều m&ocirc;n nghệ thuật kh&aacute;c như: Vẽ, nhảy, h&aacute;t&hellip; Ch&uacute;ng t&ocirc;i <strong>Tempo Music</strong> quyết định sẽ đổi t&ecirc;n th&agrave;nh <strong>Tempo Academy</strong>, đ&acirc;y sẽ l&agrave; nơi c&aacute;c bạn thoải m&aacute;i thể hiện bản th&acirc;n m&igrave;nh qua c&aacute;c bản nhạc hay, vẽ c&aacute;c bức tranh đẹp, r&egrave;n luyện sức khoẻ qua c&aacute;c b&agrave;i nhảy.. Vì chúng tôi tin rằng, &ldquo;cảm xúc của m&ocirc;̃i người là riêng biệt, năng khiếu của mỗi người l&agrave; kh&aacute;c biệt&rdquo;.</p>\r\n\r\n<p>Tâm huy&ecirc;́t của chúng tôi là được h&ocirc;̃ trợ các bạn trên con đường khám phá ti&ecirc;̀m năng âm nhạc, th&acirc;́u hi&ecirc;̉u cảm xúc, năng khiếu của bản thân khi tương tác với phím đàn, tranh vẽ để bạn biết được m&igrave;nh thực sự th&iacute;ch hợp với m&ocirc;n n&agrave;o để ph&aacute;t triển đ&uacute;ng hướng.</p>\r\n\r\n<p>Việc thay đổi bộ nhận diện thương hiệu sẽ mở đầu cho chiến lược ph&aacute;t triển mới nhằm đưa thương hiệu của <strong>Tempo Academy</strong> l&ecirc;n tầm cao mới, tạo dấu ấn r&otilde; r&agrave;ng về thương hiệu cho kh&aacute;ch h&agrave;ng v&agrave; đ&aacute;p ứng ng&agrave;y một tốt hơn nhu cầu phục vụ cho qu&yacute; phụ huynh học sinh. Với &yacute; nghĩa n&agrave;y, <strong>Tempo Academy</strong> hy vọng sẽ tiếp tục nhận được sự ủng hộ, đồng h&agrave;nh từ qu&yacute; phụ huynh học sinh v&agrave; c&aacute;c đối t&aacute;c trong thời gian tới.</p>\r\n\r\n<p>C&ugrave;ng đếm ngược ng&agrave;y khai trương học viện mới nha c&aacute;c bạn!</p>\r\n\r\n<p>Tr&acirc;n trọng !!</p>\r\n\r\n<p><strong>Tempo Academy</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=\"\" src=\"/myproject/public/upload/images/320220091_1237687320119572_8330175510159555572_n.jpg\" style=\"height:225px; width:400px\" /></p>\r\n', 'slider-4.png', '2022-12-19 15:53:21', '1', '2022-12-19 15:53:21', '1', 1, 1),
+(8, 'THÔNG BÁO KHAI TRƯƠNG TRUNG TÂM', 'thong-bao-khai-truong-trung-tam', '', '<p><strong>Tempo </strong>xin ch&agrave;o c&aacute;c bạn:</p>\r\n\r\n<p>Lời đầu ti&ecirc;n, <strong>Tempo music </strong>xin được gửi lời cảm ơn ch&acirc;n th&agrave;nh đến qu&yacute; phụ huynh v&agrave; c&aacute;c bạn học vi&ecirc;n, đ&atilde; tin tưởng lựa chọn <strong>Tempo </strong>l&agrave;m người bạn đồng h&agrave;nh c&ugrave;ng c&aacute;c bạn trong thời gian qua.</p>\r\n\r\n<p>Đ&aacute;p lại t&igrave;nh cảm của qu&yacute; phụ huynh, học sinh <strong>Tempo music </strong>lu&ocirc;n kh&ocirc;ng ngừng đổi mới, s&aacute;ng tạo để mang đến cho qu&yacute; phụ huynh, học sinh những trải nghiệm tuyệt vời nhất khi đồng h&agrave;nh c&ugrave;ng ch&uacute;ng t&ocirc;i. Với mong muốn gi&uacute;p c&aacute;c bạn nhỏ được trải nghiệm nhiều m&ocirc;n nghệ thuật kh&aacute;c như: Vẽ, nhảy, h&aacute;t&hellip; Ch&uacute;ng t&ocirc;i <strong>Tempo Music</strong> quyết định sẽ đổi t&ecirc;n th&agrave;nh <strong>Tempo Academy</strong>, đ&acirc;y sẽ l&agrave; nơi c&aacute;c bạn thoải m&aacute;i thể hiện bản th&acirc;n m&igrave;nh qua c&aacute;c bản nhạc hay, vẽ c&aacute;c bức tranh đẹp, r&egrave;n luyện sức khoẻ qua c&aacute;c b&agrave;i nhảy.. Vì chúng tôi tin rằng, &ldquo;cảm xúc của m&ocirc;̃i người là riêng biệt, năng khiếu của mỗi người l&agrave; kh&aacute;c biệt&rdquo;.</p>\r\n\r\n<p>Tâm huy&ecirc;́t của chúng tôi là được h&ocirc;̃ trợ các bạn trên con đường khám phá ti&ecirc;̀m năng âm nhạc, th&acirc;́u hi&ecirc;̉u cảm xúc, năng khiếu của bản thân khi tương tác với phím đàn, tranh vẽ để bạn biết được m&igrave;nh thực sự th&iacute;ch hợp với m&ocirc;n n&agrave;o để ph&aacute;t triển đ&uacute;ng hướng.</p>\r\n\r\n<p>Việc thay đổi bộ nhận diện thương hiệu sẽ mở đầu cho chiến lược ph&aacute;t triển mới nhằm đưa thương hiệu của <strong>Tempo Academy</strong> l&ecirc;n tầm cao mới, tạo dấu ấn r&otilde; r&agrave;ng về thương hiệu cho kh&aacute;ch h&agrave;ng v&agrave; đ&aacute;p ứng ng&agrave;y một tốt hơn nhu cầu phục vụ cho qu&yacute; phụ huynh học sinh. Với &yacute; nghĩa n&agrave;y, <strong>Tempo Academy</strong> hy vọng sẽ tiếp tục nhận được sự ủng hộ, đồng h&agrave;nh từ qu&yacute; phụ huynh học sinh v&agrave; c&aacute;c đối t&aacute;c trong thời gian tới.</p>\r\n\r\n<p>C&ugrave;ng đếm ngược ng&agrave;y khai trương học viện mới nha c&aacute;c bạn!</p>\r\n\r\n<p>Tr&acirc;n trọng !!</p>\r\n\r\n<p><strong>Tempo Academy</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n', 'slider-4.png', '2022-12-19 15:53:21', '1', '2023-05-10 16:39:55', '1', 1, 1),
 (9, 'THÔNG BÁO TUYỂN DỤNG', 'thong-bao-tuyen-dung', '', '<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t50/1/16/1f525.png\" style=\"height:16px; width:16px\" />Tempo TUYỂN DỤNG C&Aacute;C VỊ TR&Iacute; HẤP DẪN <img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t50/1/16/1f525.png\" style=\"height:16px; width:16px\" /></p>\r\n\r\n<p>&bull; Gi&aacute;o vi&ecirc;n Piano <img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/ta2/1/16/1f3b9.png\" style=\"height:16px; width:16px\" /><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/ta2/1/16/1f3b9.png\" style=\"height:16px; width:16px\" /><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/ta2/1/16/1f3b9.png\" style=\"height:16px; width:16px\" /></p>\r\n\r\n<p>&bull; Gi&aacute;o vi&ecirc;n Guitar <img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t21/1/16/1f3b8.png\" style=\"height:16px; width:16px\" /><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t21/1/16/1f3b8.png\" style=\"height:16px; width:16px\" /><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t21/1/16/1f3b8.png\" style=\"height:16px; width:16px\" /></p>\r\n\r\n<p>. Gi&aacute;o vi&ecirc;n Mĩ thuật</p>\r\n\r\n<p>&bull; Gi&aacute;o vụ <img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t9e/1/16/1f3b5.png\" style=\"height:16px; width:16px\" /><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t9e/1/16/1f3b5.png\" style=\"height:16px; width:16px\" /></p>\r\n\r\n<p><img alt=\"❣️\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/teb/1/16/2763.png\" style=\"height:16px; width:16px\" /><img alt=\"❣️\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/teb/1/16/2763.png\" style=\"height:16px; width:16px\" /> QUYỀN LỢI ĐẢM BẢO KHI L&Agrave;M VIỆC TẠI Tempo Music!</p>\r\n\r\n<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/tf8/1/16/1f3e2.png\" style=\"height:16px; width:16px\" /> M&Ocirc;I TRƯỜNG L&Agrave;M VIỆC 10/10</p>\r\n\r\n<p><img alt=\"☑️\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t8d/1/16/2611.png\" style=\"height:16px; width:16px\" /> Năng động - Chuy&ecirc;n nghiệp - Hiện đại</p>\r\n\r\n<p><img alt=\"☑️\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t8d/1/16/2611.png\" style=\"height:16px; width:16px\" /> Cơ sở vật chất SANG - XỊN - MỊN</p>\r\n\r\n<p>C&ugrave;ng rất nhiều CƠ HỘI TRONG C&Ocirc;NG VIỆC v&agrave; PH&Aacute;T TRIỂN BẢN TH&Acirc;N!</p>\r\n\r\n<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t1a/1/16/1f33b.png\" style=\"height:16px; width:16px\" /><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t1a/1/16/1f33b.png\" style=\"height:16px; width:16px\" /> Chế độ đ&atilde;i ngộ, thu nhập, phụ cấp</p>\r\n\r\n<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t64/1/16/1f91d.png\" style=\"height:16px; width:16px\" /> Trao đổi khi phỏng vấn</p>\r\n\r\n<p>-----------------------------------------------------------------------</p>\r\n\r\n<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/tcc/1/16/1f4dd.png\" style=\"height:16px; width:16px\" /> C&aacute;ch thức ứng tuyển:</p>\r\n\r\n<p><img alt=\"➖\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t4b/1/16/2796.png\" style=\"height:16px; width:16px\" /> Đến trực tiếp trung t&acirc;m tại địa chỉ 112 Phan Đ&igrave;nh Ph&ugrave;ng, TP.Pleiku, Gia Lai.</p>\r\n\r\n<p><img alt=\"➖\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t4b/1/16/2796.png\" style=\"height:16px; width:16px\" /> Hoặc ứng tuyển qua email:</p>\r\n\r\n<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/tbe/1/16/1f4e7.png\" style=\"height:16px; width:16px\" /> Gửi hồ sơ ứng tuyển đến email tempomusic0403@gmail.com</p>\r\n\r\n<p><img alt=\"????\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/tb7/1/16/1f58b.png\" style=\"height:16px; width:16px\" /> Tiêu đề email ghi rõ: Họ và tên_Vị trí dự tuyển</p>\r\n\r\n<p>-----------------------------------------------------------------------</p>\r\n\r\n<p><img alt=\"❓\" src=\"https://static.xx.fbcdn.net/images/emoji.php/v9/t4c/1/16/2753.png\" style=\"height:16px; width:16px\" /> Mọi thắc mắc cần được giải đáp vui lòng liên hệ tới:</p>\r\n\r\n<p>SĐT, Zalo, telegram: 034.930.3368 hoặc 0969.124.469</p>\r\n\r\n<p><a href=\"https://www.facebook.com/hashtag/tempomusic?__eep__=6&amp;__cft__[0]=AZU1peXOY3gwoZvd_wQ2WFOb_OIgLexZZJEpaNSLeaUkBabsPUgpozc-UsL34zfMGWv2NFNzbbF7_r40cVXrZq9-UHdZ0zzGqLi-ptj7C1u1Hc2KIIydfYoBDBjG4co12xsGjk9p-s7OjyJxw51nL-ahs9F2QYpod7g3GfIky1NwBIGB71IKya9sYB927EryVAE&amp;__tn__=*NK-R\">#TempoMusic</a></p>\r\n\r\n<p><a href=\"https://www.facebook.com/hashtag/piano?__eep__=6&amp;__cft__[0]=AZU1peXOY3gwoZvd_wQ2WFOb_OIgLexZZJEpaNSLeaUkBabsPUgpozc-UsL34zfMGWv2NFNzbbF7_r40cVXrZq9-UHdZ0zzGqLi-ptj7C1u1Hc2KIIydfYoBDBjG4co12xsGjk9p-s7OjyJxw51nL-ahs9F2QYpod7g3GfIky1NwBIGB71IKya9sYB927EryVAE&amp;__tn__=*NK-R\">#Piano</a></p>\r\n\r\n<p><a href=\"https://www.facebook.com/hashtag/guitar?__eep__=6&amp;__cft__[0]=AZU1peXOY3gwoZvd_wQ2WFOb_OIgLexZZJEpaNSLeaUkBabsPUgpozc-UsL34zfMGWv2NFNzbbF7_r40cVXrZq9-UHdZ0zzGqLi-ptj7C1u1Hc2KIIydfYoBDBjG4co12xsGjk9p-s7OjyJxw51nL-ahs9F2QYpod7g3GfIky1NwBIGB71IKya9sYB927EryVAE&amp;__tn__=*NK-R\">#Guitar</a></p>\r\n', '319397751_493398869478000_2304555332944167728_n.jpg', '2022-12-19 15:59:06', '1', '2022-12-19 15:59:06', '1', 1, 1);
 
 -- --------------------------------------------------------
@@ -226,12 +245,12 @@ INSERT INTO `db_content` (`id`, `title`, `alias`, `introtext`, `fulltext`, `img`
 CREATE TABLE `db_cosodanhgia` (
   `id` int(10) NOT NULL,
   `producer_id` int(11) NOT NULL,
-  `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `sdt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `sdt` varchar(255) DEFAULT NULL,
   `comment_time` datetime NOT NULL,
   `star` int(11) NOT NULL DEFAULT 4,
   `trash` int(11) DEFAULT 1,
-  `content` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL
+  `content` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -255,12 +274,12 @@ INSERT INTO `db_cosodanhgia` (`id`, `producer_id`, `user_name`, `sdt`, `comment_
 
 CREATE TABLE `db_customer` (
   `id` int(11) NOT NULL,
-  `fullname` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `username` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `password` varchar(32) CHARACTER SET utf8 NOT NULL,
-  `address` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `phone` varchar(13) CHARACTER SET utf8 NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `fullname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `phone` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created` datetime NOT NULL,
   `trash` int(1) NOT NULL DEFAULT 1,
   `status` int(1) NOT NULL DEFAULT 1
@@ -280,18 +299,32 @@ INSERT INTO `db_customer` (`id`, `fullname`, `username`, `password`, `address`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `db_diemdanh_hocvien`
+--
+
+CREATE TABLE `db_diemdanh_hocvien` (
+  `id` int(11) NOT NULL,
+  `hocvien_id` int(11) DEFAULT NULL,
+  `cahoc_id` int(11) DEFAULT NULL,
+  `ngaydiemdanh` date DEFAULT NULL,
+  `trang_thai` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `db_discount`
 --
 
 CREATE TABLE `db_discount` (
   `id` int(11) NOT NULL COMMENT 'ID',
-  `code` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mã giảm giá',
+  `code` varchar(255) NOT NULL COMMENT 'Mã giảm giá',
   `discount` int(11) NOT NULL COMMENT 'Số tiền',
   `limit_number` int(11) NOT NULL COMMENT 'giới hạn lượt mua',
   `number_used` int(11) NOT NULL COMMENT 'Số lượng đã nhập',
   `expiration_date` date NOT NULL COMMENT 'Ngày hết hạn',
   `payment_limit` int(11) NOT NULL COMMENT 'giới hạn đơn hàng tối thiểu',
-  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mô tả',
+  `description` varchar(255) NOT NULL COMMENT 'Mô tả',
   `created` date NOT NULL,
   `orders` int(11) NOT NULL,
   `trash` int(1) NOT NULL,
@@ -314,8 +347,8 @@ INSERT INTO `db_discount` (`id`, `code`, `discount`, `limit_number`, `number_use
 
 CREATE TABLE `db_district` (
   `id` int(5) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `type` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `provinceid` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1046,10 +1079,10 @@ INSERT INTO `db_district` (`id`, `name`, `type`, `provinceid`) VALUES
 
 CREATE TABLE `db_evaluate` (
   `id` int(10) NOT NULL,
-  `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `content` varchar(255) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `user_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `sdt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `sdt` varchar(255) DEFAULT NULL,
   `comment_time` datetime NOT NULL,
   `comment_by` int(11) DEFAULT NULL,
   `star` int(11) NOT NULL DEFAULT 4,
@@ -1086,17 +1119,73 @@ CREATE TABLE `db_hocvien` (
   `status` int(1) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `db_hocvien`
 --
 
 INSERT INTO `db_hocvien` (`id`, `name`, `ngaysinh`, `gioitinh`, `phone`, `diachi`, `img`, `monId`, `trash`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'test', 0000, 1, '', '', '1.png', 1, 1, 1, '2022-12-19 08:37:39', '0000-00-00 00:00:00'),
-(3, 'aa', 0000, 0, '', '', '1.png', 3, 1, 0, '2022-12-19 08:44:48', '0000-00-00 00:00:00'),
-(4, 'Lê Bá tôn', 2010, 1, '096912446', 'sín sù', '82d1ca6ee09fc110052b8828d1ef1345.jpg', 1, 1, 1, '2022-12-19 08:57:04', '0000-00-00 00:00:00'),
-(5, 'tèo', 1992, 1, 'tèo', 'tèo', '1.png', 1, 1, 1, '2023-07-14 20:51:02', '0000-00-00 00:00:00');
+(1, 'Giang', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '2023-07-14 16:40:47'),
+(2, 'Cường', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '2023-07-14 16:41:18'),
+(3, 'Hãn', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '2023-07-14 16:09:57'),
+(4, 'Chuối', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 'Diệu Lê', 0000, 1, 'phone', 'diachi', 'img', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 'Uyên', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 'chuong', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Khôi Nguyên', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 'Bé Bơ', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'Tịnh', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'Hương', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'Phúc', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'Bảo Nam', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 'Bảo Hân', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'Ngoc', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'Tuấn', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 'truong', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 'Bảo ngân', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, 'Nhien lon', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, 'Thảo ly', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 'Đăng nguyên', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 'Thảo nguyên', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(23, 'Ron', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(24, 'Roc', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(25, 'Phong Nhi', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(26, 'Thu lon', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(27, 'Kim ngan', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(28, 'Khánh Phương', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(29, 'Khánh Ngân', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(30, 'Hải nam', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(31, 'Hải minh', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(32, 'Lâm', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(33, 'Nhi lớn', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(34, 'Phú', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(35, 'Khánh linh', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(36, 'Khải', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(37, 'Minh Anh', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(38, 'An Nhiên', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(39, 'khanh giang', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(40, 'Đức Anh', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(41, 'Tuệ', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(42, 'Thư xíu', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(43, 'Hà anh', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(44, 'Hà Baka', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(45, 'Thiên An', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(46, 'Dũng(ht)', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(47, 'Trúc', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(48, 'Quang', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(49, 'Long', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(50, 'Đức Vân', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(51, 'Nguyệt', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(52, 'Nhật', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(53, 'Thuỳ an', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(54, 'Thương', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(55, 'Thao(Nam)', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(56, 'Kha', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(57, 'Khang', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(58, 'Nhat(khai)', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(59, 'Bong', 2000, 1, '913300100', 'Phạm Văn Đồng', '', 1, 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(61, 'Test', 0000, 1, '', '', '1.png', 1, 1, 1, '2023-07-14 16:21:10', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1105,32 +1194,173 @@ INSERT INTO `db_hocvien` (`id`, `name`, `ngaysinh`, `gioitinh`, `phone`, `diachi
 --
 
 CREATE TABLE `db_hocvien_cahoc` (
-  `id` int(11) NOT NULL,
+  `id` int(10) NOT NULL,
   `hocvien_id` int(11) NOT NULL,
   `cahoc_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `db_hocvien_cahoc`
 --
 
 INSERT INTO `db_hocvien_cahoc` (`id`, `hocvien_id`, `cahoc_id`) VALUES
-(1, 5, 1),
-(12, 6, 1),
-(13, 6, 3),
-(14, 6, 4),
-(18, 1, 6),
-(19, 3, 6),
-(20, 4, 6),
-(21, 5, 6),
-(22, 1, 7),
-(25, 3, 2),
-(26, 4, 2),
-(27, 5, 2),
-(28, 1, 8),
-(29, 3, 8),
-(30, 4, 8),
-(31, 5, 8);
+(4, 4, 3),
+(5, 5, 5),
+(6, 6, 5),
+(7, 7, 2),
+(8, 8, 7),
+(9, 9, 3),
+(13, 13, 2),
+(14, 14, 7),
+(15, 15, 15),
+(16, 16, 7),
+(17, 17, 14),
+(19, 19, 2),
+(20, 20, 3),
+(21, 19, 14),
+(23, 22, 15),
+(24, 23, 3),
+(25, 24, 3),
+(26, 25, 6),
+(29, 28, 7),
+(30, 29, 7),
+(31, 30, 2),
+(32, 31, 2),
+(33, 32, 2),
+(34, 33, 2),
+(35, 34, 6),
+(36, 35, 6),
+(37, 36, 8),
+(38, 37, 3),
+(39, 38, 6),
+(40, 39, 2),
+(41, 40, 17),
+(42, 41, 17),
+(43, 42, 21),
+(44, 43, 21),
+(45, 44, 9),
+(46, 45, 6),
+(47, 46, 3),
+(48, 47, 19),
+(49, 48, 3),
+(50, 49, 7),
+(51, 50, 8),
+(52, 51, 8),
+(53, 52, 8),
+(54, 53, 3),
+(55, 53, 8),
+(56, 54, 10),
+(57, 55, 2),
+(58, 56, 5),
+(59, 57, 5),
+(61, 59, 19),
+(65, 4, 19),
+(66, 5, 21),
+(67, 6, 21),
+(68, 7, 6),
+(69, 8, 15),
+(70, 9, 25),
+(71, 10, 9),
+(72, 11, 9),
+(73, 12, 9),
+(74, 13, 10),
+(75, 14, 15),
+(76, 15, 23),
+(77, 16, 15),
+(78, 17, 18),
+(79, 18, 5),
+(80, 19, 6),
+(81, 20, 19),
+(82, 19, 18),
+(83, 21, 17),
+(84, 22, 25),
+(85, 23, 19),
+(86, 24, 19),
+(87, 25, 14),
+(88, 26, 9),
+(89, 27, 5),
+(90, 28, 15),
+(91, 29, 15),
+(92, 30, 10),
+(93, 31, 10),
+(94, 32, 10),
+(95, 33, 10),
+(96, 34, 14),
+(97, 35, 14),
+(98, 36, 16),
+(99, 37, 19),
+(100, 38, 14),
+(101, 39, 10),
+(102, 40, 21),
+(103, 41, 21),
+(104, 42, 25),
+(105, 43, 25),
+(106, 44, 17),
+(107, 45, 14),
+(108, 46, 19),
+(109, 47, 25),
+(110, 48, 19),
+(111, 49, 15),
+(112, 50, 16),
+(113, 51, 16),
+(114, 52, 16),
+(115, 53, 19),
+(116, 53, 16),
+(117, 54, 21),
+(118, 55, 10),
+(119, 56, 13),
+(120, 57, 13),
+(121, 58, 17),
+(122, 59, 23),
+(124, 7, 10),
+(125, 8, 23),
+(126, 9, 21),
+(127, 10, 17),
+(128, 11, 17),
+(129, 12, 17),
+(130, 13, 18),
+(131, 14, 23),
+(132, 15, 7),
+(133, 18, 13),
+(134, 19, 10),
+(135, 21, 21),
+(136, 25, 23),
+(137, 26, 13),
+(138, 27, 13),
+(139, 30, 18),
+(140, 31, 18),
+(141, 32, 18),
+(142, 33, 18),
+(143, 37, 23),
+(144, 38, 18),
+(145, 39, 18),
+(146, 40, 25),
+(147, 41, 25),
+(148, 45, 18),
+(149, 55, 18),
+(150, 56, 21),
+(151, 57, 21),
+(152, 59, 5),
+(159, 3, 2),
+(160, 3, 21),
+(161, 61, 2),
+(162, 61, 3),
+(163, 61, 5),
+(164, 61, 6),
+(165, 1, 9),
+(166, 1, 17),
+(167, 2, 9),
+(168, 2, 17),
+(169, 3, 1),
+(170, 10, 1),
+(171, 11, 1),
+(172, 12, 1),
+(173, 18, 1),
+(174, 21, 1),
+(175, 26, 1),
+(176, 27, 1),
+(177, 50, 1),
+(178, 58, 1);
 
 -- --------------------------------------------------------
 
@@ -1140,13 +1370,13 @@ INSERT INTO `db_hocvien_cahoc` (`id`, `hocvien_id`, `cahoc_id`) VALUES
 
 CREATE TABLE `db_hoidapcoso` (
   `id` int(10) NOT NULL,
-  `question` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `answer` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `question` varchar(255) NOT NULL,
+  `answer` varchar(255) DEFAULT NULL,
   `producer_id` int(11) NOT NULL,
-  `question_by` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `question_by` varchar(255) NOT NULL,
   `question_time` datetime NOT NULL,
   `answer_time` datetime DEFAULT NULL,
-  `answer_by` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `answer_by` varchar(255) DEFAULT NULL,
   `star` int(11) NOT NULL DEFAULT 4,
   `trash` int(11) DEFAULT 1,
   `status` int(11) DEFAULT 1,
@@ -1180,18 +1410,18 @@ INSERT INTO `db_hoidapcoso` (`id`, `question`, `answer`, `producer_id`, `questio
 
 CREATE TABLE `db_ketnoicungcau` (
   `id` int(11) NOT NULL,
-  `nguoidang` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `phone` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `address` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `tieude` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `detail` text CHARACTER SET utf8 NOT NULL,
+  `nguoidang` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `phone` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tieude` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `catid` int(11) DEFAULT NULL,
   `ngaydang` datetime NOT NULL,
   `luotxem` int(11) NOT NULL,
   `trash` int(1) NOT NULL DEFAULT 1,
   `status` int(1) NOT NULL DEFAULT 1,
-  `price` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `hinhanh` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `hinhanh` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1215,12 +1445,12 @@ INSERT INTO `db_ketnoicungcau` (`id`, `nguoidang`, `phone`, `address`, `tieude`,
 
 CREATE TABLE `db_monhoc` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `trash` tinyint(1) NOT NULL DEFAULT 1,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `db_monhoc`
@@ -1241,24 +1471,31 @@ INSERT INTO `db_monhoc` (`id`, `name`, `trash`, `status`, `created_at`, `updated
 
 CREATE TABLE `db_order` (
   `id` int(11) NOT NULL,
-  `orderCode` varchar(8) CHARACTER SET utf8 NOT NULL,
+  `orderCode` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `customerid` int(11) NOT NULL,
   `orderdate` datetime NOT NULL,
-  `fullname` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `phone` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `fullname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `phone` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `money` int(12) NOT NULL,
   `price_ship` int(11) NOT NULL,
   `coupon` int(11) NOT NULL,
   `province` int(5) NOT NULL,
   `district` int(5) NOT NULL,
-  `address` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `trash` int(1) NOT NULL DEFAULT 1,
   `status` int(1) NOT NULL DEFAULT 1,
-  `orderDes` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `orderDes` varchar(100) DEFAULT NULL,
   `productid` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_order`
+--
+
+INSERT INTO `db_order` (`id`, `orderCode`, `customerid`, `orderdate`, `fullname`, `phone`, `money`, `price_ship`, `coupon`, `province`, `district`, `address`, `trash`, `status`, `orderDes`, `productid`, `count`, `price`) VALUES
+(143, '4cMQXbNW', 79, '2023-04-17 13:28:24', 'chương', '0123912241', 32300000, 0, 0, 64, 622, '38 võ văn tèo', 1, 0, '792023417132824', 70, 1, 32300000);
 
 -- --------------------------------------------------------
 
@@ -1276,6 +1513,13 @@ CREATE TABLE `db_orderdetail` (
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `db_orderdetail`
+--
+
+INSERT INTO `db_orderdetail` (`id`, `orderid`, `productid`, `count`, `price`, `trash`, `status`) VALUES
+(186, 143, 70, 1, 32300000, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -1284,17 +1528,17 @@ CREATE TABLE `db_orderdetail` (
 
 CREATE TABLE `db_producer` (
   `id` int(10) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `img` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `img` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `modified` datetime NOT NULL,
   `modified_by` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `trash` int(11) NOT NULL DEFAULT 1,
-  `detail` mediumtext CHARACTER SET utf8 DEFAULT NULL,
-  `iframe` varchar(2000) CHARACTER SET utf8 NOT NULL
+  `detail` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `iframe` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1322,12 +1566,12 @@ INSERT INTO `db_producer` (`id`, `name`, `code`, `img`, `created_at`, `created_b
 CREATE TABLE `db_product` (
   `id` int(11) NOT NULL,
   `catid` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `alias` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `img` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `sortDesc` text CHARACTER SET utf8 NOT NULL,
-  `detail` text CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `sortDesc` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `producer` int(11) NOT NULL,
   `number` int(11) NOT NULL,
   `number_buy` int(11) NOT NULL,
@@ -1335,15 +1579,15 @@ CREATE TABLE `db_product` (
   `price` int(11) NOT NULL,
   `price_sale` int(11) NOT NULL,
   `created` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'HDL',
+  `created_by` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'HDL',
   `modified` datetime NOT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'HDL',
+  `modified_by` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'HDL',
   `trash` int(1) NOT NULL DEFAULT 1,
   `status` int(1) NOT NULL DEFAULT 1,
   `userId` int(11) DEFAULT NULL,
-  `img2` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `img3` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `img4` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `img2` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `img3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `img4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `is_hot` int(11) NOT NULL DEFAULT 0,
   `star` double NOT NULL DEFAULT 4
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1369,8 +1613,8 @@ INSERT INTO `db_product` (`id`, `catid`, `name`, `alias`, `avatar`, `img`, `sort
 
 CREATE TABLE `db_province` (
   `id` int(5) NOT NULL,
-  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `type` varchar(30) CHARACTER SET utf8 NOT NULL
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
@@ -1450,28 +1694,53 @@ INSERT INTO `db_province` (`id`, `name`, `type`) VALUES
 
 CREATE TABLE `db_slider` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `link` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `img` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `img` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created` datetime NOT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT 'Supper Admin',
+  `created_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'Supper Admin',
   `modified` datetime NOT NULL,
-  `modified_by` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT 'Supper Admin',
+  `modified_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'Supper Admin',
   `trash` tinyint(1) NOT NULL DEFAULT 1,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `db_slider`
 --
 
-INSERT INTO `db_slider` (`id`, `name`, `link`, `img`, `created`, `created_by`, `modified`, `modified_by`, `trash`, `status`) VALUES
-(1, 'Banner1', 'banner-1', '2.jpg', '2019-06-13 21:27:24', '1', '2019-06-13 23:42:42', '', 0, 1),
-(2, 'Banner 2', 'Banner-2', 'slider-1.png', '2019-06-13 23:45:04', '1', '2019-06-13 23:45:44', '', 1, 1),
-(3, 'trang chu 1', 'trang-chu', 'slider-2.png', '2019-07-03 17:05:52', '1', '2022-04-26 11:04:48', '', 1, 1),
-(4, 'slider trang chu 2', 'slider-trang-chu-2', 'slider-3.png', '2019-07-03 17:06:38', '1', '2022-04-26 11:04:37', '', 1, 1),
-(5, 'slider trang chu 3', 'slider-trang-chu-3', 'slider-4.png', '2019-07-03 17:06:58', '1', '2022-04-26 11:04:22', '', 1, 1),
-(6, 'ss', 'ss', 'icon_142e7.png', '2019-07-03 17:08:07', '1', '2019-07-03 17:08:07', '1', 0, 1);
+INSERT INTO `db_slider` (`id`, `name`, `link`, `img`, `created`, `created_by`, `modified`, `modified_by`, `trash`, `status`, `type`) VALUES
+(1, 'Banner1', 'banner-1', '2.jpg', '2019-06-13 21:27:24', '1', '2019-06-13 23:42:42', '', 0, 1, 1),
+(2, 'Banner 2', 'Banner-2', 'slider-1.png', '2019-06-13 23:45:04', '1', '2019-06-13 23:45:44', '', 1, 1, 1),
+(3, 'trang chu 1', 'trang-chu', 'slider-2.png', '2019-07-03 17:05:52', '1', '2022-04-26 11:04:48', '', 1, 1, 1),
+(4, 'slider trang chu 2', 'slider-trang-chu-2', 'slider-3.png', '2019-07-03 17:06:38', '1', '2022-04-26 11:04:37', '', 1, 1, 1),
+(5, 'slider trang chu 3', 'slider-trang-chu-3', 'slider-4.png', '2019-07-03 17:06:58', '1', '2022-04-26 11:04:22', '', 1, 1, 1),
+(6, 'ss', 'ss', 'icon_142e7.png', '2019-07-03 17:08:07', '1', '2019-07-03 17:08:07', '1', 0, 1, 1),
+(7, 'Ảnh học viên', 'anh-hoc-vien', '2e828f43364ce912b05d191.jpg', '2023-05-16 10:25:03', '1', '2023-05-16 10:25:03', '1', 1, 1, 2),
+(8, 'Học viên 2', 'hoc-vien-2', '2f2ea39f1a90c5ce9c8115.jpg', '2023-05-16 10:28:54', '1', '2023-05-16 10:28:54', '1', 1, 1, 2),
+(9, 'Học viên 3', 'hoc-vien-3', '5ee04259fb5624087d4717.jpg', '2023-05-16 10:29:04', '1', '2023-05-16 10:29:04', '1', 1, 1, 2),
+(10, 'Học viên 4', 'hoc-vien-4', '6e42bf10071fd841810e5.jpg', '2023-05-16 10:29:13', '1', '2023-05-16 10:29:13', '1', 1, 1, 2),
+(11, 'Học viên 5', 'hoc-vien-5', '398ed8dc60d3bf8de6c23.jpg', '2023-05-16 10:29:22', '1', '2023-05-16 10:29:22', '1', 1, 1, 2),
+(12, 'Học viên 6', 'hoc-vien-6', '4979be20062fd971803e4.jpg', '2023-05-16 10:29:33', '1', '2023-05-16 10:29:33', '1', 1, 1, 2),
+(13, 'Học viên 7', 'hoc-vien-7', '340300a2b9ad66f33fbc9.jpg', '2023-05-16 10:29:42', '1', '2023-05-16 10:29:42', '1', 1, 1, 2),
+(14, 'Học viên 8', 'hoc-vien-8', 'a50f61afd8a007fe5eb16.jpg', '2023-05-16 10:29:50', '1', '2023-05-16 10:29:50', '1', 1, 1, 2),
+(15, 'Học viên 9', 'hoc-vien-9', 'c3ef5b5ee2513d0f644013.jpg', '2023-05-16 10:30:06', '1', '2023-05-16 10:30:06', '1', 1, 1, 2),
+(16, 'Học viên 10', 'hoc-vien-10', 'd7ba7613cf1c1042490d11.jpg', '2023-05-16 10:30:14', '1', '2023-05-16 10:30:14', '1', 1, 1, 2),
+(17, 'Học viên 11', 'hoc-vien-11', 'e787da266329bc77e5388.jpg', '2023-05-16 10:30:24', '1', '2023-05-16 10:30:24', '1', 1, 1, 2),
+(18, 'Học viên 12', 'hoc-vien-12', 'ea5162e0dbef04b15dfe16.jpg', '2023-05-16 10:30:32', '1', '2023-05-16 10:30:32', '1', 1, 1, 2),
+(19, 'Học viên 13', 'hoc-vien-13', 'ed47d5e66ce9b3b7eaf87.jpg', '2023-05-16 10:30:44', '1', '2023-05-16 10:30:44', '1', 1, 1, 2),
+(20, 'Học viên 14', 'hoc-vien-14', 'fd6967c0decf019158de12.jpg', '2023-05-16 10:30:52', '1', '2023-05-16 10:30:52', '1', 1, 1, 2),
+(21, 'Học viên 15', 'hoc-vien-15', '15.png', '2023-05-16 10:31:50', '1', '2023-07-14 14:58:13', '', 1, 1, 2),
+(22, 'hinh 20', 'hinh-20', '322960751_723576815683153_2517438778530756628_n.jpg', '2023-05-16 15:21:30', '1', '2023-05-16 15:21:30', '1', 1, 1, 2),
+(23, 'hình 21', 'hinh-21', '324110870_833456201497386_1044277158685970084_n.jpg', '2023-05-16 15:21:47', '1', '2023-05-16 15:21:47', '1', 1, 1, 2),
+(24, 'hình 22', 'hinh-22', '329532917_4684668598324297_4908803774318704689_n.jpg', '2023-05-16 15:21:55', '1', '2023-05-16 15:21:55', '1', 1, 1, 2),
+(25, 'hình 23', 'hinh-23', '329752982_718935029767510_8531555798965519859_n.jpg', '2023-05-16 15:22:04', '1', '2023-05-16 15:22:04', '1', 1, 1, 2),
+(26, 'hình 25', 'hinh-25', '332399568_739750430995119_432960636225152008_n.jpg', '2023-05-16 15:22:12', '1', '2023-05-16 15:22:12', '1', 1, 1, 2),
+(27, 'hình 27', 'hinh-27', '332425536_521525776792658_3059365068980392948_n.jpg', '2023-05-16 15:22:22', '1', '2023-05-16 15:22:22', '1', 1, 1, 2),
+(28, 'hình 28', 'hinh-28', '332457900_1601942693629777_1822455003095137961_n.jpg', '2023-05-16 15:22:31', '1', '2023-05-16 15:22:31', '1', 1, 1, 2),
+(29, 'hình 29', 'hinh-29', '332466027_547178000842209_5488612230290263928_n.jpg', '2023-05-16 15:22:42', '1', '2023-05-16 15:22:42', '1', 1, 1, 2),
+(30, 'hình 30', 'hinh-30', '332691867_6570539289627289_5968905391832326691_n.jpg', '2023-05-16 15:22:52', '1', '2023-05-16 15:22:52', '1', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1481,19 +1750,19 @@ INSERT INTO `db_slider` (`id`, `name`, `link`, `img`, `created`, `created_by`, `
 
 CREATE TABLE `db_user` (
   `id` int(11) NOT NULL,
-  `fullname` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `username` varchar(225) CHARACTER SET utf8 NOT NULL,
-  `password` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `username` varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `role` int(11) NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `gender` int(1) NOT NULL,
-  `phone` varchar(15) CHARACTER SET utf8 NOT NULL,
-  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `img` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `phone` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created` datetime NOT NULL,
   `trash` int(1) NOT NULL DEFAULT 1,
   `status` int(1) NOT NULL DEFAULT 1,
-  `detail` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `detail` text DEFAULT NULL,
   `star` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1518,7 +1787,7 @@ INSERT INTO `db_user` (`id`, `fullname`, `username`, `password`, `role`, `email`
 
 CREATE TABLE `db_usergroup` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created` datetime NOT NULL,
   `created_by` int(11) NOT NULL,
   `modified` datetime NOT NULL,
@@ -1548,7 +1817,7 @@ CREATE TABLE `google_users` (
   `google_email` varchar(60) NOT NULL,
   `google_link` varchar(60) NOT NULL,
   `google_picture_link` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Indexes for dumped tables
@@ -1601,6 +1870,14 @@ ALTER TABLE `db_cosodanhgia`
 --
 ALTER TABLE `db_customer`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_diemdanh_hocvien`
+--
+ALTER TABLE `db_diemdanh_hocvien`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hocvien_id` (`hocvien_id`),
+  ADD KEY `cahoc_id` (`cahoc_id`);
 
 --
 -- Indexes for table `db_discount`
@@ -1725,19 +2002,19 @@ ALTER TABLE `google_users`
 -- AUTO_INCREMENT for table `db_cahoc`
 --
 ALTER TABLE `db_cahoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `db_category`
 --
 ALTER TABLE `db_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `db_chinhsach`
 --
 ALTER TABLE `db_chinhsach`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `db_config`
@@ -1749,7 +2026,7 @@ ALTER TABLE `db_config`
 -- AUTO_INCREMENT for table `db_contact`
 --
 ALTER TABLE `db_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `db_content`
@@ -1785,13 +2062,13 @@ ALTER TABLE `db_evaluate`
 -- AUTO_INCREMENT for table `db_hocvien`
 --
 ALTER TABLE `db_hocvien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `db_hocvien_cahoc`
 --
 ALTER TABLE `db_hocvien_cahoc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
 
 --
 -- AUTO_INCREMENT for table `db_hoidapcoso`
@@ -1815,13 +2092,13 @@ ALTER TABLE `db_monhoc`
 -- AUTO_INCREMENT for table `db_order`
 --
 ALTER TABLE `db_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `db_orderdetail`
 --
 ALTER TABLE `db_orderdetail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `db_producer`
@@ -1839,7 +2116,7 @@ ALTER TABLE `db_product`
 -- AUTO_INCREMENT for table `db_slider`
 --
 ALTER TABLE `db_slider`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `db_user`
@@ -1856,6 +2133,13 @@ ALTER TABLE `db_usergroup`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `db_diemdanh_hocvien`
+--
+ALTER TABLE `db_diemdanh_hocvien`
+  ADD CONSTRAINT `db_diemdanh_hocvien_ibfk_1` FOREIGN KEY (`hocvien_id`) REFERENCES `db_hocvien` (`id`),
+  ADD CONSTRAINT `db_diemdanh_hocvien_ibfk_2` FOREIGN KEY (`cahoc_id`) REFERENCES `db_cahoc` (`id`);
 
 --
 -- Constraints for table `db_district`

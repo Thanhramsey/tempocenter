@@ -30,7 +30,7 @@ class Mhocvien extends CI_Model {
 			$this->db->where('monId', $loaisp);
 		}
 		if($cahoc != ""){
-			$this->db->where('cahocId', $cahoc);
+			$this->db->where('id', $cahoc);
 		}
         $query = $this->db->get($this->table);
         return count($query->result_array());

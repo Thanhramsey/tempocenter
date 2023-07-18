@@ -208,6 +208,11 @@ $route['hocvien/trash/(:num)'] ='hocvien/trash/$1';
 $route['hocvien/delete/(:num)'] ='hocvien/delete/$1';
 $route['hocvien/restore/(:num)'] ='hocvien/restore/$1';
 
+//điemdanh
+$route['admin/diemdanh'] ='admin/diemdanh';
+$route['admin/listCaHocTheoThu'] ='admin/listCaHocTheoThu';
+$route['admin/diemdanh/(:num)'] ='admin/diemdanh/index/$1';
+
 
 $route['admin/(:any)']='admin/E403/index';
 $route['admin/403']='admin/E403/index';

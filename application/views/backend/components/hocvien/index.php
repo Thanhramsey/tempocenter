@@ -83,6 +83,8 @@
                                     <table id="myTable" class="table table-hover table-bordered">
                                         <thead>
                                             <tr>
+                                                <th class="text-center"><input onchange="checkallchange()"
+                                                        type="checkbox" id="check-all" class="check-all"></th>
                                                 <th class="text-center">ID</th>
                                                 <th class="text-center">Tên học viên</th>
                                                 <th class="text-center">Ca học</th>
@@ -93,11 +95,13 @@
                                                 <th class="text-center">Trạng thái</th>
                                                 <th class="text-center">Thao tác</th>
                                                 <th class="text-center">Thao tác</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($list as $row) : ?>
                                             <tr>
+                                                <td class="text-center"><input type="checkbox" class="check-row"></td>
                                                 <td class="text-center"><?php echo $row['id'] ?></td>
                                                 <td class="text-center"><?php echo $row['name'] ?></td>
                                                 <td class="text-center"><?php echo $row['ca_hoc'] ?></td>

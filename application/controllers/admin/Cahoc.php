@@ -233,4 +233,23 @@ class Cahoc extends CI_Controller {
 		print json_encode(array("status"=>"success","message"=> $option_parentid));
 	}
 
+	public function listCaHocTheoThu()
+	{
+		$thu = $_POST['thu'];
+		$cahoc_list=$this->Mcahoc->cahoc_theothu($thu);
+		$option_parentid = "";
+		$counter = 0;
+		foreach ($cahoc_list as $r) {
+			$counter++;
+			if ($counter == 1) {
+				$option_parentid .= "<option value='" . $r['id'] . "' selected>" . $r['name'] . "</option>";
+			}else{
+				$option_parentid .= "<option value='" . $r['id'] . "'>" . $r['name'] . "</option>";
+			}
+		}
+		print json_encode(array("status"=>"success","message"=> $option_parentid));
+	}
+
+	
+
 }

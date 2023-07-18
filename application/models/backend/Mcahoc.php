@@ -29,6 +29,16 @@ class Mcahoc extends CI_Model {
 		$query = $this->db->get($this->table);
         return $query->result_array();
 	}
+	public function cahoc_theothu($thu)
+	{
+		$this->db->where('trash',1);
+		if($thu != ""){
+			$this->db->where('thu', $thu);
+		}
+		$this->db->order_by('id', 'asc');
+		$query = $this->db->get($this->table);
+        return $query->result_array();
+	}
 	// Đếm phân trang
 	public function cahoc_count($loaisp)
 	{
