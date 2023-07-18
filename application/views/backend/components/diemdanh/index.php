@@ -136,7 +136,15 @@ $(document).ready(function() {
         "Thứ 6",
         "Thứ 7",
     ];
-    var today = new Date();
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    var validDateString = "";
+    if(datePattern.test($("#datepicker").val())){
+        validDateString = $("#datepicker").val();
+    }else{
+        validDateString = moment($("#datepicker").val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
+    }
+   
+    var today = new Date(validDateString);
     var dayOfWeek = today.getDay();
     var todayName = days[dayOfWeek];
 
@@ -172,7 +180,6 @@ $(document).ready(function() {
                 inst.selectedDay
             );
             var dayOfWeek = selectedDate.getDay(); // Lấy thứ (0: Chủ nhật, 1: Thứ 2, ..., 6: Thứ 7)
-            console.log(days[dayOfWeek]);
             var strurl = "<?php echo base_url();?>" + '/admin/cahoc/listCaHocTheoThu';
             jQuery.ajax({
                 url: strurl,
@@ -255,6 +262,19 @@ function checkallchange() {
 }
 
 function diemdanh() {
-    console.log(arrData);
+    // console.log(arrData);
+    var strurl = "<?php echo base_url();?>" + '/admin/diemdanh/themDiemDanh';
+            jQuery.ajax({
+                url: strurl,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    arrData: arrData,
+                    ngay: $("#datepicker").val(),
+                },
+                success: function(data) {
+                    console.log(data);
+                },
+            });
 }
 </script>
