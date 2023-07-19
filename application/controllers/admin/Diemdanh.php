@@ -47,13 +47,6 @@ class Diemdanh extends CI_Controller {
 		}
 		$total=$this->Mhocvien->hocvien_count("",$cahoc);
 		$this->data['strphantrang']=$this->phantrang->PagePer($total, $current, $limit, $url='admin/diemdanh');
-		// $this->db->select('hv.id AS hocvien_id, hv.name AS hocvien_name,ch.name AS cahoc_name');
-        // $this->db->from('hocvien hv');
-        // $this->db->join('hocvien_cahoc hc', 'hv.id = hc.hocvien_id');
-		// $this->db->join('cahoc ch', 'hc.cahoc_id = ch.id', 'left');
-        // $this->db->where('hc.cahoc_id', $cahoc);
-		// $query = $this->db->get();
-
 		$query = $this->db->query("
 				SELECT
 					hv.id AS hocvien_id,

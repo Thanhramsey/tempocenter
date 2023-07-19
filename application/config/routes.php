@@ -207,11 +207,26 @@ $route['hocvien/recyclebin/(:num)'] ='hocvien/recyclebin/$1';
 $route['hocvien/trash/(:num)'] ='hocvien/trash/$1';
 $route['hocvien/delete/(:num)'] ='hocvien/delete/$1';
 $route['hocvien/restore/(:num)'] ='hocvien/restore/$1';
+//nhanvien
+$route['admin/nhanvien'] ='admin/nhanvien';
+$route['admin/nhanvien/(:num)'] ='admin/nhanvien/index/$1';
+$route['hocvien/insert'] ='hocvien/insert';
+$route['hocvien/update/(:num)'] ='hocvien/update/$1';
+$route['hocvien/status/(:num)'] ='hocvien/status/$1';
+$route['hocvien/recyclebin'] ='hocvien/recyclebin';
+$route['hocvien/recyclebin/(:num)'] ='hocvien/recyclebin/$1';
+$route['hocvien/trash/(:num)'] ='hocvien/trash/$1';
+$route['hocvien/delete/(:num)'] ='hocvien/delete/$1';
+$route['hocvien/restore/(:num)'] ='hocvien/restore/$1';
 
 //điemdanh
 $route['admin/diemdanh'] ='admin/diemdanh';
 $route['admin/listCaHocTheoThu'] ='admin/listCaHocTheoThu';
 $route['admin/diemdanh/(:num)'] ='admin/diemdanh/index/$1';
+
+//chamcong
+$route['admin/chamcong'] ='admin/chamcong';
+$route['admin/chamcong/(:num)'] ='admin/chamcong/index/$1';
 
 
 $route['admin/(:any)']='admin/E403/index';

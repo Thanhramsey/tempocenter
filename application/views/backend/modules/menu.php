@@ -31,13 +31,18 @@
                 </a>
             </li>
             <li class="treeview">
-                <a href="admin/cahoc">
-                    <i class="glyphicon glyphicon-apple"></i><span>Quản lý ca học</span>
+                <a href="admin/hocvien">
+                    <i class="glyphicon glyphicon-shopping-cart"></i> <span>Quản lý học viên</span>
                 </a>
             </li>
             <li class="treeview">
-                <a href="admin/hocvien">
-                    <i class="glyphicon glyphicon-shopping-cart"></i> <span>Quản lý học viên</span>
+                <a href="admin/nhanvien">
+                    <i class="glyphicon glyphicon-apple"></i><span>Quản lý nhân viên</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="admin/cahoc">
+                    <i class="glyphicon glyphicon-apple"></i><span>Quản lý ca học</span>
                 </a>
             </li>
             <li class="treeview">

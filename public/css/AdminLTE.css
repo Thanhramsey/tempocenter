@@ -2992,10 +2992,12 @@ table.text-center th {
   }
 }
 .modal-header {
+  background-color: #005384;
+  color:#fff;
   border-bottom-color: #f4f4f4;
 }
 .modal-footer {
-  border-top-color: #f4f4f4;
+  border-top-color: navajowhite;
 }
 .modal-primary .modal-header,
 .modal-primary .modal-footer {

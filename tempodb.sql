@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2023 at 12:31 PM
+-- Generation Time: Jul 19, 2023 at 12:18 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -39,7 +39,7 @@ CREATE TABLE `active_sessions` (
 --
 
 INSERT INTO `active_sessions` (`id`, `ip`, `session`, `date`) VALUES
-(0, '::1', 'uq790h6kgsuq8f4453kvbskhsaco0cm2', '2023-07-18 08:36:14');
+(0, '::1', '1698a50uiser5l0lj6ag8q4j77im8rmm', '2023-07-19 17:11:59');
 
 -- --------------------------------------------------------
 
@@ -124,6 +124,27 @@ INSERT INTO `db_category` (`id`, `name`, `link`, `level`, `parentid`, `orders`, 
 (2, 'Guitar', 'guitar', 1, 0, '0', '2022-06-03 14:18:11', '1', '2022-06-03 14:18:11', '1', 1, 1),
 (15, 'Piano Điện', 'piano-dien', 2, 1, '0', '2023-04-17 10:08:18', '4', '2023-04-17 10:08:18', '', 1, 1),
 (16, 'Piano Cơ', 'piano-co', 2, 1, '1', '2023-04-17 11:37:36', '4', '2023-04-17 11:37:36', '', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_chamcong_nhanvien`
+--
+
+CREATE TABLE `db_chamcong_nhanvien` (
+  `id` int(11) NOT NULL,
+  `nhanvien_id` int(11) DEFAULT NULL,
+  `ngaydiemdanh` date DEFAULT NULL,
+  `giolam` int(11) DEFAULT NULL,
+  `calamid` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`calamid`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `db_chamcong_nhanvien`
+--
+
+INSERT INTO `db_chamcong_nhanvien` (`id`, `nhanvien_id`, `ngaydiemdanh`, `giolam`, `calamid`) VALUES
+(1, 1, '2023-07-19', 10, '[\"1\",\"2\"]');
 
 -- --------------------------------------------------------
 
@@ -309,6 +330,37 @@ CREATE TABLE `db_diemdanh_hocvien` (
   `ngaydiemdanh` date DEFAULT NULL,
   `trang_thai` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `db_diemdanh_hocvien`
+--
+
+INSERT INTO `db_diemdanh_hocvien` (`id`, `hocvien_id`, `cahoc_id`, `ngaydiemdanh`, `trang_thai`) VALUES
+(2, 2, 9, '2023-07-19', 1),
+(3, 1, 9, '2023-07-19', 1),
+(4, 44, 9, '2023-07-19', 1),
+(5, 10, 9, '2023-07-19', 1),
+(6, 12, 9, '2023-07-19', 1),
+(9, 11, 9, '2023-07-19', 1),
+(10, 26, 9, '2023-07-19', 1),
+(11, 54, 10, '2023-07-19', 1),
+(12, 13, 10, '2023-07-19', 0),
+(13, 30, 10, '2023-07-19', 1),
+(14, 31, 10, '2023-07-19', 1),
+(15, 32, 10, '2023-07-19', 1),
+(16, 33, 10, '2023-07-19', 1),
+(17, 39, 10, '2023-07-19', 1),
+(18, 55, 10, '2023-07-19', 1),
+(19, 7, 10, '2023-07-19', 1),
+(20, 19, 10, '2023-07-19', 1),
+(21, 5, 5, '0000-00-00', 1),
+(22, 6, 5, '0000-00-00', 1),
+(23, 56, 5, '0000-00-00', 1),
+(24, 57, 5, '0000-00-00', 1),
+(25, 18, 5, '0000-00-00', 1),
+(26, 27, 5, '0000-00-00', 1),
+(27, 59, 5, '0000-00-00', 1),
+(28, 61, 5, '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -1466,6 +1518,33 @@ INSERT INTO `db_monhoc` (`id`, `name`, `trash`, `status`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `db_nhanvien`
+--
+
+CREATE TABLE `db_nhanvien` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `calamid` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`calamid`)),
+  `ngaysinh` varchar(255) DEFAULT NULL,
+  `gioitinh` tinyint(1) NOT NULL DEFAULT 1,
+  `phone` varchar(255) DEFAULT NULL,
+  `diachi` varchar(255) DEFAULT NULL,
+  `trash` int(1) NOT NULL,
+  `status` int(1) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `db_nhanvien`
+--
+
+INSERT INTO `db_nhanvien` (`id`, `name`, `calamid`, `ngaysinh`, `gioitinh`, `phone`, `diachi`, `trash`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'nvtest', '[\"1\"]', '1990', 1, '1221312', '12312312', 1, 1, '2023-07-19 14:46:50', '2023-07-19 15:12:39');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `db_order`
 --
 
@@ -1836,6 +1915,12 @@ ALTER TABLE `db_category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `db_chamcong_nhanvien`
+--
+ALTER TABLE `db_chamcong_nhanvien`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `db_chinhsach`
 --
 ALTER TABLE `db_chinhsach`
@@ -1929,6 +2014,12 @@ ALTER TABLE `db_monhoc`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `db_nhanvien`
+--
+ALTER TABLE `db_nhanvien`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `db_order`
 --
 ALTER TABLE `db_order`
@@ -2011,6 +2102,12 @@ ALTER TABLE `db_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `db_chamcong_nhanvien`
+--
+ALTER TABLE `db_chamcong_nhanvien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `db_chinhsach`
 --
 ALTER TABLE `db_chinhsach`
@@ -2045,6 +2142,12 @@ ALTER TABLE `db_cosodanhgia`
 --
 ALTER TABLE `db_customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `db_diemdanh_hocvien`
+--
+ALTER TABLE `db_diemdanh_hocvien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `db_discount`
@@ -2087,6 +2190,12 @@ ALTER TABLE `db_ketnoicungcau`
 --
 ALTER TABLE `db_monhoc`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `db_nhanvien`
+--
+ALTER TABLE `db_nhanvien`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `db_order`
