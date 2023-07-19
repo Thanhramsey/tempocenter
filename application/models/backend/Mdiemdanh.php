@@ -51,13 +51,13 @@ class Mdiemdanh extends CI_Model {
         return count($query->result_array());
 	}
 	//Thêm
-	public function cahoc_insert($mydata)
+	public function diemdanh_insert($mydata)
 	{
 		$this->db->insert($this->table, $mydata);
 	}
 
 	//Cập nhật
-	public function cahoc_update($mydata, $id)
+	public function diemdanh_update($mydata, $id)
 	{
 		$this->db->where('id',$id);
 		$this->db->update($this->table, $mydata);

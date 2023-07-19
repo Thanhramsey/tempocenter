@@ -4,7 +4,7 @@
         accept-charset="utf-8">
         <section class="content-header">
             <h1><i class="glyphicon glyphicon-cd"></i> Danh mục điểm danh</h1>
-            <div class="breadcrumb">
+            <!-- <div class="breadcrumb">
                 <?php
 			if ($user['role'] == 1) {
 				echo '<a class="btn btn-primary btn-sm" href="' . base_url() . 'admin/cahoc/insert" role="button">
@@ -16,7 +16,7 @@
                     <span class="glyphicon glyphicon-trash"></span> Thùng rác (<?php $total = $this->Mcahoc->cahoc_trash_count();
 																			echo $total; ?>)
                 </a>
-            </div>
+            </div> -->
         </section>
         <!-- Main content -->
         <section class="content">
@@ -39,12 +39,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label></label>
-                            <button type="submit" class="btn btn-primary btn-sm" style="margin-top:25px">
+                            <button type="submit" id="timkiem_btn" class="btn btn-primary btn-sm"
+                                style="margin-top:25px">
                                 <span class="glyphicon glyphicon-search"></span>
                                 Tìm kiếm
                             </button>
                             <button type="button" id="diemdanh_btn" class="btn btn-primary btn-sm"
-                                style="margin-top:25px ; display:none" onclick="diemdanh()">
+                                style="margin-top:25px ;" onclick="diemdanh()">
                                 <span class="glyphicon glyphicon-search"></span>
                                 Điểm Danh
                             </button>
@@ -85,18 +86,34 @@
                                             <tr>
                                                 <th class="text-center"><input onchange="checkallchange()"
                                                         type="checkbox" id="check-all" class="check-all"></th>
-                                                <th class="text-center">Tên ca học</th>
                                                 <th class="text-center">Tên học viên</th>
-                                                <th class="text-center">ID</th>
+                                                <th class="text-center">Tên ca học</th>
+                                                <th hidden class="text-center">ID</th>
+                                                <th hidden class="text-center">trang thai diem danh</th>
+                                                <th class="text-center">Trạng thái</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($list as $row) : ?>
                                             <tr>
-                                                <td class="text-center"><input type="checkbox" class="check-row"></td>
-                                                <td class="text-center"> <?php echo $row['cahoc_name'] ?></td>
+                                                <td class="text-center">
+                                                    <input type="checkbox" class="check-row" <?php if ($row['trangthai_diemdanh'] == 1) {
+																echo 'checked';
+															} ?>>
+                                                </td>
                                                 <td class="text-center"><?php echo $row['hocvien_name'] ?></td>
-                                                <td class="text-center"><?php echo $row['hocvien_id'] ?></td>
+
+                                                <td class="text-center"> <?php echo $row['cahoc_name'] ?></td>
+                                                <td hidden class="text-center"><?php echo $row['hocvien_id'] ?></td>
+                                                <td hidden class="text-center"><?php echo $row['diemdanh_hocvien_id'] ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?php if ($row['trangthai_diemdanh'] == 0) : ?>
+                                                    <p style="color:red"> Vắng</p>
+                                                    <?php else : ?>
+                                                    <p style="color:green"> Có mặt</p>
+                                                    <?php endif; ?>
+                                                </td>
                                             </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -138,12 +155,12 @@ $(document).ready(function() {
     ];
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
     var validDateString = "";
-    if(datePattern.test($("#datepicker").val())){
+    if (datePattern.test($("#datepicker").val())) {
         validDateString = $("#datepicker").val();
-    }else{
+    } else {
         validDateString = moment($("#datepicker").val(), 'DD-MM-YYYY').format('YYYY-MM-DD');
     }
-   
+
     var today = new Date(validDateString);
     var dayOfWeek = today.getDay();
     var todayName = days[dayOfWeek];
@@ -172,6 +189,7 @@ $(document).ready(function() {
         changeMonth: true, // Cho phép thay đổi tháng
         changeYear: true, // Cho phép thay đổi năm
         yearRange: "2020:2030", // Phạm vi năm cho phép
+        maxDate: 0,
         onSelect: function(dateText, inst) {
             // Gọi hàm lấy thứ khi người dùng chọn một ngày
             var selectedDate = new Date(
@@ -191,6 +209,7 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data) {
                         $("#caId").html(data.message);
+                        $("#timkiem_btn").click();
                     } else {
                         $("#caId").html("");
                     }
@@ -199,12 +218,19 @@ $(document).ready(function() {
         },
     });
 
+    $("#caId").change(function() {
+        $("#timkiem_btn").click();
+    });
+
 
     var table = $('#diemdanhTable').DataTable({
         columnDefs: [{
             targets: 0,
             orderable: false // Vô hiệu hóa sắp xếp cho cột này
-        }]
+        }],
+        scrollY: '400px', // Set the height of the scrollable area
+        scrollCollapse: true, // Enable scrollbar collapse
+        paging: false
     });
 
 
@@ -213,6 +239,18 @@ $(document).ready(function() {
         console.log($(this), isChecked)
         if (!isChecked) {
             $('#check-all').prop('checked', false);
+            var row = $(this).closest('tr');
+            var rowData = table.row(row).data();
+
+            var obj = {
+                id: rowData[3],
+                ca: rowData[1],
+                tenhv: rowData[2],
+                trangthai: 0,
+                diemdanhId: rowData[4]
+            }
+            console.log('Dữ liệu từ hàng đó:', obj, rowData);
+            arrData.push(obj);
         } else {
             // Kiểm tra xem tất cả các checkboxes cá nhân đã được chọn hay không
             var allChecked = $('.check-row:checked').length === $('.check-row').length;
@@ -225,17 +263,19 @@ $(document).ready(function() {
                 id: rowData[3],
                 ca: rowData[1],
                 tenhv: rowData[2],
+                trangthai: 1,
+                diemdanhId: rowData[4]
             }
             console.log('Dữ liệu từ hàng đó:', obj, rowData);
             arrData.push(obj);
 
         }
 
-        if ($('.check-row:checked').length > 0) {
-            $('#diemdanh_btn').show();
-        } else {
-            $('#diemdanh_btn').hide();
-        }
+        // if ($('.check-row:checked').length > 0) {
+        //     $('#diemdanh_btn').show();
+        // } else {
+        //     $('#diemdanh_btn').hide();
+        // }
     });
 
 
@@ -244,37 +284,48 @@ $(document).ready(function() {
 function checkallchange() {
     if ($('#check-all').is(":checked")) {
         $('.check-row').prop('checked', true);
-        $('#diemdanh_btn').show();
+        // $('#diemdanh_btn').show();
         $('.check-row:checked').each(function() {
             var rowData = {
                 id: $(this).closest('tr').find('td:nth-child(4)').text(),
                 ca: $(this).closest('tr').find('td:nth-child(2)').text(),
-                tenhv: $(this).closest('tr').find('td:nth-child(3)').text()
+                tenhv: $(this).closest('tr').find('td:nth-child(3)').text(),
+                trangthai: 1,
+                diemdanhId: $(this).closest('tr').find('td:nth-child(5)').text()
             };
             arrData.push(rowData);
         });
     } else {
         $('.check-row').prop('checked', false);
-        $('#diemdanh_btn').hide();
-        arrData = [];
+        $('.check-row').each(function() {
+            var rowData = {
+                id: $(this).closest('tr').find('td:nth-child(4)').text(),
+                ca: $(this).closest('tr').find('td:nth-child(2)').text(),
+                tenhv: $(this).closest('tr').find('td:nth-child(3)').text(),
+                trangthai: 0,
+                diemdanhId: $(this).closest('tr').find('td:nth-child(5)').text()
+            };
+            arrData.push(rowData);
+        });
+
     }
 
 }
 
 function diemdanh() {
-    // console.log(arrData);
     var strurl = "<?php echo base_url();?>" + '/admin/diemdanh/themDiemDanh';
-            jQuery.ajax({
-                url: strurl,
-                type: "POST",
-                dataType: "json",
-                data: {
-                    arrData: arrData,
-                    ngay: $("#datepicker").val(),
-                },
-                success: function(data) {
-                    console.log(data);
-                },
-            });
+    jQuery.ajax({
+        url: strurl,
+        type: "POST",
+        dataType: "json",
+        data: {
+            arrData: arrData,
+            ca: $("#caId").val(),
+            ngay: $("#datepicker").val(),
+        },
+        success: function(data) {
+            location.reload();
+        },
+    });
 }
 </script>

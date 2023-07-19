@@ -12,6 +12,8 @@ class Diemdanh extends CI_Controller {
 		$this->load->model('backend/Mmonhoc');
 		$this->load->model('backend/Mhocvien');
 		$this->load->model('backend/Mhocviencahoc');
+		$this->load->model('backend/Mdiemdanh');
+		
 		if(!$this->session->userdata('sessionadmin'))
 		{
 			redirect('admin/user/login','refresh');
@@ -57,7 +59,8 @@ class Diemdanh extends CI_Controller {
 					hv.id AS hocvien_id,
 					hv.name AS hocvien_name,
 					ch.name  AS cahoc_name,
-					IF(diemdanh_hocvien.trang_thai IS NOT NULL, TRUE, FALSE) AS trangthai_diemdanh
+					IF(diemdanh_hocvien.trang_thai IS NOT NULL, diemdanh_hocvien.trang_thai, FALSE) AS trangthai_diemdanh,
+					IF(diemdanh_hocvien.id IS NOT NULL, diemdanh_hocvien.id, FALSE) AS diemdanh_hocvien_id
 				FROM
 					db_hocvien AS hv
 				JOIN
@@ -70,7 +73,7 @@ class Diemdanh extends CI_Controller {
 					ch.id = $cahoc;
 			");
 		$result = $query->result_array();
-		print_r($result);
+		// print_r($result);
 		$this->data['list']=  $query->result_array();
 		$this->data['ngaydiemdanh']=  $ngaydiemdanh;
 		$this->data['cahoc']=  $cahoc;
@@ -83,10 +86,29 @@ class Diemdanh extends CI_Controller {
 	public function themDiemDanh(){
 		$arrData = $_POST['arrData'];
 		$ngay = $_POST['ngay'];
+		$ca = $_POST['ca'];
 		foreach ($arrData as $r) {
+
+			if($r['diemdanhId'] == 0){
+				$mydata= array(
+					'hocvien_id' => $r['id'],
+					'cahoc_id' => $ca,
+					'ngaydiemdanh' =>$ngay,
+					'trang_thai'=> $r['trangthai']
+				);
+				$this->Mdiemdanh->diemdanh_insert($mydata);
+			}else{
+				$mydata= array(
+					'hocvien_id' => $r['id'],
+					'cahoc_id' => $ca,
+					'ngaydiemdanh' =>$ngay,
+					'trang_thai'=> $r['trangthai']
+				);
+				$this->Mdiemdanh->diemdanh_update($mydata,$r['diemdanhId']);
+			}
 			
 		}
-		print json_encode(array("status"=>"success","message"=> $arrData));
+		print json_encode(array("status"=>"success","message"=> "Thêm thành công"));
 	}
 
 	public function listCaHoc($monId)
