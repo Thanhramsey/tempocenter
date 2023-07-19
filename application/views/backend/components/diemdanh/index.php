@@ -185,7 +185,7 @@ $(document).ready(function() {
     });
 
     $("#datepicker").datepicker({
-        dateFormat: "dd-mm-yy", // Định dạng ngày tháng
+        dateFormat: "yy-mm-dd", // Định dạng ngày tháng
         changeMonth: true, // Cho phép thay đổi tháng
         changeYear: true, // Cho phép thay đổi năm
         yearRange: "2020:2030", // Phạm vi năm cho phép

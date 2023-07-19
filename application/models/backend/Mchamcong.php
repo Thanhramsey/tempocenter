@@ -13,6 +13,13 @@ class Mchamcong extends CI_Model {
 		$this->db->insert($this->table, $mydata);
 	}
 
+	public function chamcong_update($mydata, $id, $ngaydiemdanh)
+	{
+		$this->db->where('nhanvien_id',$id);
+		$this->db->where('ngaydiemdanh',$ngaydiemdanh);
+		$this->db->update($this->table, $mydata);
+	}
+
 	public function getdulieuchamcong($nhanvienid, $ngaychamcong)
 	{
 		$this->db->where('nhanvien_id',$nhanvienid);

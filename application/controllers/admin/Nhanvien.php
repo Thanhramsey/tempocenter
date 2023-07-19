@@ -152,17 +152,28 @@ class Nhanvien extends CI_Controller {
 		redirect('admin/nhanvien/recyclebin','refresh');
 	}
 
-	public function chamcong()
+	public function chamconginsert()
 	{
-		$mydata= array(
+		$mydata = array(
 			"nhanvien_id" => $_POST['nhanvien_id'],
 			"ngaydiemdanh" =>  $_POST['ngaydiemdanh'],
 			"giolam" => $_POST['giolam'],
-			"calamid" =>  json_encode($_POST['calamid'])
+			"calamid" =>  json_encode($_POST['calamid'])				
 		);
-		$this->Mchamcong->chamcong_insert($mydata,);
-		print json_encode(array("status"=>"success","message"=> "Thêm thành công"));
+		$this->Mchamcong->chamcong_insert($mydata);
+		print json_encode(array("status"=>"success","message"=> "Thêm thành công"));					
 	}
+
+	public function chamcongupdate()
+	{		
+		$mydata= array(
+			"giolam" => $_POST['giolam'],
+			"calamid" =>  json_encode($_POST['calamid'])				
+		);
+		$this->Mchamcong->chamcong_update($mydata,$_POST['nhanvien_id'],$_POST['ngaydiemdanh']);
+		print json_encode(array("status"=>"success","message"=> "Sửa thành công"));			
+	}
+
 
 	public function getdulieuchamcong()
 	{

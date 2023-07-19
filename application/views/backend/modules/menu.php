@@ -2,27 +2,6 @@
 
     <section class="sidebar">
         <ul class="sidebar-menu">
-            <li class="header">QUẢN LÝ CỬA HÀNG</li>
-            <li class="treeview">
-                <a href="admin">
-                    <i class="glyphicon glyphicon-signal"></i> <span>Thống kê</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/product">
-                    <i class="glyphicon glyphicon-apple"></i><span>Sản phẩm</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/orders">
-                    <i class="glyphicon glyphicon-shopping-cart"></i> <span>Đơn hàng</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/hoidap">
-                    <i class="glyphicon glyphicon-question-sign"></i> <span>Hỏi đáp</span>
-                </a>
-            </li>
             <!-- quan ly hoc vu -->
             <li class="header">QUẢN LÝ HỌC VỤ</li>
             <li class="treeview">
@@ -50,6 +29,28 @@
                     <i class="glyphicon glyphicon-signal"></i> <span>Quản lý môn học</span>
                 </a>
             </li>
+            <li class="header">QUẢN LÝ CỬA HÀNG</li>
+            <li class="treeview">
+                <a href="admin">
+                    <i class="glyphicon glyphicon-signal"></i> <span>Thống kê</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="admin/product">
+                    <i class="glyphicon glyphicon-apple"></i><span>Sản phẩm</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="admin/orders">
+                    <i class="glyphicon glyphicon-shopping-cart"></i> <span>Đơn hàng</span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="admin/hoidap">
+                    <i class="glyphicon glyphicon-question-sign"></i> <span>Hỏi đáp</span>
+                </a>
+            </li>
+            
             <li class="treeview">
                 <a href="admin/hoidap">
                     <i class="glyphicon glyphicon-question-sign"></i> <span>Hỏi đáp</span>

@@ -167,6 +167,8 @@ $listCa = [
                         </div>
                         <div class="modal-body">
                             <div class="row">
+                                <h5 id="alert" hidden style="color:red ; padding-left:15px">Còn nhập thiếu thông tin
+                                </h5>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tên nhân viên</label>
@@ -174,7 +176,7 @@ $listCa = [
                                             style="display:block;height:35px;width:250px" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label>Chọn ca</label>
+                                        <label>Chọn ca<span class="maudo">(*)</span></label>
                                         <select class="select2" multiple name="calamid[]" id="calamid"
                                             class="form-control" style="width:250px">
                                             <option value="">Chọn ca</option>
@@ -192,7 +194,7 @@ $listCa = [
                                     </div>
                                     <div class="form-group">
                                         <label>Số giờ làm <span class="maudo">(*)</span></label>
-                                        <input type="number" id="hour" name="hour"
+                                        <input type="number" id="hour" name="hour"  max="24"
                                             style="display:block;height:35px;width:250px" value="0">
                                         <input hidden type="text" id="nhanvienid" name="nhanvienid">
                                     </div>
@@ -213,64 +215,105 @@ $listCa = [
 </div><!-- /.content-wrapper -->
 
 <script type="text/javascript">
+function validDay(day) {
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    var validDateString = "";
+    if (datePattern.test(day)) {
+        validDateString = day;
+    } else {
+        validDateString = moment(day, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    }
+    return validDateString;
+}
 $(document).ready(function() {
     // Lắng nghe sự kiện click của nút mở modal
     var today = new Date();
-    var formattedDate = today.toISOString().slice(0, 10);
+    var formattedDate = validDay(today);
+
     $('.btn-open-modal').on('click', function() {
         var nhanvienid = $(this).closest('tr').find('td[data-id]').data('id');
         var tenNhanVien = $(this).closest('tr').find('td[data-name]').data('name');
         $('#nhanvienid').val(nhanvienid);
         $('#tenNhanVien').val(tenNhanVien);
+        $("#alert").hide();
         getdulieuchamcong(nhanvienid, formattedDate);
     });
     $("#datepicker").val(formattedDate);
     $("#datepicker").datepicker({
-        dateFormat: "dd-mm-yy", // Định dạng ngày tháng
+        dateFormat: "yy-mm-dd", // Định dạng ngày tháng
         changeMonth: true, // Cho phép thay đổi tháng
         changeYear: true, // Cho phép thay đổi năm
         yearRange: "2020:2030", // Phạm vi năm cho phép
         maxDate: 0,
         onSelect: function(dateText, inst) {
-            var date = new Date(dateText);
-            // var selectDate = date.toISOString().slice(0, 10);
-            var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/getdulieuchamcong';
-            jQuery.ajax({
-                url: strurl,
-                type: "POST",
-                data: {
-                    "nhanvienid": $('#nhanvienid').val(),
-                    "ngaychamcong": date
-                },
-                dataType: "json",
-                success: function(data) {
-                    if (data.message.length > 0) {
-                        $("#hour").val(data.message[0].giolam);
-                        var selectedIds = JSON.parse(data.message[0].calamid);
-                        $('#calamid').val(selectedIds).trigger('change');
-                    }
-                },
-            });
+            var selectDate = validDay(dateText);
+            getdulieuchamcong($('#nhanvienid').val(), selectDate);
         },
     });
 });
 
 function chamcong() {
-    var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/chamcong';
-    jQuery.ajax({
-        url: strurl,
-        type: "POST",
-        dataType: "json",
-        data: {
-            "nhanvien_id": $('#nhanvienid').val(),
-            "ngaydiemdanh": $("#datepicker").val(),
-            "giolam": $("#hour").val(),
-            "calamid": $("#calamid").val()
-        },
-        success: function(data) {
-            $('#myModal').modal('hide');
-        },
-    });
+    var validDate = validDay($("#datepicker").val());
+    var checkForm = true;
+    if (validDate == "" || $("#hour").val() == "0" || $("#calamid").val() === null) {
+        checkForm = false;
+        $("#alert").show();
+    }
+
+    var isInsert = true;
+
+
+    if (checkForm) {
+        var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/getdulieuchamcong';
+        jQuery.ajax({
+            url: strurl,
+            type: "POST",
+            data: {
+                "nhanvienid": $('#nhanvienid').val(),
+                "ngaychamcong": validDate
+            },
+            dataType: "json",
+            success: function(data) {
+                if (data.message.length > 0) {
+                    var strurlupdate = "<?php echo base_url();?>" + '/admin/nhanvien/chamcongupdate';
+                    jQuery.ajax({
+                        url: strurlupdate,
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "nhanvien_id": $('#nhanvienid').val(),
+                            "ngaydiemdanh": validDate,
+                            "giolam": $("#hour").val(),
+                            "calamid": $("#calamid").val(),
+                        },
+                        success: function(data) {
+                            $("#alert").hide();
+                            $('#myModal').modal('hide');
+                        },
+                    });
+                }else{
+                    var strurlInsert = "<?php echo base_url();?>" + '/admin/nhanvien/chamconginsert';
+                    jQuery.ajax({
+                        url: strurlInsert,
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            "nhanvien_id": $('#nhanvienid').val(),
+                            "ngaydiemdanh": validDate,
+                            "giolam": $("#hour").val(),
+                            "calamid": $("#calamid").val(),
+                        },
+                        success: function(data) {
+                            $("#alert").hide();
+                            $('#myModal').modal('hide');
+                        },
+                    });                   
+                }
+            },
+        });
+
+    }
+
 }
 
 function getdulieuchamcong(nhanvienid, ngaychamcong) {
@@ -288,6 +331,9 @@ function getdulieuchamcong(nhanvienid, ngaychamcong) {
                 $("#hour").val(data.message[0].giolam);
                 var selectedIds = JSON.parse(data.message[0].calamid);
                 $('#calamid').val(selectedIds).trigger('change');
+            } else {
+                $("#calamid").val([]).trigger('change');
+                $("#hour").val(0);
             }
         },
     });
