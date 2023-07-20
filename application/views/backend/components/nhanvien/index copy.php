@@ -21,10 +21,6 @@ $listCa = [
         <section class="content-header">
             <h1><i class="glyphicon glyphicon-cd"></i> Danh mục nhân viên</h1>
             <div class="breadcrumb">
-                <button type="button" class="btn btn-success btn-xs btn-open-modal" data-toggle="modal"
-                    data-target="#myModal">
-                    Chấm công
-                </button>
                 <a class="btn btn-primary btn-sm" href="admin/nhanvien/insert" role="button">
                     <span class="glyphicon glyphicon-plus"></span> Thêm mới
                 </a>
@@ -86,9 +82,9 @@ $listCa = [
                                                 <td class="text-center" data-name=<?php echo $row['name'] ?>>
                                                     <?php echo $row['name'] ?></td>
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-success btn-xs btn-ls-chamcong"
-                                                        data-toggle="modal" data-target="#lsChamCong">
-                                                        Lịch sử Chấm công
+                                                    <button type="button" class="btn btn-success btn-xs btn-open-modal"
+                                                        data-toggle="modal" data-target="#myModal">
+                                                        Chấm công
                                                     </button>
                                                 </td>
                                                 <td class="text-center">
@@ -159,7 +155,7 @@ $listCa = [
                 </div>
                 <!-- /.col -->
             </div>
-            <!-- Chấm công modal -->
+
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -175,9 +171,9 @@ $listCa = [
                                 </h5>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Chọn Ngày <span class="maudo">(*)</span></label>
-                                        <input type="text" id="datepicker" name="datepicker"
-                                            style="display:block;height:35px;width:250px">
+                                        <label>Tên nhân viên</label>
+                                        <input type="text" id="tenNhanVien" name="tenNhanVien"
+                                            style="display:block;height:35px;width:250px" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label>Chọn ca<span class="maudo">(*)</span></label>
@@ -192,71 +188,21 @@ $listCa = [
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nhân viên</label>
-                                        <select name="nhanvien" id="nhanvien" class="form-control" style="width:250px">
-                                        </select>
-                                        <input hidden type="text" id="nhanvienid" name="nhanvienid">
+                                        <label>Chọn Ngày <span class="maudo">(*)</span></label>
+                                        <input type="text" id="datepicker" name="datepicker"
+                                            style="display:block;height:35px;width:250px">
                                     </div>
                                     <div class="form-group">
                                         <label>Số giờ làm <span class="maudo">(*)</span></label>
                                         <input type="number" id="hour" name="hour" max="24"
                                             style="display:block;height:35px;width:250px" value="0">
+                                        <input hidden type="text" id="nhanvienid" name="nhanvienid">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" onclick="chamcong()">Lưu Chấm Công</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lịch sử Chấm công modal -->
-            <div class="modal fade" id="lsChamCong" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">Lịch sử Chấm công nhân viên</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <h5 id="alert" hidden style="color:red ; padding-left:15px">Còn nhập thiếu thông tin
-                                </h5>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Chọn Từ Ngày <span class="maudo">(*)</span></label>
-                                        <input type="text" id="tuNgay" name="tuNgay"
-                                            style="display:block;height:35px;width:250px">
-                                        <input type="text" id="lsnhanvienid" hidden>
-                                    </div>
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Chọn Đến Ngày <span class="maudo">(*)</span></label>
-                                        <input type="text" id="denNgay" name="denNgay"
-                                            style="display:block;height:35px;width:250px">
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <table id="lsTable" class="table table-hover table-bordered no-footer">
-                                        <thead>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-12">
-                                    <h4 id="tongtien" style="color:red;font-weight:bold"></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                         </div>
                     </div>
@@ -279,122 +225,19 @@ function validDay(day) {
     }
     return validDateString;
 }
-var dataTable;
 $(document).ready(function() {
     // Lắng nghe sự kiện click của nút mở modal
     var today = new Date();
-    var firstDateOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     var formattedDate = validDay(today);
-    var validFirstDate = validDay(firstDateOfMonth);
 
     $('.btn-open-modal').on('click', function() {
-        var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/listNhanVien';
-        jQuery.ajax({
-            url: strurl,
-            type: "POST",
-            dataType: "json",
-            data: {},
-            success: function(data) {
-                if (data) {
-                    console.log(data);
-                    $("#nhanvien").html(data.message);
-                    var nhanvienid = data.select['id'];
-                    getdulieuchamcong(nhanvienid, formattedDate);
-                } else {
-                    $("#nhanvien").html("");
-                }
-            },
-        });
-
-    });
-
-    $('.btn-ls-chamcong').on('click', function() {
         var nhanvienid = $(this).closest('tr').find('td[data-id]').data('id');
-        $("#lsnhanvienid").val(nhanvienid);
-        var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/LschamCongNhanVien';
-        jQuery.ajax({
-            url: strurl,
-            type: "POST",
-            dataType: "json",
-            data: {
-                "nhanvienid": nhanvienid,
-                "tuNgay": validFirstDate,
-                "denNgay": formattedDate
-            },
-            success: function(data) {
-                if (data.message.length > 0) {
-                    if (dataTable) {
-                        dataTable.destroy();
-                    }
-                    dataTable = $("#lsTable").DataTable({
-                        data: data.message, // Pass the data array to the DataTable
-                        columns: [{
-                                data: "name",
-                                title: "Tên Nhân viên"
-                            },
-                            {
-                                data: "ngaydiemdanh",
-                                title: "Ngày chấm công"
-                            },
-                            {
-                                data: "congtheogio",
-                                title: "Công theo giờ"
-                            },
-                            {
-                                data: "giolam",
-                                title: "Giờ làm"
-                            },
-                            {
-                                data: "sotien",
-                                title: "Số tiền"
-                            },
-                        ],
-                    });
-                    var sum = 0;
-                    data.message.forEach((record) => {
-                        sum = sum + parseFloat(record.sotien);
-                    });
-                    $("#tongtien").html("Tổng số tiền là: " + sum);
-                } else {
-                    if (dataTable) {
-                        dataTable.destroy();
-                    }
-                    dataTable = $("#lsTable").DataTable({
-                        data: data.message, // Pass the data array to the DataTable
-                        columns: [{
-                                data: "name",
-                                title: "Tên Nhân viên"
-                            },
-                            {
-                                data: "ngaydiemdanh",
-                                title: "Ngày chấm công"
-                            },
-                            {
-                                data: "congtheogio",
-                                title: "Công theo giờ"
-                            },
-                            {
-                                data: "giolam",
-                                title: "Giờ làm"
-                            },
-                            {
-                                data: "sotien",
-                                title: "Số tiền"
-                            },
-                        ],
-                    });
-                    $("#tongtien").html("Nhân viên chưa được ghi nhận ngày công nào!");
-                }
-            },
-        });
+        var tenNhanVien = $(this).closest('tr').find('td[data-name]').data('name');
+        $('#nhanvienid').val(nhanvienid);
+        $('#tenNhanVien').val(tenNhanVien);
+        $("#alert").hide();
+        getdulieuchamcong(nhanvienid, formattedDate);
     });
-    $("#nhanvien").change(function() {
-        // Lấy giá trị của option đã chọn
-        var selectedValue = $(this).val();
-        var dateCall = validDay($("#datepicker").val());
-        getdulieuchamcong(selectedValue, dateCall);
-    });
-
     $("#datepicker").val(formattedDate);
     $("#datepicker").datepicker({
         dateFormat: "yy-mm-dd", // Định dạng ngày tháng
@@ -404,34 +247,9 @@ $(document).ready(function() {
         maxDate: 0,
         onSelect: function(dateText, inst) {
             var selectDate = validDay(dateText);
-            getdulieuchamcong($('#nhanvien').val(), selectDate);
+            getdulieuchamcong($('#nhanvienid').val(), selectDate);
         },
     });
-    $("#tuNgay").val(validFirstDate);
-    $("#denNgay").val(formattedDate);
-    $("#tuNgay").datepicker({
-        dateFormat: "yy-mm-dd", // Định dạng ngày tháng
-        changeMonth: true, // Cho phép thay đổi tháng
-        changeYear: true, // Cho phép thay đổi năm
-        yearRange: "2020:2030", // Phạm vi năm cho phép
-        maxDate: 0,
-        onSelect: function(dateText, inst) {
-            updateTable($("#lsnhanvienid").val(), validDay($("#tuNgay").val()), validDay($(
-                "#denNgay").val()));
-        },
-    });
-    $("#denNgay").datepicker({
-        dateFormat: "yy-mm-dd", // Định dạng ngày tháng
-        changeMonth: true, // Cho phép thay đổi tháng
-        changeYear: true, // Cho phép thay đổi năm
-        yearRange: "2020:2030", // Phạm vi năm cho phép
-        maxDate: 0,
-        onSelect: function(dateText, inst) {
-            updateTable($("#lsnhanvienid").val(), validDay($("#tuNgay").val()), validDay($(
-                "#denNgay").val()));
-        },
-    });
-
 });
 
 function chamcong() {
@@ -441,27 +259,29 @@ function chamcong() {
         checkForm = false;
         $("#alert").show();
     }
+
     var isInsert = true;
+
+
     if (checkForm) {
         var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/getdulieuchamcong';
         jQuery.ajax({
             url: strurl,
             type: "POST",
             data: {
-                "nhanvienid": $('#nhanvien').val(),
+                "nhanvienid": $('#nhanvienid').val(),
                 "ngaychamcong": validDate
             },
             dataType: "json",
             success: function(data) {
                 if (data.message.length > 0) {
-                    var strurlupdate = "<?php echo base_url();?>" +
-                        '/admin/nhanvien/chamcongupdate';
+                    var strurlupdate = "<?php echo base_url();?>" + '/admin/nhanvien/chamcongupdate';
                     jQuery.ajax({
                         url: strurlupdate,
                         type: "POST",
                         dataType: "json",
                         data: {
-                            "nhanvien_id": $('#nhanvien').val(),
+                            "nhanvien_id": $('#nhanvienid').val(),
                             "ngaydiemdanh": validDate,
                             "giolam": $("#hour").val(),
                             "calamid": $("#calamid").val(),
@@ -472,14 +292,13 @@ function chamcong() {
                         },
                     });
                 } else {
-                    var strurlInsert = "<?php echo base_url();?>" +
-                        '/admin/nhanvien/chamconginsert';
+                    var strurlInsert = "<?php echo base_url();?>" + '/admin/nhanvien/chamconginsert';
                     jQuery.ajax({
                         url: strurlInsert,
                         type: "POST",
                         dataType: "json",
                         data: {
-                            "nhanvien_id": $('#nhanvien').val(),
+                            "nhanvien_id": $('#nhanvienid').val(),
                             "ngaydiemdanh": validDate,
                             "giolam": $("#hour").val(),
                             "calamid": $("#calamid").val(),
@@ -492,7 +311,9 @@ function chamcong() {
                 }
             },
         });
+
     }
+
 }
 
 function getdulieuchamcong(nhanvienid, ngaychamcong) {
@@ -513,85 +334,6 @@ function getdulieuchamcong(nhanvienid, ngaychamcong) {
             } else {
                 $("#calamid").val([]).trigger('change');
                 $("#hour").val(0);
-            }
-        },
-    });
-}
-
-function updateTable(lsnhanvienid, tuNgay, denNgay) {
-    var strurl = "<?php echo base_url();?>" + '/admin/nhanvien/LschamCongNhanVien';
-    jQuery.ajax({
-        url: strurl,
-        type: "POST",
-        dataType: "json",
-        data: {
-            "nhanvienid": lsnhanvienid,
-            "tuNgay": tuNgay,
-            "denNgay": denNgay
-        },
-        success: function(data) {
-            if (data.message.length > 0) {
-                if (dataTable) {
-                    dataTable.destroy();
-                }
-                dataTable = $("#lsTable").DataTable({
-                    data: data.message, // Pass the data array to the DataTable
-                    columns: [{
-                            data: "name",
-                            title: "Tên Nhân viên"
-                        },
-                        {
-                            data: "ngaydiemdanh",
-                            title: "Ngày chấm công"
-                        },
-                        {
-                            data: "congtheogio",
-                            title: "Công theo giờ"
-                        },
-                        {
-                            data: "giolam",
-                            title: "Giờ làm"
-                        },
-                        {
-                            data: "sotien",
-                            title: "Số tiền"
-                        },
-                    ],
-                });
-                var sum = 0;
-                data.message.forEach((record) => {
-                    sum = sum + parseFloat(record.sotien);
-                });
-                $("#tongtien").html("Tổng số tiền là: " + sum);
-            } else {
-                if (dataTable) {
-                    dataTable.destroy();
-                }
-                dataTable = $("#lsTable").DataTable({
-                    data: data.message, // Pass the data array to the DataTable
-                    columns: [{
-                            data: "name",
-                            title: "Tên Nhân viên"
-                        },
-                        {
-                            data: "ngaydiemdanh",
-                            title: "Ngày chấm công"
-                        },
-                        {
-                            data: "congtheogio",
-                            title: "Công theo giờ"
-                        },
-                        {
-                            data: "giolam",
-                            title: "Giờ làm"
-                        },
-                        {
-                            data: "sotien",
-                            title: "Số tiền"
-                        },
-                    ],
-                });
-                $("#tongtien").html("Nhân viên chưa được ghi nhận ngày công nào!");
             }
         },
     });

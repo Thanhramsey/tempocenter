@@ -183,4 +183,39 @@ class Nhanvien extends CI_Controller {
 		print json_encode(array("status"=>"success","message"=> $result));
 	}
 
+
+	public function listNhanVien()
+	{
+		$nhanvien_list=$this->Mnhanvien->nhanvien_list();
+		$option_parentid = "";
+		$counter = 0;
+		$selectNV = "";
+		foreach ($nhanvien_list as $r) {
+			$counter++;
+			if ($counter == 1) {
+				$option_parentid .= "<option value='" . $r['id'] . "' selected>" . $r['name'] . "</option>";
+				$selectNV =  $r;
+			}else{
+				$option_parentid .= "<option value='" . $r['id'] . "'>" . $r['name'] . "</option>";
+			}
+		}
+		print json_encode(array("status"=>"success","message"=> $option_parentid,"select"=>$selectNV));
+	}
+
+	public function LschamCongNhanVien()
+	{
+		$nhanvienid = $_POST['nhanvienid'];
+		$tuNgay = $_POST['tuNgay'];
+		$denNgay = $_POST['denNgay'];
+
+		$this->db->select('nhanvien.name, chamcong_nhanvien.calamid, chamcong_nhanvien.nhanvien_id, chamcong_nhanvien.giolam, chamcong_nhanvien.ngaydiemdanh, nhanvien.congtheogio, (db_chamcong_nhanvien.giolam * db_nhanvien.congtheogio) as sotien');
+		$this->db->from('nhanvien');
+		$this->db->join('chamcong_nhanvien', 'nhanvien.id = chamcong_nhanvien.nhanvien_id');
+		$this->db->where('nhanvien_id', $nhanvienid);
+		$this->db->where('ngaydiemdanh >=', $tuNgay);
+		$this->db->where('ngaydiemdanh <=', $denNgay);
+		$this->db->order_by('ngaydiemdanh', 'asc');
+		$query = $this->db->get();
+		print json_encode(array("status"=>"success","message"=> $query->result()));
+	}
 }

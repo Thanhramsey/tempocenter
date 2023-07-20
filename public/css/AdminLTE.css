@@ -5046,3 +5046,11 @@ hr {
 .form-group .select2-container{
   display: block !important;
 }
+
+
+#lsTable {
+  width: 100% !important;
+  overflow-x: auto; /* Chiều ngang */
+  height: 300px;
+  overflow-y: auto;
+}
