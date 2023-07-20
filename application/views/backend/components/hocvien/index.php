@@ -20,40 +20,6 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <!-- <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Môn</label>
-                            <select name="loaisp" id="loaisp" class="form-control" onchange="loadCahoc()">
-                                <option value="">[--Chọn môn--]
-                                    <?php
-								$monhoc_list = $this->Mmonhoc->monhoc_list();
-								$option_parentid = "";
-								foreach ($monhoc_list as $r) {
-									$option_parentid .= "<option value='" . $r['id'] . "'>" . $r['name'] . "</option>";
-								}
-								echo $option_parentid;
-								?>
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Ca</label>
-                            <select name="caId" id="caId" class="form-control">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4" style="padding-top: 25px;">
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-search"></span>
-                            Tìm kiếm
-                        </button>
-                    </div>
-                </div>
-            </div> -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="box" id="view">
@@ -88,6 +54,7 @@
                                                 <th class="text-center">ID</th>
                                                 <th class="text-center">Tên học viên</th>
                                                 <th class="text-center">Ca học</th>
+                                                <th class="text-center">Lịch sử</th>
                                                 <th class="text-center">Năm sinh</th>
                                                 <th class="text-center">giới tính</th>
                                                 <th class="text-center">SĐT</th>
@@ -102,9 +69,16 @@
                                             <?php foreach ($list as $row) : ?>
                                             <tr>
                                                 <td class="text-center"><input type="checkbox" class="check-row"></td>
-                                                <td class="text-center"><?php echo $row['id'] ?></td>
+                                                <td class="text-center" data-id=<?php echo $row['id'] ?>>
+                                                    <?php echo $row['id'] ?></td>
                                                 <td class="text-center"><?php echo $row['name'] ?></td>
                                                 <td class="text-center"><?php echo $row['ca_hoc'] ?></td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-success btn-xs btn-ls-diemdanh"
+                                                        data-toggle="modal" data-target="#lsDiemDanh">
+                                                        Tra cứu
+                                                    </button>
+                                                </td>
                                                 <td class="text-center"><?php echo $row['ngaysinh'] ?></td>
                                                 <td class="text-center"><?php echo $row['gioitinh'] ?></td>
                                                 <td class="text-center"><?php echo $row['phone'] ?></td>
@@ -160,6 +134,55 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <!-- Lịch sử Chấm công modal -->
+            <div class="modal fade" id="lsDiemDanh" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Lịch sử Điểm Danh học viên</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <h5 id="alert" hidden style="color:red ; padding-left:15px">Còn nhập thiếu thông tin
+                                </h5>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Chọn Từ Ngày <span class="maudo">(*)</span></label>
+                                        <input type="text" id="tuNgay" name="tuNgay"
+                                            style="display:block;height:35px;width:250px">
+                                        <input type="text" id="lsdiemdanhid" hidden>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Chọn Đến Ngày <span class="maudo">(*)</span></label>
+                                        <input type="text" id="denNgay" name="denNgay"
+                                            style="display:block;height:35px;width:250px">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <table id="lsTable" class="table table-hover table-bordered no-footer">
+                                        <thead>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12">
+                                    <h4 id="tongtien" style="color:red;font-weight:bold"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- /.row -->
         </section>
         <!-- /.content -->
@@ -167,35 +190,174 @@
 </div><!-- /.content-wrapper -->
 
 <script type="text/javascript">
-function sortby(option) {
-    var strurl = "<?php echo base_url();?>" + '/admin/cahoc';
+function validDay(day) {
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    var validDateString = "";
+    if (datePattern.test(day)) {
+        validDateString = day;
+    } else {
+        validDateString = moment(day, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    }
+    return validDateString;
+}
+var dataTable;
+$(document).ready(function() {
+    var today = new Date();
+    var firstDateOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    var formattedDate = validDay(today);
+    var validFirstDate = validDay(firstDateOfMonth);
+
+    $('.btn-ls-diemdanh').on('click', function() {
+        var hocvienid = $(this).closest('tr').find('td[data-id]').data('id');
+        $("#lsdiemdanhid").val(hocvienid);
+        var strurl = "<?php echo base_url();?>" + '/admin/hocvien/lsDiemDanhHocVien';
+        jQuery.ajax({
+            url: strurl,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "hocvienid": hocvienid,
+                "tuNgay": validFirstDate,
+                "denNgay": formattedDate
+            },
+            success: function(data) {
+                console.log("data", data);
+                if (data.message.length > 0) {
+                    if (dataTable) {
+                        dataTable.destroy();
+                    }
+                    dataTable = $("#lsTable").DataTable({
+                        data: data.message, // Pass the data array to the DataTable
+                        columns: [{
+                                data: "ten_hocvien",
+                                title: "Tên Học viên"
+                            },
+                            {
+                                data: "ngaydiemdanh",
+                                title: "Ngày điểm danh"
+                            },
+                            {
+                                data: "ten_cahoc",
+                                title: "Ca học"
+                            },
+                        ],
+                    });
+                    $("#tongtien").html("Tổng số buổi học là: " + data.message.length);
+                } else {
+                    if (dataTable) {
+                        dataTable.destroy();
+                    }
+                    dataTable = $("#lsTable").DataTable({
+                        data: data.message, // Pass the data array to the DataTable
+                        columns: [{
+                                data: "ten_hocvien",
+                                title: "Tên Học viên"
+                            },
+                            {
+                                data: "ngaydiemdanh",
+                                title: "Ngày điểm danh"
+                            },
+                            {
+                                data: "ten_cahoc",
+                                title: "Ca học"
+                            },
+                        ],
+                    });
+                    $("#tongtien").html(
+                        "Học viên chưa được ghi nhận giờ học nào trong khoảng thời gian!"
+                    );
+                }
+            },
+        });
+    });
+    $("#tuNgay").val(validFirstDate);
+    $("#denNgay").val(formattedDate);
+    $("#tuNgay").datepicker({
+        dateFormat: "yy-mm-dd", // Định dạng ngày tháng
+        changeMonth: true, // Cho phép thay đổi tháng
+        changeYear: true, // Cho phép thay đổi năm
+        yearRange: "2020:2030", // Phạm vi năm cho phép
+        maxDate: 0,
+        onSelect: function(dateText, inst) {
+            updateTable($("#lsdiemdanhid").val(), validDay($("#tuNgay").val()), validDay($(
+                "#denNgay").val()));
+        },
+    });
+    $("#denNgay").datepicker({
+        dateFormat: "yy-mm-dd", // Định dạng ngày tháng
+        changeMonth: true, // Cho phép thay đổi tháng
+        changeYear: true, // Cho phép thay đổi năm
+        yearRange: "2020:2030", // Phạm vi năm cho phép
+        maxDate: 0,
+        onSelect: function(dateText, inst) {
+            updateTable($("#lsdiemdanhid").val(), validDay($("#tuNgay").val()), validDay($(
+                "#denNgay").val()));
+        },
+    });
+});
+
+function updateTable(lsdiemdanhid, tuNgay, denNgay) {
+    var strurl = "<?php echo base_url();?>" + '/admin/hocvien/lsDiemDanhHocVien';
     jQuery.ajax({
         url: strurl,
-        type: 'POST',
-        dataType: 'json',
+        type: "POST",
+        dataType: "json",
         data: {
-            'sapxep': option
+            "hocvienid": lsdiemdanhid,
+            "tuNgay": tuNgay,
+            "denNgay": denNgay
         },
         success: function(data) {
-            $('#list-product').html(data);
-        }
-    });
-}
-
-function loadCahoc() {
-    var strurl = "<?php echo base_url();?>" + '/admin/cahoc/listCaHoc/' + $("#loaisp").val();
-    jQuery.ajax({
-        url: strurl,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            if (data) {
-                $("#caId").html(data.message);
+            if (data.message.length > 0) {
+                if (dataTable) {
+                    dataTable.destroy();
+                }
+                dataTable = $("#lsTable").DataTable({
+                    data: data.message, // Pass the data array to the DataTable
+                    columns: [{
+                            data: "ten_hocvien",
+                            title: "Tên Học viên"
+                        },
+                        {
+                            data: "ngaydiemdanh",
+                            title: "Ngày điểm danh"
+                        },
+                        {
+                            data: "ten_cahoc",
+                            title: "Ca học"
+                        },
+                    ],
+                });
+                var sum = 0;
+                data.message.forEach((record) => {
+                    sum = sum + parseFloat(record.sotien);
+                });
+                $("#tongtien").html("Tổng số buổi học là: " + data.message.length);
             } else {
-                $("#caId").html("");
+                if (dataTable) {
+                    dataTable.destroy();
+                }
+                dataTable = $("#lsTable").DataTable({
+                    data: data.message, // Pass the data array to the DataTable
+                    columns: [{
+                            data: "ten_hocvien",
+                            title: "Tên Học viên"
+                        },
+                        {
+                            data: "ngaydiemdanh",
+                            title: "Ngày điểm danh"
+                        },
+                        {
+                            data: "ten_cahoc",
+                            title: "Ca học"
+                        },
+                    ],
+                });
+                $("#tongtien").html(
+                    "Học viên chưa được ghi nhận giờ học nào trong khoảng thời gian!"
+                );
             }
-
-        }
+        },
     });
 }
 </script>

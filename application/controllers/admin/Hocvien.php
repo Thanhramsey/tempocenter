@@ -234,4 +234,22 @@ class Hocvien extends CI_Controller {
 		redirect('admin/hocvien/recyclebin','refresh');
 	}
 
+	public function lsDiemDanhHocVien(){
+		$hocvien_id = $_POST['hocvienid'];
+		$tu_ngay = $_POST['tuNgay'];
+		$den_ngay = $_POST['denNgay'];
+
+		$this->db->select('hocvien.name AS ten_hocvien, cahoc.name AS ten_cahoc, diemdanh_hocvien.ngaydiemdanh, diemdanh_hocvien.trang_thai');
+		$this->db->from('diemdanh_hocvien');
+		$this->db->join('hocvien', 'hocvien.id = diemdanh_hocvien.hocvien_id', 'left');
+		$this->db->join('cahoc', 'cahoc.id = diemdanh_hocvien.cahoc_id', 'left');
+		$this->db->where('diemdanh_hocvien.hocvien_id', $hocvien_id);
+		$this->db->where('diemdanh_hocvien.ngaydiemdanh >=', $tu_ngay);
+		$this->db->where('diemdanh_hocvien.ngaydiemdanh <=', $den_ngay);
+		$this->db->where('diemdanh_hocvien.trang_thai', 1);
+		$this->db->order_by('ngaydiemdanh', 'asc');
+		$query = $this->db->get();
+		print json_encode(array("status"=>"success","message"=> $query->result()));
+	}
+
 }
