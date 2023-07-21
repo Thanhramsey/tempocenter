@@ -347,7 +347,7 @@
             <div class="product-container">
                 <?php foreach ($listProducts as $sp) :?>
                 <div class="p-box-5">
-                    <div class="product-lt">
+                    <div class="product-lt  hvr-pulse-shrink">
                         <div class="lt-product-group-image">
                             <a href="<?php echo $sp['alias'] ?>" title="<?php echo $sp['name'] ?>">
                                 <img class="img-p" src="public/images/products/<?php echo $sp['avatar'] ?>" alt="">

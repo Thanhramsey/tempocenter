@@ -120,13 +120,13 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-12 text-center">
                                         <ul class="pagination">
                                             <?php echo $strphantrang ?>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- /.ND -->
                             </div>
                         </div><!-- ./box-body -->

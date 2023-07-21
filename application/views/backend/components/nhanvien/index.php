@@ -145,7 +145,7 @@ $listCa = [
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row">
+                                <div class="row" hidden>
                                     <div class="col-md-12 text-center">
                                         <ul class="pagination">
                                             <?php echo $strphantrang ?>

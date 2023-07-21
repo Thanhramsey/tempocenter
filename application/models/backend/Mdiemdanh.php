@@ -117,4 +117,22 @@ class Mdiemdanh extends CI_Model {
         $row=$query->row_array();
         return $row['name'];
     }
+	public function diemdanh_detail($id)
+	{
+		$this->db->where('trash',1);
+		$this->db->where('id',$id);
+		$this->db->order_by('id', 'asc');
+		$query = $this->db->get($this->table);
+        return $query->row_array();
+	}
+
+	public function status($id)
+	{
+		$row=$this->Mdiemdanh->diemdanh_detail($id);
+		$status=($row['trangthai']==1)?0:1;
+		$mydata= array('status' => $status);
+		$this->Mdiemdanh->diemdanh_update($mydata, $id);
+		$this->session->set_flashdata('success', 'Cập nhật thành công');
+		redirect('admin/diemdanh','refresh');
+	}
 }

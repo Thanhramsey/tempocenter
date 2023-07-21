@@ -30,7 +30,7 @@ class Nhanvien extends CI_Controller {
 		$first=$this->phantrang->PageFirst($limit, $current);
 		$total=$this->Mnhanvien->nhanvien_count();
 		$this->data['strphantrang']=$this->phantrang->PagePer($total, $current, $limit, $url='admin/nhanvien');
-		$this->data['list'] = $this->Mnhanvien->nhanvien_all($limit, $first);
+		$this->data['list'] = $this->Mnhanvien->nhanvien_list();
 		$this->data['view']='index';
 		$this->data['title']='Học viên';
 		$this->load->view('backend/layout', $this->data);

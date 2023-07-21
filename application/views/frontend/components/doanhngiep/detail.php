@@ -45,7 +45,7 @@
 							<?php else : ?>
 								<?php foreach ($list as $sp) : ?>
 									<div class="col-md-4 col-lg-4 col-xs-6 col-6 detail-box">
-										<div class="product-lt">
+										<div class="product-lt  hvr-pulse-shrink">
 											<div class="lt-product-group-image">
 												<a id="zoomOut" href="<?php echo $sp['alias'] ?>" title="<?php echo $sp['name'] ?>">
 													<figure>

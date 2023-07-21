@@ -90,6 +90,7 @@
         $('#cahocId').select2();
         $('#calamid').select2();
         $('#hocvienId').select2();
+        $('#lsHocVien').select2();
         $('#myTable').DataTable();
 
         function tmTotalHrsOnSite() {

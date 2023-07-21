@@ -5054,3 +5054,8 @@ hr {
   height: 300px;
   overflow-y: auto;
 }
+
+.select2-container--default .select2-results__option--selected{
+  color: #ddd !important;
+  background: #8bc34a !important;
+}

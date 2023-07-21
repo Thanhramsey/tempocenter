@@ -14,43 +14,40 @@
                     <i class="glyphicon glyphicon-shopping-cart"></i> <span>Quản lý học viên</span>
                 </a>
             </li>
-            <li class="treeview">
+            <?php
+			if ($user['role'] == 1) {
+				echo ' <li class="treeview">
                 <a href="admin/nhanvien">
                     <i class="glyphicon glyphicon-apple"></i><span>Quản lý nhân viên</span>
                 </a>
             </li>
             <li class="treeview">
-                <a href="admin/cahoc">
-                    <i class="glyphicon glyphicon-apple"></i><span>Quản lý ca học</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/monhoc">
-                    <i class="glyphicon glyphicon-signal"></i> <span>Quản lý môn học</span>
-                </a>
-            </li>
-            <li class="header">QUẢN LÝ CỬA HÀNG</li>
-            <li class="treeview">
-                <a href="admin">
-                    <i class="glyphicon glyphicon-signal"></i> <span>Thống kê</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/product">
-                    <i class="glyphicon glyphicon-apple"></i><span>Sản phẩm</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/orders">
-                    <i class="glyphicon glyphicon-shopping-cart"></i> <span>Đơn hàng</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="admin/hoidap">
-                    <i class="glyphicon glyphicon-question-sign"></i> <span>Hỏi đáp</span>
-                </a>
-            </li>
-            
+            <a href="admin/cahoc">
+                <i class="glyphicon glyphicon-apple"></i><span>Quản lý ca học</span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="admin/monhoc">
+                <i class="glyphicon glyphicon-signal"></i> <span>Quản lý môn học</span>
+            </a>
+        </li> <li class="header">QUẢN LÝ CỬA HÀNG</li>
+        <li class="treeview">
+            <a href="admin">
+                <i class="glyphicon glyphicon-signal"></i> <span>Thống kê</span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="admin/product">
+                <i class="glyphicon glyphicon-apple"></i><span>Sản phẩm</span>
+            </a>
+        </li>
+        <li class="treeview">
+            <a href="admin/orders">
+                <i class="glyphicon glyphicon-shopping-cart"></i> <span>Đơn hàng</span>
+            </a>
+        </li>';
+			}
+			?>
             <li class="treeview">
                 <a href="admin/hoidap">
                     <i class="glyphicon glyphicon-question-sign"></i> <span>Hỏi đáp</span>
@@ -62,7 +59,7 @@
 				echo '<li class="header">QUẢN LÝ DANH MỤC</li>
 				<li>
 					<a href="admin/useradmin">
-						<i class="glyphicon glyphicon-briefcase"></i><span> Cơ sở kinh doanh</span>
+						<i class="glyphicon glyphicon-briefcase"></i><span> Tài khoản</span>
 					</a>
 				 </li>
 				<li class="treeview">

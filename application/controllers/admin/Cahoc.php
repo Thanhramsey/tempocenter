@@ -39,8 +39,7 @@ class Cahoc extends CI_Controller {
                   ->from('cahoc AS ch')
                   ->join('hocvien_cahoc AS hvc', 'ch.id = hvc.cahoc_id', 'left')
                   ->join('hocvien AS hv', 'hvc.hocvien_id = hv.id', 'left')
-                  ->group_by('ch.id')
-				  ->limit($limit, $first) 
+                  ->group_by('ch.id') 
                   ->get();
 		if ($query->num_rows() > 0) {
 			$result = $query->result_array();
